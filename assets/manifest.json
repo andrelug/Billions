@@ -1,0 +1,2837 @@
+{
+ "barrel": {
+  "file": "barrel.png",
+  "w": 40,
+  "h": 40,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "building/academy": {
+  "file": "building/academy.png",
+  "w": 256,
+  "h": 256,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/advfarm": {
+  "file": "building/advfarm.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/advmill": {
+  "file": "building/advmill.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/advquarry": {
+  "file": "building/advquarry.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/ballista": {
+  "file": "building/ballista.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/bank": {
+  "file": "building/bank.png",
+  "w": 192,
+  "h": 192,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/cc": {
+  "file": "building/cc.png",
+  "w": 320,
+  "h": 320,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/cottage": {
+  "file": "building/cottage.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/crystalpalace": {
+  "file": "building/crystalpalace.png",
+  "w": 384,
+  "h": 384,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/engineeringcenter": {
+  "file": "building/engineeringcenter.png",
+  "w": 192,
+  "h": 192,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/executor": {
+  "file": "building/executor.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/farm": {
+  "file": "building/farm.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/fisherman": {
+  "file": "building/fisherman.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/foundry": {
+  "file": "building/foundry.png",
+  "w": 256,
+  "h": 256,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/hunter": {
+  "file": "building/hunter.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/inn": {
+  "file": "building/inn.png",
+  "w": 256,
+  "h": 256,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/lookout": {
+  "file": "building/lookout.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/market": {
+  "file": "building/market.png",
+  "w": 192,
+  "h": 192,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/mill": {
+  "file": "building/mill.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/mine": {
+  "file": "building/mine.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/oilplatform": {
+  "file": "building/oilplatform.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/powerplant": {
+  "file": "building/powerplant.png",
+  "w": 192,
+  "h": 192,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/quarry": {
+  "file": "building/quarry.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/radar": {
+  "file": "building/radar.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/sawmill": {
+  "file": "building/sawmill.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/shocking": {
+  "file": "building/shocking.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/soldierscenter": {
+  "file": "building/soldierscenter.png",
+  "w": 192,
+  "h": 192,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/spire": {
+  "file": "building/spire.png",
+  "w": 384,
+  "h": 384,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/stakes": {
+  "file": "building/stakes.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/stonegate": {
+  "file": "building/stonegate.png",
+  "w": 192,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/stonegate_v": {
+  "file": "building/stonegate_v.png",
+  "w": 64,
+  "h": 192,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/stonehouse": {
+  "file": "building/stonehouse.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/stonetower": {
+  "file": "building/stonetower.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/stonewall": {
+  "file": "building/stonewall.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/stoneworkshop": {
+  "file": "building/stoneworkshop.png",
+  "w": 256,
+  "h": 256,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/telescope": {
+  "file": "building/telescope.png",
+  "w": 320,
+  "h": 320,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/tent": {
+  "file": "building/tent.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/tesla": {
+  "file": "building/tesla.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/transmutator": {
+  "file": "building/transmutator.png",
+  "w": 320,
+  "h": 320,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/victory": {
+  "file": "building/victory.png",
+  "w": 256,
+  "h": 256,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/warehouse": {
+  "file": "building/warehouse.png",
+  "w": 256,
+  "h": 256,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/wasp": {
+  "file": "building/wasp.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/wirefence": {
+  "file": "building/wirefence.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/woodgate": {
+  "file": "building/woodgate.png",
+  "w": 192,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/woodgate_v": {
+  "file": "building/woodgate_v.png",
+  "w": 64,
+  "h": 192,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/woodtower": {
+  "file": "building/woodtower.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/woodwall": {
+  "file": "building/woodwall.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "building/woodworkshop": {
+  "file": "building/woodworkshop.png",
+  "w": 256,
+  "h": 256,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "fx/acid": {
+  "file": "fx/acid.png",
+  "w": 24,
+  "h": 24,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "fx/acidsplash": {
+  "file": "fx/acidsplash.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "fx/arrow": {
+  "file": "fx/arrow.png",
+  "w": 32,
+  "h": 8,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "fx/blast": {
+  "file": "fx/blast.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "fx/blood": {
+  "file": "fx/blood.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "fx/bolt": {
+  "file": "fx/bolt.png",
+  "w": 48,
+  "h": 12,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "fx/ichor": {
+  "file": "fx/ichor.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "fx/ring": {
+  "file": "fx/ring.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "fx/rocket": {
+  "file": "fx/rocket.png",
+  "w": 40,
+  "h": 16,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "icon/colonists": {
+  "file": "icon/colonists.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "icon/energy": {
+  "file": "icon/energy.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "icon/food": {
+  "file": "icon/food.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "icon/gold": {
+  "file": "icon/gold.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "icon/iron": {
+  "file": "icon/iron.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "icon/oil": {
+  "file": "icon/oil.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "icon/stone": {
+  "file": "icon/stone.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "icon/wood": {
+  "file": "icon/wood.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "icon/workers": {
+  "file": "icon/workers.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "infected/aged": {
+  "file": "infected/aged.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "infected/behemoth": {
+  "file": "infected/behemoth.png",
+  "w": 144,
+  "h": 144,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "infected/chubby": {
+  "file": "infected/chubby.png",
+  "w": 80,
+  "h": 80,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "infected/colonist": {
+  "file": "infected/colonist.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "infected/decrepit": {
+  "file": "infected/decrepit.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "infected/executive": {
+  "file": "infected/executive.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "infected/fresh": {
+  "file": "infected/fresh.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "infected/giant": {
+  "file": "infected/giant.png",
+  "w": 176,
+  "h": 176,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "infected/harpy": {
+  "file": "infected/harpy.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "infected/venom": {
+  "file": "infected/venom.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "infected/young": {
+  "file": "infected/young.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "mayor/f": {
+  "file": "mayor/f.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "mayor/m": {
+  "file": "mayor/m.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "nest/large": {
+  "file": "nest/large.png",
+  "w": 256,
+  "h": 256,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "nest/medium": {
+  "file": "nest/medium.png",
+  "w": 192,
+  "h": 192,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "nest/small": {
+  "file": "nest/small.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "pickup/energy": {
+  "file": "pickup/energy.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "pickup/food": {
+  "file": "pickup/food.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "pickup/gold": {
+  "file": "pickup/gold.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "pickup/iron": {
+  "file": "pickup/iron.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "pickup/oil": {
+  "file": "pickup/oil.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "pickup/stone": {
+  "file": "pickup/stone.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "pickup/wood": {
+  "file": "pickup/wood.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "pickup/workers": {
+  "file": "pickup/workers.png",
+  "w": 48,
+  "h": 48,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "raven": {
+  "file": "raven.png",
+  "w": 32,
+  "h": 32,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "terrain/AL/forest_0": {
+  "file": "terrain/AL/forest_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/forest_1": {
+  "file": "terrain/AL/forest_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/forest_2": {
+  "file": "terrain/AL/forest_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/forest_3": {
+  "file": "terrain/AL/forest_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/gold_0": {
+  "file": "terrain/AL/gold_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/gold_1": {
+  "file": "terrain/AL/gold_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/gold_2": {
+  "file": "terrain/AL/gold_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/gold_3": {
+  "file": "terrain/AL/gold_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/grass_0": {
+  "file": "terrain/AL/grass_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/grass_1": {
+  "file": "terrain/AL/grass_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/grass_2": {
+  "file": "terrain/AL/grass_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/grass_3": {
+  "file": "terrain/AL/grass_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/iron_0": {
+  "file": "terrain/AL/iron_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/iron_1": {
+  "file": "terrain/AL/iron_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/iron_2": {
+  "file": "terrain/AL/iron_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/iron_3": {
+  "file": "terrain/AL/iron_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/mountain_0": {
+  "file": "terrain/AL/mountain_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/mountain_1": {
+  "file": "terrain/AL/mountain_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/mountain_2": {
+  "file": "terrain/AL/mountain_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/mountain_3": {
+  "file": "terrain/AL/mountain_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/mud_0": {
+  "file": "terrain/AL/mud_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/mud_1": {
+  "file": "terrain/AL/mud_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/mud_2": {
+  "file": "terrain/AL/mud_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/mud_3": {
+  "file": "terrain/AL/mud_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/oil_0": {
+  "file": "terrain/AL/oil_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/oil_1": {
+  "file": "terrain/AL/oil_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/oil_2": {
+  "file": "terrain/AL/oil_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/oil_3": {
+  "file": "terrain/AL/oil_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/stone_0": {
+  "file": "terrain/AL/stone_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/stone_1": {
+  "file": "terrain/AL/stone_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/stone_2": {
+  "file": "terrain/AL/stone_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/stone_3": {
+  "file": "terrain/AL/stone_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/water_0": {
+  "file": "terrain/AL/water_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/water_1": {
+  "file": "terrain/AL/water_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/water_2": {
+  "file": "terrain/AL/water_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/AL/water_3": {
+  "file": "terrain/AL/water_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/forest_0": {
+  "file": "terrain/BR/forest_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/forest_1": {
+  "file": "terrain/BR/forest_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/forest_2": {
+  "file": "terrain/BR/forest_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/forest_3": {
+  "file": "terrain/BR/forest_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/gold_0": {
+  "file": "terrain/BR/gold_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/gold_1": {
+  "file": "terrain/BR/gold_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/gold_2": {
+  "file": "terrain/BR/gold_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/gold_3": {
+  "file": "terrain/BR/gold_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/grass_0": {
+  "file": "terrain/BR/grass_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/grass_1": {
+  "file": "terrain/BR/grass_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/grass_2": {
+  "file": "terrain/BR/grass_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/grass_3": {
+  "file": "terrain/BR/grass_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/iron_0": {
+  "file": "terrain/BR/iron_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/iron_1": {
+  "file": "terrain/BR/iron_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/iron_2": {
+  "file": "terrain/BR/iron_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/iron_3": {
+  "file": "terrain/BR/iron_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/mountain_0": {
+  "file": "terrain/BR/mountain_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/mountain_1": {
+  "file": "terrain/BR/mountain_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/mountain_2": {
+  "file": "terrain/BR/mountain_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/mountain_3": {
+  "file": "terrain/BR/mountain_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/mud_0": {
+  "file": "terrain/BR/mud_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/mud_1": {
+  "file": "terrain/BR/mud_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/mud_2": {
+  "file": "terrain/BR/mud_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/mud_3": {
+  "file": "terrain/BR/mud_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/oil_0": {
+  "file": "terrain/BR/oil_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/oil_1": {
+  "file": "terrain/BR/oil_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/oil_2": {
+  "file": "terrain/BR/oil_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/oil_3": {
+  "file": "terrain/BR/oil_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/stone_0": {
+  "file": "terrain/BR/stone_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/stone_1": {
+  "file": "terrain/BR/stone_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/stone_2": {
+  "file": "terrain/BR/stone_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/stone_3": {
+  "file": "terrain/BR/stone_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/water_0": {
+  "file": "terrain/BR/water_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/water_1": {
+  "file": "terrain/BR/water_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/water_2": {
+  "file": "terrain/BR/water_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/BR/water_3": {
+  "file": "terrain/BR/water_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/forest_0": {
+  "file": "terrain/DS/forest_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/forest_1": {
+  "file": "terrain/DS/forest_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/forest_2": {
+  "file": "terrain/DS/forest_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/forest_3": {
+  "file": "terrain/DS/forest_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/gold_0": {
+  "file": "terrain/DS/gold_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/gold_1": {
+  "file": "terrain/DS/gold_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/gold_2": {
+  "file": "terrain/DS/gold_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/gold_3": {
+  "file": "terrain/DS/gold_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/grass_0": {
+  "file": "terrain/DS/grass_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/grass_1": {
+  "file": "terrain/DS/grass_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/grass_2": {
+  "file": "terrain/DS/grass_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/grass_3": {
+  "file": "terrain/DS/grass_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/iron_0": {
+  "file": "terrain/DS/iron_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/iron_1": {
+  "file": "terrain/DS/iron_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/iron_2": {
+  "file": "terrain/DS/iron_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/iron_3": {
+  "file": "terrain/DS/iron_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/mountain_0": {
+  "file": "terrain/DS/mountain_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/mountain_1": {
+  "file": "terrain/DS/mountain_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/mountain_2": {
+  "file": "terrain/DS/mountain_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/mountain_3": {
+  "file": "terrain/DS/mountain_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/mud_0": {
+  "file": "terrain/DS/mud_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/mud_1": {
+  "file": "terrain/DS/mud_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/mud_2": {
+  "file": "terrain/DS/mud_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/mud_3": {
+  "file": "terrain/DS/mud_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/oil_0": {
+  "file": "terrain/DS/oil_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/oil_1": {
+  "file": "terrain/DS/oil_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/oil_2": {
+  "file": "terrain/DS/oil_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/oil_3": {
+  "file": "terrain/DS/oil_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/stone_0": {
+  "file": "terrain/DS/stone_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/stone_1": {
+  "file": "terrain/DS/stone_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/stone_2": {
+  "file": "terrain/DS/stone_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/stone_3": {
+  "file": "terrain/DS/stone_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/water_0": {
+  "file": "terrain/DS/water_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/water_1": {
+  "file": "terrain/DS/water_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/water_2": {
+  "file": "terrain/DS/water_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/DS/water_3": {
+  "file": "terrain/DS/water_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/forest_0": {
+  "file": "terrain/FA/forest_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/forest_1": {
+  "file": "terrain/FA/forest_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/forest_2": {
+  "file": "terrain/FA/forest_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/forest_3": {
+  "file": "terrain/FA/forest_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/gold_0": {
+  "file": "terrain/FA/gold_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/gold_1": {
+  "file": "terrain/FA/gold_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/gold_2": {
+  "file": "terrain/FA/gold_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/gold_3": {
+  "file": "terrain/FA/gold_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/grass_0": {
+  "file": "terrain/FA/grass_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/grass_1": {
+  "file": "terrain/FA/grass_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/grass_2": {
+  "file": "terrain/FA/grass_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/grass_3": {
+  "file": "terrain/FA/grass_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/iron_0": {
+  "file": "terrain/FA/iron_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/iron_1": {
+  "file": "terrain/FA/iron_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/iron_2": {
+  "file": "terrain/FA/iron_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/iron_3": {
+  "file": "terrain/FA/iron_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/mountain_0": {
+  "file": "terrain/FA/mountain_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/mountain_1": {
+  "file": "terrain/FA/mountain_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/mountain_2": {
+  "file": "terrain/FA/mountain_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/mountain_3": {
+  "file": "terrain/FA/mountain_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/mud_0": {
+  "file": "terrain/FA/mud_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/mud_1": {
+  "file": "terrain/FA/mud_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/mud_2": {
+  "file": "terrain/FA/mud_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/mud_3": {
+  "file": "terrain/FA/mud_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/oil_0": {
+  "file": "terrain/FA/oil_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/oil_1": {
+  "file": "terrain/FA/oil_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/oil_2": {
+  "file": "terrain/FA/oil_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/oil_3": {
+  "file": "terrain/FA/oil_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/stone_0": {
+  "file": "terrain/FA/stone_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/stone_1": {
+  "file": "terrain/FA/stone_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/stone_2": {
+  "file": "terrain/FA/stone_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/stone_3": {
+  "file": "terrain/FA/stone_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/water_0": {
+  "file": "terrain/FA/water_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/water_1": {
+  "file": "terrain/FA/water_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/water_2": {
+  "file": "terrain/FA/water_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/FA/water_3": {
+  "file": "terrain/FA/water_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/forest_0": {
+  "file": "terrain/TM/forest_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/forest_1": {
+  "file": "terrain/TM/forest_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/forest_2": {
+  "file": "terrain/TM/forest_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/forest_3": {
+  "file": "terrain/TM/forest_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/gold_0": {
+  "file": "terrain/TM/gold_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/gold_1": {
+  "file": "terrain/TM/gold_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/gold_2": {
+  "file": "terrain/TM/gold_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/gold_3": {
+  "file": "terrain/TM/gold_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/grass_0": {
+  "file": "terrain/TM/grass_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/grass_1": {
+  "file": "terrain/TM/grass_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/grass_2": {
+  "file": "terrain/TM/grass_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/grass_3": {
+  "file": "terrain/TM/grass_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/iron_0": {
+  "file": "terrain/TM/iron_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/iron_1": {
+  "file": "terrain/TM/iron_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/iron_2": {
+  "file": "terrain/TM/iron_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/iron_3": {
+  "file": "terrain/TM/iron_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/mountain_0": {
+  "file": "terrain/TM/mountain_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/mountain_1": {
+  "file": "terrain/TM/mountain_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/mountain_2": {
+  "file": "terrain/TM/mountain_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/mountain_3": {
+  "file": "terrain/TM/mountain_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/mud_0": {
+  "file": "terrain/TM/mud_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/mud_1": {
+  "file": "terrain/TM/mud_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/mud_2": {
+  "file": "terrain/TM/mud_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/mud_3": {
+  "file": "terrain/TM/mud_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/oil_0": {
+  "file": "terrain/TM/oil_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/oil_1": {
+  "file": "terrain/TM/oil_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/oil_2": {
+  "file": "terrain/TM/oil_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/oil_3": {
+  "file": "terrain/TM/oil_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/stone_0": {
+  "file": "terrain/TM/stone_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/stone_1": {
+  "file": "terrain/TM/stone_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/stone_2": {
+  "file": "terrain/TM/stone_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/stone_3": {
+  "file": "terrain/TM/stone_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/water_0": {
+  "file": "terrain/TM/water_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/water_1": {
+  "file": "terrain/TM/water_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/water_2": {
+  "file": "terrain/TM/water_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/TM/water_3": {
+  "file": "terrain/TM/water_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/forest_0": {
+  "file": "terrain/VO/forest_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/forest_1": {
+  "file": "terrain/VO/forest_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/forest_2": {
+  "file": "terrain/VO/forest_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/forest_3": {
+  "file": "terrain/VO/forest_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/gold_0": {
+  "file": "terrain/VO/gold_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/gold_1": {
+  "file": "terrain/VO/gold_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/gold_2": {
+  "file": "terrain/VO/gold_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/gold_3": {
+  "file": "terrain/VO/gold_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/grass_0": {
+  "file": "terrain/VO/grass_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/grass_1": {
+  "file": "terrain/VO/grass_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/grass_2": {
+  "file": "terrain/VO/grass_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/grass_3": {
+  "file": "terrain/VO/grass_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/iron_0": {
+  "file": "terrain/VO/iron_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/iron_1": {
+  "file": "terrain/VO/iron_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/iron_2": {
+  "file": "terrain/VO/iron_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/iron_3": {
+  "file": "terrain/VO/iron_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/mountain_0": {
+  "file": "terrain/VO/mountain_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/mountain_1": {
+  "file": "terrain/VO/mountain_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/mountain_2": {
+  "file": "terrain/VO/mountain_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/mountain_3": {
+  "file": "terrain/VO/mountain_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/mud_0": {
+  "file": "terrain/VO/mud_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/mud_1": {
+  "file": "terrain/VO/mud_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/mud_2": {
+  "file": "terrain/VO/mud_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/mud_3": {
+  "file": "terrain/VO/mud_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/oil_0": {
+  "file": "terrain/VO/oil_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/oil_1": {
+  "file": "terrain/VO/oil_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/oil_2": {
+  "file": "terrain/VO/oil_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/oil_3": {
+  "file": "terrain/VO/oil_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/stone_0": {
+  "file": "terrain/VO/stone_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/stone_1": {
+  "file": "terrain/VO/stone_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/stone_2": {
+  "file": "terrain/VO/stone_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/stone_3": {
+  "file": "terrain/VO/stone_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/water_0": {
+  "file": "terrain/VO/water_0.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/water_1": {
+  "file": "terrain/VO/water_1.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/water_2": {
+  "file": "terrain/VO/water_2.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "terrain/VO/water_3": {
+  "file": "terrain/VO/water_3.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0,
+  "ay": 0
+ },
+ "unit/mutant": {
+  "file": "unit/mutant.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "unit/pyro": {
+  "file": "unit/pyro.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "unit/ranger": {
+  "file": "unit/ranger.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "unit/rocketeer": {
+  "file": "unit/rocketeer.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "unit/sniper": {
+  "file": "unit/sniper.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "unit/soldier": {
+  "file": "unit/soldier.png",
+  "w": 64,
+  "h": 64,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ },
+ "unit/titan": {
+  "file": "unit/titan.png",
+  "w": 128,
+  "h": 128,
+  "frames": 1,
+  "fps": 8,
+  "ax": 0.5,
+  "ay": 0.5
+ }
+}

@@ -1,80 +1,120 @@
 # Billions — Colony Survival
 
-A mobile-first browser game in the spirit of *They Are Billions*: build a colony,
-fortify it, and survive 30 days of escalating zombie hordes. No dependencies,
-no build step: plain HTML, CSS and JavaScript on a Canvas.
+A colony-survival strategy game in the style of *They Are Billions*, built to run in a
+browser on phones, tablets and desktops. You build a colony inside an energy grid, gather
+resources, research technology, train an army, and survive escalating swarms of infected.
+The final swarm comes from every side at once.
 
-Works on phones (touch), tablets and desktop browsers. Installable to a phone
-home screen as a PWA and playable offline.
+Plain HTML, CSS and JavaScript (ES modules) on a Canvas. There are no runtime
+dependencies and no build step. It installs as a PWA and plays offline.
 
-## Play it
+The art is temporary. Every sprite is a generated placeholder that you can replace one
+file at a time. See [ASSETS.md](ASSETS.md). For what matches the original game and what
+is still missing, see [PARITY.md](PARITY.md).
 
-Any static web host works. The easiest is GitHub Pages:
+## Run it locally
 
-1. Push this repository to GitHub.
-2. Repository **Settings → Pages → Source: GitHub Actions**.
-3. The included workflow (`.github/workflows/pages.yml`) deploys on every push
-   to `master` / `main`. Your game is then at `https://<user>.github.io/<repo>/`.
-
-Alternatively, **Settings → Pages → Source: Deploy from a branch** (branch
-`master`, folder `/ (root)`) also works, with no workflow needed.
-
-To run locally:
+ES modules need a web server; opening `index.html` from disk will not work.
 
 ```sh
-npx http-server -p 8080 .
-# open http://localhost:8080
+npm run serve          # npx http-server -p 8080 -c-1 .
+# or: python3 -m http.server 8080
 ```
 
-On your phone, open the URL in Safari or Chrome and use **Share → Add to Home
-Screen** to install it full-screen. Progress autosaves every day and when the
-app goes to the background.
+Then open http://localhost:8080. To test on a phone on the same Wi-Fi, open
+`http://<your-computer-ip>:8080`.
 
-## How to play
+## Deploy
 
-- **Goal:** keep the Command Center alive through day 30. Hordes attack on days
-  5, 10, 15, 20, 25 and a final one from all sides on day 30. Scouts announce the
-  direction a day ahead; hordes arrive at night.
-- **Build:** tap a building in the bottom bar, tap the map to position it, then
-  tap **✓ Build** (or tap the ghost again). Walls place instantly per tap; the
-  **Line** toggle draws a wall between two taps.
-- **Economy:** Tents add workers and gold but eat food. Farms grow food on open
-  grass, Sawmills need forest, Quarries need rock. The placement preview shows
-  the yield of a spot before you commit.
-- **Defense:** Walls block zombies (your units can pass through). Ballistas shoot
-  over walls. Barracks train Rangers (fast, long range) and Soldiers (tough).
-  Tap a unit, then tap the ground to move it; **Army** selects everyone. Units
-  rally automatically to buildings under attack nearby.
-- **Danger:** gunfire attracts nearby zombies, and an overrun tent turns its
-  colonists into zombies inside your walls.
-- **Camera:** drag to pan, pinch or scroll to zoom, tap the minimap to jump.
-- **Keyboard (desktop):** `1`–`7` pick a building, `A` select the army, `H`
-  center on the base, `Space` pause, `Esc` cancel, `+`/`-` zoom.
+Any static host works. With GitHub Pages:
 
-Three difficulties (Easy / Normal / Hard) scale horde sizes.
+1. Repository **Settings → Pages → Source: GitHub Actions**.
+2. The workflow in `.github/workflows/pages.yml` deploys every push to `master` or
+   `main`. The game is then at `https://<user>.github.io/<repo>/`.
+
+On a phone, open the URL and use **Share → Add to Home Screen** (Safari) or **Install app**
+(Chrome) to play full-screen and offline. The service worker (`sw.js`) is network-first,
+so a new deploy is picked up on the next load while online.
+
+## Game modes
+
+- **Survival.** Choose a map (6 themes, unlocked in order by winning), the infected
+  population (5 levels), the duration (80, 100, 120 or 150 days) and whether to elect
+  mayors. These choices set the score factor.
+- **Weekly Challenge.** Uses the same seed for the whole ISO week, with one attempt and
+  a fixed score factor. Scores are kept on the device.
+- **The 50 Days Challenge.** Neighbouring colonies send you reinforcements every 5 days.
+- **Campaign.** Not built yet (see PARITY.md).
+
+Survival is ironman, as in the original game. It autosaves every 2 minutes and whenever
+the app goes to the background, and you can **Save & Quit** from the menu. Losing a game
+deletes its save. Several games can be in progress at the same time.
+
+## Controls
+
+**Touch**
+- Drag to pan, pinch to zoom, and tap the minimap to jump.
+- Tap a unit or building to select it. With units selected, tap the ground to move and
+  long-press to attack-move.
+- **Select** turns on box selection. **Army** selects every unit. **Base** jumps to the
+  Command Center. **!** jumps to the last alert.
+- Group buttons 1–5: hold to assign the current selection, tap to recall, double-tap to
+  jump to the group.
+- Building: tap a card in the bottom tray, tap the map to position it, then tap **Build**.
+  For walls, **Line** draws a wall between two taps.
+
+**Keyboard and mouse.** These follow the original game's defaults.
+
+| Key | Action |
+|---|---|
+| Left click / drag | Select / box select |
+| Right click | Move, attack, garrison or pick up, depending on the target |
+| Space | Pause |
+| Esc | Cancel or open the menu |
+| Enter | Select the Command Center |
+| F2 | Select the whole army |
+| Q (or A) | Attack-move |
+| H / S / P / C | Hold / Stop / Patrol / Chase |
+| Ctrl+1–8, then 1–8 | Assign a control group, then recall it |
+| R or Tab while placing | Rotate a gate |
+| Tab | Hide the HUD |
+| E (hold) / G | Show the energy grid while held / toggle it |
+| F4 | Flat terrain and grid view |
+| Alt (hold) | Health bars |
+| Delete | Demolish the selected building |
+| Q W R U I O P | Train units while a Soldiers Center or Engineering Center is selected |
+| Arrows, wheel, +/− | Pan and zoom |
 
 ## Project layout
 
 ```
-index.html            page shell and HUD markup
-css/style.css         mobile-first styling (safe areas, landscape, desktop)
-js/config.js          tuning: buildings, units, zombies, horde schedule, difficulty
-js/util.js            PRNG, min-heap, spatial hash
-js/world.js           map generation and flow-field (Dijkstra) pathfinding
-js/game.js            simulation: economy, combat, zombie AI, hordes, save/load
-js/render.js          Canvas renderer, vector building icons, minimap
-js/input.js           touch / mouse / keyboard input
-js/ui.js              HUD, placement flow, panels, toasts, screens, persistence
-js/main.js            boot and game loop
-manifest.webmanifest  PWA manifest; sw.js caches the app for offline play
-icons/                app icons
+index.html, css/style.css   App shell and the mobile-first HUD
+js/main.js                  Entry point
+js/core/                    RNG, spatial grid, flow-field and A* pathfinding
+js/data/                    Game data: buildings, research, units, infected, maps, mayors,
+                            achievements, sprite list
+js/sim/                     Simulation at a fixed 20 Hz: world generation, economy, energy,
+                            noise, vision, combat, infected AI, swarms, nests, scoring
+js/view/                    Canvas renderer, camera, terrain cache, asset loader, audio
+js/ui/                      Input, selection and commands, HUD, panels, screens, profile
+assets/                     Placeholder sprites plus manifest.json (see ASSETS.md)
+tools/gen-placeholders.mjs  Regenerates the placeholder sprites
+tests/                      node --test unit tests for the simulation
 ```
 
-## Design notes
+The simulation does not use the DOM, so it runs in Node (`tests/sim.test.js` plays whole
+scenarios headlessly).
 
-- Hordes navigate with a flow field computed from the Command Center. Walls and
-  buildings are expensive but passable in the field, so hordes chew through the
-  cheapest route and find gaps you leave open.
-- Zombies are alerted by damage: shooting one pulls its neighbours onto the
-  shooter, and towers that fire at wanderers will draw them in.
-- Everything is tunable in `js/config.js`.
+## Development
+
+```sh
+npm test               # unit and simulation tests (Node 18 or later)
+npm run assets         # regenerate missing placeholder sprites (needs Playwright)
+```
+
+In the browser console, `window.BILLIONS` is the running app and `BILLIONS.game` is the
+simulation.
+
+Performance targets: the final swarm in Node simulates about 14,000 infected in about
+5 ms per step. In Chromium it holds 60 fps with about 10,000 infected on screen. On slow
+devices the renderer drops to 1x pixel density automatically.

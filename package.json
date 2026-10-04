@@ -1,0 +1,10 @@
+{
+  "name": "billions",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "serve": "npx http-server -p 8080 -c-1 .",
+    "assets": "node tools/gen-placeholders.mjs"
+  }
+}

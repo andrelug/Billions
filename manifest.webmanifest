@@ -1,7 +1,7 @@
 {
   "name": "Billions — Colony Survival",
   "short_name": "Billions",
-  "description": "Build a colony, fortify it, and survive 30 days of zombie hordes.",
+  "description": "Build a colony, power it, fortify it, and survive the infected swarms.",
   "start_url": "./",
   "scope": "./",
   "display": "fullscreen",
