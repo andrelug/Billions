@@ -1,16 +1,18 @@
 # Art and sound guide
 
-All art in this repository is temporary. Every sprite is a generated placeholder, so you
-can replace them **one file at a time**: the game picks up whatever is in `assets/` and
-falls back to a drawn placeholder for any file that is missing or fails to load. No code
-changes are needed.
+Sprites can be replaced **one file at a time**: the game picks up whatever is in
+`assets/` and falls back to a drawn placeholder for any file that is missing or fails
+to load. No code changes are needed. The painterly steampunk artwork and its prompts
+are documented in [art/README.md](art/README.md). Open [the art catalog](art/index.html)
+through the local server to review all 315 base sprites and play the 36 walk and
+attack strips included for the seven colony units and eleven infected types.
 
 - `assets/SPRITES.md` lists every sprite: its key, file, size and what it is.
 - `assets/manifest.json` tells the game how to cut and place each image.
 
 ## Quick start
 
-1. Find the sprite in `assets/SPRITES.md`, for example `building/tent → assets/building/tent.png, 128x128`.
+1. Find the sprite in `assets/SPRITES.md`, for example `building/tent → assets/building/tent.png, 256x256`.
 2. Draw your art and save it over that PNG, keeping the same path.
 3. Reload the game. Hard-refresh, or bump `CACHE` in `sw.js` if the old image sticks.
 

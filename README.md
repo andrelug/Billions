@@ -8,9 +8,10 @@ The final swarm comes from every side at once.
 Plain HTML, CSS and JavaScript (ES modules) on a Canvas. There are no runtime
 dependencies and no build step. It installs as a PWA and plays offline.
 
-The art is temporary. Every sprite is a generated placeholder that you can replace one
-file at a time. See [ASSETS.md](ASSETS.md). For what matches the original game and what
-is still missing, see [PARITY.md](PARITY.md).
+The sprite pack includes 315 original painterly steampunk images and 36 walk and
+attack animation strips for all 18 characters. Review and play the animations in
+[the art catalog](art/index.html), or see [ASSETS.md](ASSETS.md) for replacement rules.
+For what matches the original game and what is still missing, see [PARITY.md](PARITY.md).
 
 ## Run it locally
 
@@ -97,7 +98,7 @@ js/sim/                     Simulation at a fixed 20 Hz: world generation, econo
                             noise, vision, combat, infected AI, swarms, nests, scoring
 js/view/                    Canvas renderer, camera, terrain cache, asset loader, audio
 js/ui/                      Input, selection and commands, HUD, panels, screens, profile
-assets/                     Placeholder sprites plus manifest.json (see ASSETS.md)
+assets/                     Original sprites and animation strips plus manifest.json
 tools/gen-placeholders.mjs  Regenerates the placeholder sprites
 tests/                      node --test unit tests for the simulation
 ```

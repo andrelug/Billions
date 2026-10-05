@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Billions — Art Catalog</title>
+<style>
+  :root { color-scheme:dark; font:15px/1.5 system-ui,sans-serif; background:#111b21; color:#e7edf0 }
+  body { max-width:1400px; margin:auto; padding:32px }
+  h1 { font-size:32px; margin:0 0 6px } p { color:#b5c2c8; margin:0 0 20px }
+  a { color:#8cc9e7 } header { border-bottom:1px solid #35434a; padding-bottom:22px; margin-bottom:24px }
+  nav { display:flex; gap:12px; flex-wrap:wrap; align-items:center }
+  select,input { font:inherit; border:1px solid #586971; background:#1b2a32; color:inherit; border-radius:6px; padding:8px }
+  input[type=checkbox] { width:18px; height:18px; vertical-align:middle }
+  #grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:24px }
+  figure { margin:0; min-width:0 } .stage { height:210px; display:flex; align-items:center; justify-content:center; background:#24352f; border-radius:6px; overflow:hidden }
+  .stage img { max-width:95%; max-height:95%; object-fit:contain }
+  .stage.unit img,.stage.infected img { width:160px; height:160px }
+  .stage canvas { width:160px; height:160px; max-width:100%; max-height:100% }
+  .stage.icon img,.stage.pickup img,.stage.fx img { max-width:96px; max-height:96px }
+  .stage.terrain { background-color:#17232a; background-size:64px 64px; background-repeat:repeat } .stage.terrain img { display:none }
+  figcaption { padding-top:10px } small { display:block; color:#a7b6bd; overflow-wrap:anywhere }
+  .pending { opacity:.6 } .flag { font-size:12px; color:#84dbb4 } .pending .flag { color:#b9aa86 }
+  #empty { padding:40px 0 } @media(max-width:500px) { body { padding:18px } #grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px } .stage { height:150px } h1 {font-size:26px} }
+</style>
+<header>
+  <h1>Billions art catalog</h1>
+  <p id="summary">Loading sprite inventory…</p>
+  <nav>
+    <label>Category <select id="category"><option value="">All art</option><option>building</option><option>unit</option><option>infected</option><option>nest</option><option>terrain</option><option>icon</option><option>pickup</option><option>mayor</option><option>fx</option></select></label>
+    <label>Find <input id="search" type="search" placeholder="Name or sprite key"></label>
+    <label><input id="pending" type="checkbox"> Include placeholders</label>
+    <a href="../">Open game</a>
+  </nav>
+</header>
+<main id="grid"></main><p id="empty" hidden>No matching art.</p>
+<script type="module">
+import {assetSpecs} from '../js/data/art.js';
+let manifest,generated,animations=[];
+const specs=assetSpecs();
+async function refresh(){
+ const next=await Promise.all(['../assets/manifest.json','generated.json'].map(url=>fetch(url,{cache:'no-store'}).then(r=>r.json())));
+ const changed=!generated||JSON.stringify(next[1])!==JSON.stringify(generated);
+ [manifest,generated]=next;
+ const baseCount=specs.filter(s=>generated[s.key]).length, animatedCount=Object.keys(generated).filter(key=>manifest[key]?.frames>1).length;
+ document.querySelector('#summary').textContent=`${baseCount} of ${specs.length} base sprites replaced; ${animatedCount} animation strips installed. Animations play below. Click any sprite to open its PNG.`;
+ if(changed)render();
+}
+function render(){
+ const category=document.querySelector('#category').value, search=document.querySelector('#search').value.toLowerCase(), pending=document.querySelector('#pending').checked;
+ const known=new Set(specs.map(s=>s.key));
+ const extra=Object.keys(manifest).filter(key=>!known.has(key)).map(key=>({key,desc:key.replace(/[_/]/g,' ')}));
+ const visible=[...specs,...extra].filter(s=>(pending||generated[s.key])&&(!category||s.key.startsWith(category+'/'))&&(s.key+' '+s.desc).toLowerCase().includes(search));
+ animations=[];
+ const grid=document.querySelector('#grid'); grid.replaceChildren();
+ for(const s of visible){
+  const m=manifest[s.key], done=generated[s.key], figure=document.createElement('figure'); figure.className=done?'':'pending';
+  const a=document.createElement('a'); a.className='stage '+s.key.split('/')[0]; a.href='../assets/'+m.file; a.target='_blank'; a.rel='noopener'; a.setAttribute('aria-label','Open '+s.desc);
+  const img=new Image(); img.src=a.href+(done?'?v='+done.sha256:''); img.alt=s.desc;
+  if(m.frames>1){
+   const canvas=document.createElement('canvas'); canvas.width=m.w;canvas.height=m.h;canvas.setAttribute('role','img');canvas.setAttribute('aria-label',s.desc+' animation');a.append(canvas);
+   animations.push({img,canvas,m});
+  }else{img.loading='lazy';a.append(img);}
+  if(s.key.startsWith('terrain/'))a.style.backgroundImage=`url("${img.src}")`;
+  const caption=document.createElement('figcaption'); caption.textContent=s.desc;
+  for(const text of [s.key,`${m.w} × ${m.h} px${m.frames>1?` per frame · ${m.frames} frames · ${m.fps} fps`:''}`]){ const small=document.createElement('small');small.textContent=text;caption.append(small); }
+  if(s.key.startsWith('terrain/')){ const small=document.createElement('small');small.textContent='Repeated at 64 px to inspect tile seams';caption.append(small); }
+  const flag=document.createElement('span');flag.className='flag';flag.textContent=done?'Generated artwork':'Placeholder';caption.append(flag);figure.append(a,caption);grid.append(figure);
+ }
+ document.querySelector('#empty').hidden=visible.length>0;
+}
+for(const id of ['category','search','pending'])document.getElementById(id).addEventListener('input',render);
+await refresh();
+setInterval(()=>refresh().catch(()=>{}),15000);
+const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+setInterval(()=>{
+ for(const {img,canvas,m} of animations){
+  if(!img.complete||!img.naturalWidth)continue;
+  const frame=reducedMotion.matches?0:Math.floor(performance.now()*m.fps/1000)%m.frames;
+  const ctx=canvas.getContext('2d');ctx.clearRect(0,0,m.w,m.h);ctx.drawImage(img,frame*m.w,0,m.w,m.h,0,0,m.w,m.h);
+ }
+},60);
+</script>
+</html>

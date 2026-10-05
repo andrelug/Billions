@@ -1,0 +1,122 @@
+{
+  "unit/ranger_walk": {
+    "file": "assets/unit/ranger_walk.png",
+    "w": 128,
+    "h": 128,
+    "frames": 6,
+    "fps": 8,
+    "baseKey": "unit/ranger",
+    "sha256": "9310659b772ec126002ae84c24c321f30f03e0cc339acaa863b4d8c2528f47c1",
+    "source": "/Users/andrelug/.codex/generated_images/01a10bf5-1b46-7dc2-91d3-8b410a39d256/exec-26eaed69-65a8-45f7-af22-70a013d881fe.png",
+    "provider": "built-in image_gen",
+    "prompt": "Use case: stylized-concept. Create ONE transparent horizontal sprite strip for unit/ranger_walk, using the supplied character as the exact visual reference. Original painterly steampunk RTS game art, same clothing, face, anatomy, weapons, palette, high overhead three-quarter camera and upper-left lighting as the reference.\nSubject: Female human bow scout, short blue hooded cape, brown leather armor, quiver, boots and bow held toward right.\nAnimation: Six unmistakably DIFFERENT articulated poses forming a walk cycle. Pose 1: right boot far FORWARD toward screen right, left boot far BACK toward screen left. Pose 2: rear left knee bent high, right leg planted. Pose 3: left boot swings forward past the planted right leg. Pose 4: left boot far FORWARD toward screen right, right boot far BACK toward screen left. Pose 5: rear right knee bent high, left leg planted. Pose 6: right boot swings forward past the planted left leg. The boots exchange front/back positions across the cycle. Relax the arms and carry weapons low while walking. DO NOT repeat the idle fighting stance. Small torso bob, same anatomy throughout.\nLAYOUT IS ESSENTIAL: exactly 6 separate full-body poses in ONE horizontal row, evenly spaced across exactly 6 equal-width cells. Canvas aspect 3:1; cells may be tall. Each pose is centered at its own cell's midpoint. Use the SAME scale, camera, fixed root position and foot baseline in every cell. Entire head, limbs and weapons must be contained inside each cell, with transparent margins between poses. Keep the body in the central 40% of cell height and all weapons inside the central 70% of cell width.\nEvery pose faces RIGHT. Preserve every detail of the character's identity; change only the articulated motion. No horizontal drift, turn-around, camera movement, anatomy changes, detached limbs, overlapping frames, extra characters, second row, cell outlines, labels, numbers, words or watermark. Real alpha transparency everywhere outside the characters and compact contact shadows. No background or ground plane."
+  },
+  "unit/soldier_walk": {
+    "file": "assets/unit/soldier_walk.png",
+    "w": 128,
+    "h": 128,
+    "frames": 6,
+    "fps": 8,
+    "baseKey": "unit/soldier",
+    "sha256": "fff319b76deea353c8a43b9ae5155c904383766313c3ec871451941c8c0624a1",
+    "source": "/Users/andrelug/.codex/generated_images/01a10bf5-1b46-7dc2-91d3-8b410a39d256/exec-f463e255-c67d-4944-a837-90daa310f9b6.png",
+    "provider": "built-in image_gen",
+    "prompt": "Use case: stylized-concept. Create ONE transparent horizontal sprite strip for unit/soldier_walk, using the supplied character as the exact visual reference. Original painterly steampunk RTS game art, same clothing, face, anatomy, weapons, palette, high overhead three-quarter camera and upper-left lighting as the reference.\nSubject: Armored human rifle soldier with blue steel breastplate, brass helmet, brown boots and compact long rifle held toward right.\nAnimation: Six unmistakably DIFFERENT articulated poses forming a walk cycle. Pose 1: right boot far FORWARD toward screen right, left boot far BACK toward screen left. Pose 2: rear left knee bent high, right leg planted. Pose 3: left boot swings forward past the planted right leg. Pose 4: left boot far FORWARD toward screen right, right boot far BACK toward screen left. Pose 5: rear right knee bent high, left leg planted. Pose 6: right boot swings forward past the planted left leg. The boots exchange front/back positions across the cycle. Relax the arms and carry weapons low while walking. DO NOT repeat the idle fighting stance. Small torso bob, same anatomy throughout.\nLAYOUT IS ESSENTIAL: exactly 6 separate full-body poses in ONE horizontal row, evenly spaced across exactly 6 equal-width cells. Canvas aspect 3:1; cells may be tall. Each pose is centered at its own cell's midpoint. Use the SAME scale, camera, fixed root position and foot baseline in every cell. Entire head, limbs and weapons must be contained inside each cell, with transparent margins between poses. Keep the body in the central 40% of cell height and all weapons inside the central 70% of cell width.\nEvery pose faces RIGHT. Preserve every detail of the character's identity; change only the articulated motion. No horizontal drift, turn-around, camera movement, anatomy changes, detached limbs, overlapping frames, extra characters, second row, cell outlines, labels, numbers, words or watermark. Real alpha transparency everywhere outside the characters and compact contact shadows. No background or ground plane."
+  },
+  "unit/soldier_attack": {
+    "file": "assets/unit/soldier_attack.png",
+    "w": 128,
+    "h": 128,
+    "frames": 4,
+    "fps": 12,
+    "baseKey": "unit/soldier",
+    "sha256": "c369f9e843868658209727e5524d4eb6adc824c6569cd4e976f11b501fe0835b",
+    "source": "/Users/andrelug/.codex/generated_images/01a10bf5-1b46-7dc2-91d3-8b410a39d256/exec-53d1b4ae-59a0-4423-8578-f0a4d526551e.png",
+    "provider": "built-in image_gen",
+    "prompt": "Use case: stylized-concept. Create ONE transparent horizontal sprite strip for unit/soldier_attack, using the supplied character as the exact visual reference. Original painterly steampunk RTS game art, same clothing, face, anatomy, weapons, palette, high overhead three-quarter camera and upper-left lighting as the reference.\nSubject: Armored human rifle soldier with blue steel breastplate, brass helmet, brown boots and compact long rifle held toward right.\nAnimation: Four consecutive phases of one attack: preparation, wind-up, strike or discharge, recovery. brace the rifle, fire with a small recoil, and recover. No victim, scene, gore or large projectile effects.\nLAYOUT IS ESSENTIAL: exactly 4 separate full-body poses in ONE horizontal row, evenly spaced across exactly 4 equal-width cells. Canvas aspect 3:1; cells may be tall. Each pose is centered at its own cell's midpoint. Use the SAME scale, camera, fixed root position and foot baseline in every cell. Entire head, limbs and weapons must be contained inside each cell, with transparent margins between poses. Keep the body in the central 40% of cell height and all weapons inside the central 70% of cell width.\nEvery pose faces RIGHT. Preserve every detail of the character's identity; change only the articulated motion. No horizontal drift, turn-around, camera movement, anatomy changes, detached limbs, overlapping frames, extra characters, second row, cell outlines, labels, numbers, words or watermark. Real alpha transparency everywhere outside the characters and compact contact shadows. No background or ground plane."
+  },
+  "unit/sniper_walk": {
+    "file": "assets/unit/sniper_walk.png",
+    "w": 128,
+    "h": 128,
+    "frames": 6,
+    "fps": 8,
+    "baseKey": "unit/sniper",
+    "sha256": "42c34a678b395ab87320eb5945ca0f2b1d520e1a1dd5d5d2df31a8e29a326edc",
+    "source": "/Users/andrelug/.codex/generated_images/01a10bf5-1b46-7dc2-91d3-8b410a39d256/exec-31ee4847-217e-4bc1-8959-6d6849a2d0f4.png",
+    "provider": "built-in image_gen",
+    "prompt": "Use case: stylized-concept. Create ONE transparent horizontal sprite strip for unit/sniper_walk, using the supplied character as the exact visual reference. Original painterly steampunk RTS game art, same clothing, face, anatomy, weapons, palette, high overhead three-quarter camera and upper-left lighting as the reference.\nSubject: Human sharpshooter in short teal cloak, dark leather gear and goggles, long brass scoped rifle aimed toward right.\nAnimation: Six unmistakably DIFFERENT articulated poses forming a walk cycle. Pose 1: right boot far FORWARD toward screen right, left boot far BACK toward screen left. Pose 2: rear left knee bent high, right leg planted. Pose 3: left boot swings forward past the planted right leg. Pose 4: left boot far FORWARD toward screen right, right boot far BACK toward screen left. Pose 5: rear right knee bent high, left leg planted. Pose 6: right boot swings forward past the planted left leg. The boots exchange front/back positions across the cycle. Relax the arms and carry weapons low while walking. DO NOT repeat the idle fighting stance. Small torso bob, same anatomy throughout.\nLAYOUT IS ESSENTIAL: exactly 6 separate full-body poses in ONE horizontal row, evenly spaced across exactly 6 equal-width cells. Canvas aspect 3:1; cells may be tall. Each pose is centered at its own cell's midpoint. Use the SAME scale, camera, fixed root position and foot baseline in every cell. Entire head, limbs and weapons must be contained inside each cell, with transparent margins between poses. Keep the body in the central 40% of cell height and all weapons inside the central 70% of cell width.\nEvery pose faces RIGHT. Preserve every detail of the character's identity; change only the articulated motion. No horizontal drift, turn-around, camera movement, anatomy changes, detached limbs, overlapping frames, extra characters, second row, cell outlines, labels, numbers, words or watermark. Real alpha transparency everywhere outside the characters and compact contact shadows. No background or ground plane."
+  },
+  "unit/sniper_attack": {
+    "file": "assets/unit/sniper_attack.png",
+    "w": 128,
+    "h": 128,
+    "frames": 4,
+    "fps": 12,
+    "baseKey": "unit/sniper",
+    "sha256": "7c8377f1c6d1fa52d60a40dfd4ef8f311512e49d2da3be5add59a212e2fe579d",
+    "source": "/Users/andrelug/.codex/generated_images/01a10bf5-1b46-7dc2-91d3-8b410a39d256/exec-f9239bc2-3cef-42b6-90c6-a1b5a4f60f51.png",
+    "provider": "built-in image_gen",
+    "prompt": "Use case: stylized-concept. Create ONE transparent horizontal sprite strip for unit/sniper_attack, using the supplied character as the exact visual reference. Original painterly steampunk RTS game art, same clothing, face, anatomy, weapons, palette, high overhead three-quarter camera and upper-left lighting as the reference.\nSubject: Human sharpshooter in short teal cloak, dark leather gear and goggles, long brass scoped rifle aimed toward right.\nAnimation: Four consecutive phases of one attack: preparation, wind-up, strike or discharge, recovery. aim the long scoped rifle, fire with a small recoil, and recover. No victim, scene, gore or large projectile effects.\nLAYOUT IS ESSENTIAL: exactly 4 separate full-body poses in ONE horizontal row, evenly spaced across exactly 4 equal-width cells. Canvas aspect 3:1; cells may be tall. Each pose is centered at its own cell's midpoint. Use the SAME scale, camera, fixed root position and foot baseline in every cell. Entire head, limbs and weapons must be contained inside each cell, with transparent margins between poses. Keep the body in the central 40% of cell height and all weapons inside the central 70% of cell width.\nEvery pose faces RIGHT. Preserve every detail of the character's identity; change only the articulated motion. No horizontal drift, turn-around, camera movement, anatomy changes, detached limbs, overlapping frames, extra characters, second row, cell outlines, labels, numbers, words or watermark. Real alpha transparency everywhere outside the characters and compact contact shadows. No background or ground plane."
+  },
+  "unit/pyro_walk": {
+    "file": "assets/unit/pyro_walk.png",
+    "w": 128,
+    "h": 128,
+    "frames": 6,
+    "fps": 8,
+    "baseKey": "unit/pyro",
+    "sha256": "75c74b02dbe3e7f817402411245c956f544e9c22df9d2aa7eefb1a81b4aa4493",
+    "source": "/Users/andrelug/.codex/generated_images/01a10bf5-1b46-7dc2-91d3-8b410a39d256/exec-7f64383c-3caa-4cec-b577-d8ca5299bd4c.png",
+    "provider": "built-in image_gen",
+    "prompt": "Use case: stylized-concept. Create ONE transparent horizontal sprite strip for unit/pyro_walk, using the supplied character as the exact visual reference. Original painterly steampunk RTS game art, same clothing, face, anatomy, weapons, palette, high overhead three-quarter camera and upper-left lighting as the reference.\nSubject: Heavy human flamethrower trooper in orange and iron protective armor, brass fuel tanks on back, short hose and flamethrower nozzle held toward right; no emitted flame.\nAnimation: Six unmistakably DIFFERENT articulated poses forming a walk cycle. Pose 1: right boot far FORWARD toward screen right, left boot far BACK toward screen left. Pose 2: rear left knee bent high, right leg planted. Pose 3: left boot swings forward past the planted right leg. Pose 4: left boot far FORWARD toward screen right, right boot far BACK toward screen left. Pose 5: rear right knee bent high, left leg planted. Pose 6: right boot swings forward past the planted left leg. The boots exchange front/back positions across the cycle. Relax the arms and carry weapons low while walking. DO NOT repeat the idle fighting stance. Small torso bob, same anatomy throughout.\nLAYOUT IS ESSENTIAL: exactly 6 separate full-body poses in ONE horizontal row, evenly spaced across exactly 6 equal-width cells. Canvas aspect 3:1; cells may be tall. Each pose is centered at its own cell's midpoint. Use the SAME scale, camera, fixed root position and foot baseline in every cell. Entire head, limbs and weapons must be contained inside each cell, with transparent margins between poses. Keep the body in the central 40% of cell height and all weapons inside the central 70% of cell width.\nEvery pose faces RIGHT. Preserve every detail of the character's identity; change only the articulated motion. No horizontal drift, turn-around, camera movement, anatomy changes, detached limbs, overlapping frames, extra characters, second row, cell outlines, labels, numbers, words or watermark. Real alpha transparency everywhere outside the characters and compact contact shadows. No background or ground plane."
+  },
+  "unit/rocketeer_walk": {
+    "file": "assets/unit/rocketeer_walk.png",
+    "w": 128,
+    "h": 128,
+    "frames": 6,
+    "fps": 8,
+    "baseKey": "unit/rocketeer",
+    "sha256": "67ed41c5661bf85e15743fa9440556dacbb692c855c5bf7434bcb0fa373f14bd",
+    "source": "/Users/andrelug/.codex/generated_images/01a10bf5-1b46-7dc2-91d3-8b410a39d256/exec-a2c9099b-08b3-4713-8f51-5b370f3b85f2.png",
+    "provider": "built-in image_gen",
+    "prompt": "Use case: stylized-concept. Create ONE transparent horizontal sprite strip for unit/rocketeer_walk, using the supplied character as the exact visual reference. Original painterly steampunk RTS game art, same clothing, face, anatomy, weapons, palette, high overhead three-quarter camera and upper-left lighting as the reference.\nSubject: Human rocket artillery trooper in violet and iron armor, brass rocket pack and shoulder launcher pointing right; no launched projectile.\nAnimation: Six unmistakably DIFFERENT articulated poses forming a walk cycle. Pose 1: right boot far FORWARD toward screen right, left boot far BACK toward screen left. Pose 2: rear left knee bent high, right leg planted. Pose 3: left boot swings forward past the planted right leg. Pose 4: left boot far FORWARD toward screen right, right boot far BACK toward screen left. Pose 5: rear right knee bent high, left leg planted. Pose 6: right boot swings forward past the planted left leg. The boots exchange front/back positions across the cycle. Relax the arms and carry weapons low while walking. DO NOT repeat the idle fighting stance. Small torso bob, same anatomy throughout.\nLAYOUT IS ESSENTIAL: exactly 6 separate full-body poses in ONE horizontal row, evenly spaced across exactly 6 equal-width cells. Canvas aspect 3:1; cells may be tall. Each pose is centered at its own cell's midpoint. Use the SAME scale, camera, fixed root position and foot baseline in every cell. Entire head, limbs and weapons must be contained inside each cell, with transparent margins between poses. Keep the body in the central 40% of cell height and all weapons inside the central 70% of cell width.\nEvery pose faces RIGHT. Preserve every detail of the character's identity; change only the articulated motion. No horizontal drift, turn-around, camera movement, anatomy changes, detached limbs, overlapping frames, extra characters, second row, cell outlines, labels, numbers, words or watermark. Real alpha transparency everywhere outside the characters and compact contact shadows. No background or ground plane."
+  },
+  "unit/mutant_walk": {
+    "file": "assets/unit/mutant_walk.png",
+    "w": 256,
+    "h": 256,
+    "frames": 6,
+    "fps": 8,
+    "baseKey": "unit/mutant",
+    "sha256": "a249736c3bf00b2116df84c6ec1402ff33c5d78f83eeae48be9a80d641fe8aa8",
+    "source": "/Users/andrelug/.codex/generated_images/01a10bf5-1b46-7dc2-91d3-8b410a39d256/exec-2529a581-c271-475c-8e38-b8a5bbfbdc78.png",
+    "provider": "built-in image_gen",
+    "prompt": "Use case: stylized-concept. Create ONE transparent horizontal sprite strip for unit/mutant_walk, using the supplied character as the exact visual reference. Original painterly steampunk RTS game art, same clothing, face, anatomy, weapons, palette, high overhead three-quarter camera and upper-left lighting as the reference.\nSubject: Large allied muscular engineered humanoid brute, purple-gray skin, blue colony harness with brass fittings, giant clawed hands reaching toward right.\nAnimation: Six unmistakably DIFFERENT articulated poses forming a walk cycle. Pose 1: right boot far FORWARD toward screen right, left boot far BACK toward screen left. Pose 2: rear left knee bent high, right leg planted. Pose 3: left boot swings forward past the planted right leg. Pose 4: left boot far FORWARD toward screen right, right boot far BACK toward screen left. Pose 5: rear right knee bent high, left leg planted. Pose 6: right boot swings forward past the planted left leg. The boots exchange front/back positions across the cycle. Relax the arms and carry weapons low while walking. DO NOT repeat the idle fighting stance. Small torso bob, same anatomy throughout.\nLAYOUT IS ESSENTIAL: exactly 6 separate full-body poses in ONE horizontal row, evenly spaced across exactly 6 equal-width cells. Canvas aspect 3:1; cells may be tall. Each pose is centered at its own cell's midpoint. Use the SAME scale, camera, fixed root position and foot baseline in every cell. Entire head, limbs and weapons must be contained inside each cell, with transparent margins between poses. Keep the body in the central 40% of cell height and all weapons inside the central 70% of cell width.\nEvery pose faces RIGHT. Preserve every detail of the character's identity; change only the articulated motion. No horizontal drift, turn-around, camera movement, anatomy changes, detached limbs, overlapping frames, extra characters, second row, cell outlines, labels, numbers, words or watermark. Real alpha transparency everywhere outside the characters and compact contact shadows. No background or ground plane."
+  },
+  "unit/titan_walk": {
+    "file": "assets/unit/titan_walk.png",
+    "w": 256,
+    "h": 256,
+    "frames": 6,
+    "fps": 8,
+    "baseKey": "unit/titan",
+    "sha256": "05cd1a6daa9aabdcf6834d0cbc748e4489353af44086b4e9d5cadb8dec11fb5d",
+    "source": "/Users/andrelug/.codex/generated_images/01a10bf5-1b46-7dc2-91d3-8b410a39d256/exec-820360a4-ecb4-423f-9359-6dfa3af84052.png",
+    "provider": "built-in image_gen",
+    "prompt": "Use case: stylized-concept. Create ONE transparent horizontal sprite strip for unit/titan_walk, using the supplied character as the exact visual reference. Original painterly steampunk RTS game art, same clothing, face, anatomy, weapons, palette, high overhead three-quarter camera and upper-left lighting as the reference.\nSubject: Large bipedal steam war machine, blue-gray iron armor, brass pistons, stout legs and twin heavy machine-gun arms pointing right.\nAnimation: Six unmistakably DIFFERENT articulated poses forming a walk cycle. Pose 1: right boot far FORWARD toward screen right, left boot far BACK toward screen left. Pose 2: rear left knee bent high, right leg planted. Pose 3: left boot swings forward past the planted right leg. Pose 4: left boot far FORWARD toward screen right, right boot far BACK toward screen left. Pose 5: rear right knee bent high, left leg planted. Pose 6: right boot swings forward past the planted left leg. The boots exchange front/back positions across the cycle. Relax the arms and carry weapons low while walking. DO NOT repeat the idle fighting stance. Small torso bob, same anatomy throughout.\nLAYOUT IS ESSENTIAL: exactly 6 separate full-body poses in ONE horizontal row, evenly spaced across exactly 6 equal-width cells. Canvas aspect 3:1; cells may be tall. Each pose is centered at its own cell's midpoint. Use the SAME scale, camera, fixed root position and foot baseline in every cell. Entire head, limbs and weapons must be contained inside each cell, with transparent margins between poses. Keep the body in the central 40% of cell height and all weapons inside the central 70% of cell width.\nEvery pose faces RIGHT. Preserve every detail of the character's identity; change only the articulated motion. No horizontal drift, turn-around, camera movement, anatomy changes, detached limbs, overlapping frames, extra characters, second row, cell outlines, labels, numbers, words or watermark. Real alpha transparency everywhere outside the characters and compact contact shadows. No background or ground plane."
+  },
+  "infected/decrepit_walk": {
+    "file": "assets/infected/decrepit_walk.png",
+    "w": 96,
+    "h": 96,
+    "frames": 6,
+    "fps": 8,
+    "baseKey": "infected/decrepit",
+    "sha256": "ad42926c7905d7b78a668f0b1a7f5af434b194ab52ba784aa39843b9ac1c13e8",
+    "source": "/Users/andrelug/.codex/generated_images/01a10bf5-1b46-7dc2-91d3-8b410a39d256/exec-1407f0bc-83bf-444a-a02d-ed7e061b84b3.png",
+    "provider": "built-in image_gen",
+    "prompt": "Use case: stylized-concept. Create ONE transparent horizontal sprite strip for infected/decrepit_walk, using the supplied character as the exact visual reference. Original painterly steampunk RTS game art, same clothing, face, anatomy, weapons, palette, high overhead three-quarter camera and upper-left lighting as the reference.\nSubject: Frail hunched elderly adult infected, olive-gray skin, ragged tan clothes, thin limbs and slack reaching arms. Non-graphic undead horror; no exposed viscera.\nAnimation: Six unmistakably DIFFERENT articulated poses forming a walk cycle. Pose 1: right boot far FORWARD toward screen right, left boot far BACK toward screen left. Pose 2: rear left knee bent high, right leg planted. Pose 3: left boot swings forward past the planted right leg. Pose 4: left boot far FORWARD toward screen right, right boot far BACK toward screen left. Pose 5: rear right knee bent high, left leg planted. Pose 6: right boot swings forward past the planted left leg. The boots exchange front/back positions across the cycle. Relax the arms and carry weapons low while walking. DO NOT repeat the idle fighting stance. Small torso bob, same anatomy throughout.\nLAYOUT IS ESSENTIAL: exactly 6 separate full-body poses in ONE horizontal row, evenly spaced across exactly 6 equal-width cells. Canvas aspect 3:1; cells may be tall. Each pose is centered at its own cell's midpoint. Use the SAME scale, camera, fixed root position and foot baseline in every cell. Entire head, limbs and weapons must be contained inside each cell, with transparent margins between poses. Keep the body in the central 40% of cell height and all weapons inside the central 70% of cell width.\nEvery pose faces RIGHT. Preserve every detail of the character's identity; change only the articulated motion. No horizontal drift, turn-around, camera movement, anatomy changes, detached limbs, overlapping frames, extra characters, second row, cell outlines, labels, numbers, words or watermark. Real alpha transparency everywhere outside the characters and compact contact shadows. No background or ground plane."
+  }
+}
