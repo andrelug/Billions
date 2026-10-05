@@ -90,6 +90,50 @@ resolution is up to you.
   - `blood` and `ichor` are corpses;
   - `ring` is used for pulses.
 
+## Interface skin
+
+Menus, panels, buttons and the HUD are plain HTML and CSS. Any `ui/...` entry in
+`assets/manifest.json` restyles them when the game starts (see `js/ui/skin.js`); with no
+entries the plain interface stays. Draw at 2x and keep the files in `assets/ui/`.
+
+**Frames** stretch as 9-slice images: the corners keep their size and the edges and the
+centre stretch. `slice` gives the insets in image pixels (top, right, bottom, left);
+`border` gives how many screen pixels they take (default half of `slice`). Add
+`"repeat": "round"` to tile the edges instead of stretching them.
+
+```json
+"ui/frame": { "file": "ui/frame.png", "slice": [48, 48, 48, 48] }
+```
+
+| Key | Used for |
+|---|---|
+| `ui/frame` | Panels, dialogs, the selection panel, the build bar and scrolling lists |
+| `ui/toast` | Messages under the top bar |
+| `ui/button`, `ui/button_down` | Every button, and while pressed |
+| `ui/button_primary`, `ui/button_danger` | Start, Build and confirm buttons; demolish and abandon |
+| `ui/button_on` | Selected options, tabs, cards, commands and rail buttons |
+| `ui/slot` | Square slots: build cards, unit commands, the left rail, group buttons, unit and research buttons |
+| `ui/tab`, `ui/tab_on` | Build category tabs |
+| `ui/chip` | Each resource counter in the top bar |
+| `ui/bar_top`, `ui/bar_bottom` | The top bar and the bottom tray |
+| `ui/minimap` | Frame around the minimap |
+| `ui/clock` | Frame around the day counter |
+
+**Images.** `ui/title_bg` covers the title and menu screens; `ui/logo` replaces the
+BILLIONS title text and keeps its aspect ratio.
+
+**Icons.** `ui/icon/<name>` replaces the text glyph of a button. Square, transparent,
+128x128. Names: `select`, `army`, `base`, `alert`, `grid`, `menu`, `pause`, `play`,
+`fast`, `faster`, `info`, `close`, and the unit commands `move`, `attack`, `hold`,
+`stop`, `patrol`, `chase`, `nearest`, `strongest`, `leave`, `drop`, `dismiss`,
+`deselect`.
+
+**Font.** `ui/font` points to a `.woff2` file used for titles, buttons and HUD numbers.
+Use a font whose licence allows bundling it with the game.
+
+**Colours.** `ui/vars` has no file; it overrides the CSS colour variables, for example
+`"ui/vars": { "--accent": "#d9b45a", "--text": "#f3ead6", "--muted": "#b4a588" }`.
+
 ## manifest.json
 
 Each key maps to an entry like this:

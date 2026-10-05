@@ -24,6 +24,7 @@ export class Assets {
       const res = await fetch(this.base + 'manifest.json', { cache: 'no-cache' });
       if (res.ok) manifest = await res.json();
     } catch (e) { /* offline or missing: placeholders only */ }
+    this.manifest = manifest;
     const keys = [...this.specs.keys()];
     let done = 0;
     await Promise.all(keys.map(async (key) => {
@@ -42,7 +43,7 @@ export class Assets {
     // animation states ("unit/ranger_walk", "infected/young_attack") and
     // terrain props ("prop/FA/tree_0"). They have no placeholder: when
     // missing, the base sprite or the procedural terrain volume is used.
-    await Promise.all(Object.keys(manifest).filter((k) => !this.specs.has(k) && manifest[k].file).map(async (key) => {
+    await Promise.all(Object.keys(manifest).filter((k) => !this.specs.has(k) && !k.startsWith('ui/') && manifest[k].file).map(async (key) => {
       const m = manifest[key], base = this.entries.get(key.replace(/_(walk|attack)$/, ''));
       const img = await loadImage(this.base + m.file).catch(() => null);
       if (!img) return;

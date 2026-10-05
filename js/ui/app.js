@@ -11,6 +11,7 @@ import { Panel } from './panel.js';
 import { Screens, weekInfo } from './screens.js';
 import { Profile } from './profile.js';
 import { assetSpecs } from '../data/art.js';
+import { applySkin } from './skin.js';
 import { ACHIEVEMENTS } from '../data/achievements.js';
 import { THEMES, THEME_ORDER, POPULATIONS } from '../data/maps.js';
 import { TERRAIN } from '../data/terrain.js';
@@ -48,6 +49,7 @@ export class App {
   async boot() {
     this.screens.show('scr-loading');
     await this.assets.load((f) => { $('load-bar').style.width = (f * 100).toFixed(0) + '%'; });
+    applySkin(this.assets.manifest);
     this.hud = new Hud(this);
     this.tray = new Tray(this);
     this.panel = new Panel(this);

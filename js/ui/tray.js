@@ -68,7 +68,7 @@ export class Tray {
     const counts = {};
     for (const u of units) counts[u.type] = (counts[u.type] || 0) + 1;
     tabs.append(el('span', { class: 'sel-sum' }, Object.keys(counts).map((t) => `${counts[t]} ${UNITS[t].name}`).join(' · ')));
-    const cmd = (icon, label, fn, on, title) => tray.append(el('button', { class: 'cmd' + (on ? ' on' : ''), title, onclick: fn }, el('span', {}, icon), label));
+    const cmd = (icon, label, fn, on, title) => tray.append(el('button', { class: 'cmd' + (on ? ' on' : ''), title, onclick: fn }, el('span', { class: 'ico', 'data-icon': label.toLowerCase() }, icon), label));
     cmd('➜', 'Move', () => { c.targeting = c.targeting === 'move' ? null : 'move'; this.render(); app.toast('Tap where to move', 'info'); }, c.targeting === 'move', 'Move, ignoring enemies');
     cmd('⚔', 'Attack', () => { c.targeting = c.targeting === 'amove' ? null : 'amove'; this.render(); app.toast('Tap where to attack-move', 'info'); }, c.targeting === 'amove', 'Attack-move (Q)');
     cmd('⛨', 'Hold', () => { g.unitSys.command(units, { t: 'hold' }); this.render(); }, units.every((u) => u.cmd.t === 'hold'), 'Hold position (H)');
@@ -108,7 +108,7 @@ export class Tray {
     acts.append(el('button', { class: 'primary', onclick: () => app.ctrl.confirm() }, '✓ Build'));
     if (d.rotate) acts.append(el('button', { class: 'opt', onclick: () => app.ctrl.rotate() }, '⟳ Rotate'));
     if (d.wall || d.trap || d.gate) acts.append(el('button', { class: 'opt' + (p.lineMode ? ' on' : ''), onclick: () => app.ctrl.toggleLine() }, '📏 Line'));
-    acts.append(el('button', { class: 'x', onclick: () => app.ctrl.cancelPlace() }, '✕'));
+    acts.append(el('button', { class: 'x', onclick: () => app.ctrl.cancelPlace() }, el('span', { class: 'ico', 'data-icon': 'close' }, '✕')));
     bar.append(head, info, status, acts);
   }
 }
