@@ -1,0 +1,7 @@
+{
+  "music": {
+    "menu": "music/menu.mp3",
+    "calm": ["music/calm_1.mp3", "music/calm_2.mp3", "music/calm_3.mp3"],
+    "tension": "music/tension.mp3"
+  }
+}

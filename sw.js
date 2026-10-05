@@ -14,7 +14,8 @@ self.addEventListener('fetch', (e) => {
   const fresh = req.mode === 'navigate' || FRESH.test(url.pathname);
   // Network first so updates (and new art) show up; fall back to cache offline.
   e.respondWith(fetch(req, fresh ? { cache: 'no-cache' } : undefined).then((res) => {
-    if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
+    // Only whole responses can be cached; streamed music arrives in 206 parts.
+    if (res.status === 200) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {}); }
     return res;
   }).catch(() => caches.match(req)));
 });
