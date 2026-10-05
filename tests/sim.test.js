@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { Game } from '../js/sim/game.js';
 import { placementBlocker } from '../js/sim/placement.js';
 import { T } from '../js/sim/worldgen.js';
-import { MOVE_SCALE } from '../js/data/maps.js';
+import { MOVE_SCALE, THEMES, MAP_SIZE } from '../js/data/maps.js';
+import { generateMap } from '../js/sim/worldgen.js';
 
 function freshGame(theme = 'FA', seed = 11) {
   const g = new Game();
@@ -11,6 +12,12 @@ function freshGame(theme = 'FA', seed = 11) {
   // Clear the map population for controlled scenarios.
   g.infected = []; g.nests = []; g.zgrid.rebuild(g.infected);
   return g;
+}
+// Open grass around the Command Center, for scenarios that are not about terrain.
+function openGround(g, r = 32) {
+  const W = g.world, cx = Math.floor(g.cc.cx), cy = Math.floor(g.cc.cy);
+  for (let y = cy - r; y <= cy + r; y++) for (let x = cx - r; x <= cx + r; x++) if (W.inside(x, y) && Math.hypot(x - cx, y - cy) <= r) W.setTile(x, y, T.GRASS);
+  g.afterLoad();   // power, economy, cost map and the colony flow field
 }
 const run = (g, sec) => { for (let i = 0; i < sec * 20 && g.state === 'playing'; i++) g.step(0.05); };
 // First tile (scanning outward from the CC) where `ok(x, y)` holds.
@@ -35,6 +42,7 @@ test('new game matches the reference start', () => {
 
 test('rangers kill approaching walkers', () => {
   const g = freshGame();
+  openGround(g);
   const cx = g.cc.cx, cy = g.cc.cy;
   for (const u of g.units) { u.x = cx + 0.5; u.y = cy + 4; u.post = { x: u.x, y: u.y }; }
   const far = find(g, (x, y) => g.world.walkable(x, y) && g.colonyField.dist[x + y * g.world.w] < 0xFFFFFFFF, 14, 30);
@@ -61,6 +69,7 @@ test('buildings: barrier drains, then infection spawns infected', () => {
 
 test('energy grid: buildings must be inside, teslas extend it and cascade when lost', () => {
   const g = freshGame();
+  openGround(g);
   g.res.gold = 2000; g.res.wood = 50;
   const outside = find(g, (x, y) => g.world.power[x + y * g.world.w] === 0 && g.world.terrain(x, y).build && g.world.terrain(x + 1, y + 1).build && g.world.terrain(x + 1, y).build && g.world.terrain(x, y + 1).build, 12, 30);
   assert.match(g.buildBlocker('tent', outside.x, outside.y, 0), /energy grid/);
@@ -175,4 +184,33 @@ test('movement runs at the tuned pace', () => {
   const moved = Math.hypot(u.x - x0, u.y - y0);
   assert.ok(moved <= 2.4 * MOVE_SCALE * 1.05 + 1e-6, `soldier moved ${moved.toFixed(2)} cells in 1 s`);
   assert.ok(moved >= 2.4 * MOVE_SCALE * 0.5, `soldier moved ${moved.toFixed(2)} cells in 1 s`);
+});
+
+test('maps vary in layout and keep resources reachable', () => {
+  const blocks = [T.MOUNTAIN, T.STONE, T.IRON, T.GOLD, T.WATER, T.FOREST];
+  const layouts = new Set();
+  for (const theme of Object.keys(THEMES)) for (const seed of [3, 17, 29, 41]) {
+    const m = generateMap(seed, MAP_SIZE, { ...THEMES[theme].gen, blocks });
+    layouts.add(m.layout);
+    const { w, tiles, start, reach } = m;
+    // A quarry can stand next to the deposit: open, reached ground beside it.
+    const usable = { [T.STONE]: [], [T.IRON]: [], [T.GOLD]: [] };
+    for (let i = 0; i < tiles.length; i++) {
+      if (!usable[tiles[i]]) continue;
+      const open = [1, -1, w, -w].some((d) => reach[i + d] && (tiles[i + d] === T.GRASS || tiles[i + d] === T.MUD));
+      if (open) usable[tiles[i]].push(Math.hypot(i % w - start.x, Math.floor(i / w) - start.y));
+    }
+    const tag = `${theme}:${seed}`;
+    assert.ok(usable[T.STONE].filter((d) => d < 26).length >= 15, `${tag} stone near the colony`);
+    assert.ok(usable[T.IRON].filter((d) => d < 40).length >= 8, `${tag} iron within reach`);
+    assert.ok(usable[T.GOLD].length >= 10, `${tag} gold somewhere`);
+    assert.ok(Math.min(...usable[T.GOLD]) >= (THEMES[theme].gen.goldMin || 36) - 3, `${tag} gold stays far away`);
+    // Swarms enter from every side: the middle of each edge reaches the colony.
+    for (const [x, y] of [[w >> 1, 1], [w >> 1, w - 2], [1, w >> 1], [w - 2, w >> 1]]) {
+      let ok = false;
+      for (let d = 0; d < 30 && !ok; d++) for (const [dx, dy] of [[d, 0], [-d, 0], [0, d], [0, -d]]) { const xx = x + dx, yy = y + dy; if (xx > 0 && yy > 0 && xx < w && yy < w && reach[xx + yy * w]) ok = true; }
+      assert.ok(ok, `${tag} edge at ${x},${y} connects to the colony`);
+    }
+  }
+  assert.ok(layouts.size >= 4, `layouts seen: ${[...layouts].join(', ')}`);
 });

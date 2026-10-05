@@ -20,7 +20,7 @@ export const THEMES = {
     giants: 0, behemoths: 0, villages: 1, villageSize: [3, 4], nestFactor: 0.5, density: 0.35,
     tiers: { weak: 34, medium: 58, strong: 82, powerful: 200 },
     treasures: [3, 4], oldTowers: [1, 2], energy: [2, 3], foodPick: [2, 3], ravens: 8,
-    gen: { water: 0.05, mountain: 0.1, forest: 0.32, mud: 0.06, stone: 14, iron: 9, gold: 4, oil: 6, scales: { water: 18, mountain: 12, forest: 9 } },
+    gen: { water: 0.05, mountain: 0.1, forest: 0.32, mud: 0.06, stone: 14, iron: 9, gold: 4, oil: 6, scales: { water: 18, mountain: 12, forest: 9 }, layouts: { basin: 3, river: 2, plains: 2, ridges: 1, lakes: 1 } },
     ground: 'grass', palette: { grass: '#4f7f3a', forest: '#2c5a26', mountain: '#6b6b63', water: '#2f6f9f', mud: '#6b5a3a' },
   },
   BR: {
@@ -30,7 +30,7 @@ export const THEMES = {
     giants: 1, behemoths: 1, villages: 1, villageSize: [5, 7], nestFactor: 0.8, density: 0.38,
     tiers: { weak: 34, medium: 52, strong: 70, powerful: 92 },
     treasures: [3, 4], oldTowers: [1, 2], energy: [2, 3], foodPick: [2, 3], ravens: 12,
-    gen: { water: 0.13, mountain: 0.17, forest: 0.12, mud: 0.12, stone: 13, iron: 8, gold: 4, oil: 6, scales: { water: 9, mountain: 8, forest: 7 } },
+    gen: { water: 0.13, mountain: 0.17, forest: 0.12, mud: 0.12, stone: 13, iron: 8, gold: 4, oil: 6, scales: { water: 9, mountain: 8, forest: 7 }, layouts: { river: 3, lakes: 2, ridges: 2, basin: 1, plains: 1 } },
     ground: 'moor', palette: { grass: '#566b3c', forest: '#2f4a2a', mountain: '#5e5a54', water: '#2b5878', mud: '#5a4c36' },
   },
   TM: {
@@ -40,7 +40,7 @@ export const THEMES = {
     giants: 1, behemoths: 1, villages: 4, villageSize: [7, 10], nestFactor: 1, density: 0.4,
     tiers: { weak: 32, medium: 50, strong: 68, powerful: 88 },
     treasures: [4, 5], oldTowers: [1, 2], energy: [2, 3], foodPick: [1, 2], ravens: 24,
-    gen: { water: 0.15, mountain: 0.06, forest: 0.1, mud: 0.06, stone: 12, iron: 8, gold: 3, oil: 6, scales: { water: 26, mountain: 14, forest: 10 } },
+    gen: { water: 0.15, mountain: 0.06, forest: 0.1, mud: 0.06, stone: 12, iron: 8, gold: 3, oil: 6, scales: { water: 26, mountain: 14, forest: 10 }, layouts: { plains: 3, lakes: 2, river: 2, basin: 1, ridges: 1 } },
     ground: 'grass', palette: { grass: '#5c8f3e', forest: '#2f6a2a', mountain: '#727068', water: '#3378a8', mud: '#6b5a3a' },
   },
   AL: {
@@ -51,7 +51,7 @@ export const THEMES = {
     tiers: { weak: 30, medium: 48, strong: 66, powerful: 86 },
     treasures: [3, 4], oldTowers: [1, 2], energy: [5, 6], foodPick: [1, 2], ravens: 0,
     mods: [{ path: 'building.*.need.energy', pct: 0.3 }, { path: 'awareness', pct: -0.5 }, { path: 'unit.*.speed', pct: -0.2 }],
-    gen: { water: 0.1, mountain: 0.23, forest: 0.1, mud: 0.04, stone: 12, iron: 8, gold: 3, oil: 5, scales: { water: 14, mountain: 11, forest: 8 } },
+    gen: { water: 0.1, mountain: 0.23, forest: 0.1, mud: 0.04, stone: 12, iron: 8, gold: 3, oil: 5, scales: { water: 14, mountain: 11, forest: 8 }, layouts: { ridges: 3, basin: 3, river: 1, lakes: 1, plains: 0 } },
     ground: 'snow', palette: { grass: '#d8e2ea', forest: '#3d5a4a', mountain: '#8b95a0', water: '#6d9cc4', mud: '#a8b4bf' },
   },
   DS: {
@@ -62,7 +62,7 @@ export const THEMES = {
     tiers: { weak: 28, medium: 46, strong: 64, powerful: 82 },
     treasures: [5, 6], oldTowers: [2, 3], energy: [1, 2], foodPick: [5, 6], ravens: 40,
     mods: [{ path: 'awareness', pct: 0.3 }, { path: 'vision', pct: 0.1 }],
-    gen: { water: 0.03, mountain: 0.15, forest: 0.06, mud: 0.15, stone: 20, iron: 14, gold: 6, oil: 12, scales: { water: 5, mountain: 5, forest: 5 } },
+    gen: { water: 0.03, mountain: 0.15, forest: 0.06, mud: 0.15, stone: 20, iron: 14, gold: 6, oil: 12, scales: { water: 5, mountain: 5, forest: 5 }, layouts: { plains: 3, ridges: 2, basin: 2, river: 0, lakes: 0 } },
     ground: 'sand', palette: { grass: '#c9a86a', forest: '#6b7a3a', mountain: '#9a6b4a', water: '#3f86a8', mud: '#b08a58' },
   },
   VO: {
@@ -72,7 +72,7 @@ export const THEMES = {
     giants: 2, behemoths: 4, villages: 1, villageSize: [22, 22], nestFactor: 1.5, density: 0.45,
     tiers: { weak: 24, medium: 36, strong: 52, powerful: 70 },
     treasures: [3, 4], oldTowers: [2, 3], energy: [2, 3], foodPick: [2, 3], ravens: 12,
-    gen: { water: 0.1, mountain: 0.18, forest: 0.12, mud: 0.15, stone: 14, iron: 10, gold: 7, goldMin: 18, oil: 7, scales: { water: 12, mountain: 10, forest: 8 } },
+    gen: { water: 0.1, mountain: 0.18, forest: 0.12, mud: 0.15, stone: 14, iron: 10, gold: 7, goldMin: 18, oil: 7, scales: { water: 12, mountain: 10, forest: 8 }, layouts: { lakes: 3, ridges: 2, basin: 1, river: 1, plains: 1 } },
     ground: 'caustic', palette: { grass: '#6b7a3a', forest: '#3a4a26', mountain: '#5a5048', water: '#4a8a5a', mud: '#7a6a3a' },
   },
 };

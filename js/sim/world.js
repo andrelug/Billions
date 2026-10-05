@@ -20,7 +20,7 @@ export class World {
     const g = generateMap(seed, size, biome);
     const w = new World(g.w, g.h);
     w.tiles.set(g.tiles); w.variant.set(g.variant);
-    w.start = g.start; w.villages = g.villages;
+    w.start = g.start; w.villages = g.villages; w.layout = g.layout;
     w.refreshTerrain();
     return w;
   }
@@ -28,7 +28,7 @@ export class World {
   static fromSave(s) {
     const w = new World(s.w, s.h);
     w.tiles.set(s.tiles); w.variant.set(s.variant);
-    w.start = s.start; w.villages = s.villages || [];
+    w.start = s.start; w.villages = s.villages || []; w.layout = s.layout || null;
     w.refreshTerrain();
     return w;
   }
@@ -81,6 +81,6 @@ export class World {
   }
 
   serialize() {
-    return { w: this.w, h: this.h, tiles: Array.from(this.tiles), variant: Array.from(this.variant), start: this.start, villages: this.villages };
+    return { w: this.w, h: this.h, tiles: Array.from(this.tiles), variant: Array.from(this.variant), start: this.start, villages: this.villages, layout: this.layout };
   }
 }
