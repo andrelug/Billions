@@ -128,7 +128,7 @@ export class Economy {
         case 'wood': if (t === T.FOREST && !claimed[i]) { claimed[i] = 1; wood++; } break;
         case 'mine':
           if (claimed[i]) break;
-          if (t === T.STONE) { claimed[i] = 1; stone++; } else if (t === T.IRON) { claimed[i] = 1; iron++; } else if (t === T.GOLD) { claimed[i] = 1; gold++; }
+          if (t === T.STONE || t === T.MOUNTAIN) { claimed[i] = 1; stone++; } else if (t === T.IRON) { claimed[i] = 1; iron++; } else if (t === T.GOLD) { claimed[i] = 1; gold++; }
           break;
         case 'farm': if ((t === T.GRASS) && !claimed[i] && W.trap[i] === -1 && cells < (hv.max || 99)) { claimed[i] = 2; cells++; } break;
         case 'fish': if (t === T.WATER && !claimed[i]) { claimed[i] = 1; cells++; } break;

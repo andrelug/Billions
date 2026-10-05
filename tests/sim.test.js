@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Game } from '../js/sim/game.js';
+import { placementBlocker } from '../js/sim/placement.js';
+import { T } from '../js/sim/worldgen.js';
 
 function freshGame(theme = 'FA', seed = 11) {
   const g = new Game();
@@ -131,4 +133,33 @@ test('swarm schedule matches the reference for 100 and 80 days', () => {
   days.forEach((d, i) => assert.ok(d >= ref[i] && d <= ref[i] + 1, `swarm ${i + 1} on day ${d}`));
   const f = new Game(); f.setup({ theme: 'FA', pop: 'medium', days: 80, seed: 1 });
   assert.equal(Math.floor(f.waves.list.find((e) => e.final).at), Math.ceil(2208 * 0.8));
+});
+
+test('quarry: mountains count as stone for placement and mining', () => {
+  const g = freshGame();
+  const W = g.world;
+  const ring = (x, y, pred) => {
+    for (let ty = y - 1; ty < y + 3; ty++) for (let tx = x - 1; tx < x + 3; tx++) {
+      if (tx >= x && tx < x + 2 && ty >= y && ty < y + 2) continue;
+      if (W.inside(tx, ty) && pred(W.tiles[tx + ty * W.w])) return true;
+    }
+    return false;
+  };
+  const grass2x2 = (x, y) => [0, 1].every((dy) => [0, 1].every((dx) => W.tile(x + dx, y + dy) === T.GRASS && W.occAt(x + dx, y + dy) === -1));
+  const deposit = (t) => t === T.STONE || t === T.IRON || t === T.GOLD;
+  const opts = { ignorePower: true, ignoreLock: true };
+  // Next to a mountain only: allowed, and the mountain cells yield stone.
+  const m = find(g, (x, y) => grass2x2(x, y) && ring(x, y, (t) => t === T.MOUNTAIN) && !ring(x, y, deposit), 4, 60);
+  assert.ok(m, 'found grass next to a mountain');
+  assert.equal(placementBlocker(g, 'quarry', m.x, m.y, 0, opts), null);
+  assert.ok(g.eco.preview('quarry', m.x, m.y, 2, 2).stone > 0, 'mountain cells give stone');
+  // Next to a stone deposit still works.
+  const s = find(g, (x, y) => grass2x2(x, y) && ring(x, y, (t) => t === T.STONE), 4, 60);
+  assert.ok(s, 'found grass next to a stone deposit');
+  assert.equal(placementBlocker(g, 'quarry', s.x, s.y, 0, opts), null);
+  // Open grass with no rock around is still refused.
+  const rock = (t) => t === T.MOUNTAIN || deposit(t);
+  const o = find(g, (x, y) => grass2x2(x, y) && !ring(x, y, rock), 4, 60);
+  assert.ok(o, 'found open grass');
+  assert.equal(placementBlocker(g, 'quarry', o.x, o.y, 0, opts), 'Must be next to stone, iron or gold');
 });

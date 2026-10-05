@@ -6,7 +6,7 @@ export { T };
 export const TERRAIN = {
   [T.GRASS]:    { key: 'grass',    name: 'Grass',          walk: true,  build: true,  resource: 'grass' },
   [T.FOREST]:   { key: 'forest',   name: 'Forest',         walk: false, build: false, resource: 'wood' },
-  [T.MOUNTAIN]: { key: 'mountain', name: 'Mountain',       walk: false, build: false, resource: null },
+  [T.MOUNTAIN]: { key: 'mountain', name: 'Mountain',       walk: false, build: false, resource: 'stone' },
   [T.STONE]:    { key: 'stone',    name: 'Stone deposit',  walk: false, build: false, resource: 'stone' },
   [T.IRON]:     { key: 'iron',     name: 'Iron deposit',   walk: false, build: false, resource: 'iron' },
   [T.GOLD]:     { key: 'gold',     name: 'Gold deposit',   walk: false, build: false, resource: 'goldore' },
