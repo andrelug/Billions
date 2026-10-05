@@ -1,0 +1,11 @@
+{
+  "music": {
+    "menu": "music/menu.mp3",
+    "calm": ["music/calm_1.mp3", "music/calm_2.mp3", "music/calm_3.mp3"],
+    "tension": "music/tension.mp3",
+    "swarm": ["music/swarm_1.mp3", "music/swarm_2.mp3"],
+    "final": "music/final.mp3",
+    "victory": "music/victory.mp3",
+    "defeat": "music/defeat.mp3"
+  }
+}

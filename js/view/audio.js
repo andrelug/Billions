@@ -35,6 +35,8 @@ const FALLBACK = { collapse: 'explosion', infect: 'groan' };
 // final, victory, defeat. Ambience: one loop per map id (FA, BR, TM, AL, DS, VO).
 const MUSIC_VOL = 0.5, AMB_VOL = 0.3, FADE = 2.5;
 const ONCE = new Set(['victory', 'defeat']);
+// A mood without its own tracks borrows the closest one until they exist.
+const MOOD_FALLBACK = { final: 'swarm', swarm: 'tension', tension: 'calm' };
 
 export class Audio {
   constructor() {
@@ -121,8 +123,13 @@ export class Audio {
   refreshMusic() {
     if (!this.ctx) return;
     const on = this.enabled && this.musicOn;
-    this.musicCh = this.cue(this.musicCh, on ? this.choose(this.lists.music[this.moodName], this.musicCh) : null, MUSIC_VOL, 'music');
+    this.musicCh = this.cue(this.musicCh, on ? this.choose(this.moodList(), this.musicCh) : null, MUSIC_VOL, 'music');
     this.ambCh = this.cue(this.ambCh, on ? this.choose(this.lists.ambience[this.ambName], this.ambCh) : null, AMB_VOL, 'amb');
+  }
+  moodList() {
+    let m = this.moodName;
+    while (m && !this.lists.music[m]) m = MOOD_FALLBACK[m];
+    return m ? this.lists.music[m] : null;
   }
   // A mood may list several files: the current one keeps playing while it
   // belongs to the mood, otherwise one is picked at random.
@@ -144,13 +151,13 @@ export class Audio {
     gain.connect(this.master);
     const now = this.ctx.currentTime;
     gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(vol, now + FADE);
-    const list = kind === 'music' ? this.lists.music[this.moodName] : this.lists.ambience[this.ambName];
+    const list = kind === 'music' ? this.moodList() : this.lists.ambience[this.ambName];
     const many = Array.isArray(list) && list.length > 1, once = kind === 'music' && ONCE.has(this.moodName);
     el.loop = !many && !once;
     const nc = { file, el, gain };
     // With several tracks, the next one starts when this one ends.
     if (many) el.addEventListener('ended', () => {
-      if (kind === 'music' && this.musicCh === nc) this.musicCh = this.cue(null, this.choose(this.lists.music[this.moodName], null, file), vol, kind);
+      if (kind === 'music' && this.musicCh === nc) this.musicCh = this.cue(null, this.choose(this.moodList(), null, file), vol, kind);
       if (kind === 'amb' && this.ambCh === nc) this.ambCh = this.cue(null, this.choose(this.lists.ambience[this.ambName], null, file), vol, kind);
     });
     el.play().catch(() => {});

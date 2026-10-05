@@ -12,6 +12,7 @@ import { Screens, weekInfo } from './screens.js';
 import { Profile } from './profile.js';
 import { assetSpecs } from '../data/art.js';
 import { applySkin } from './skin.js';
+import { layoutName } from '../sim/worldgen.js';
 import { ACHIEVEMENTS } from '../data/achievements.js';
 import { THEMES, THEME_ORDER, POPULATIONS } from '../data/maps.js';
 import { TERRAIN } from '../data/terrain.js';
@@ -136,7 +137,7 @@ export class App {
     if (g.mayorOffer) this.panel.mayor(g.mayorOffer);
     this.audio.setAmbience(g.settings.theme);
     this.audio.mood(g.waves.finalSpawned ? 'final' : 'calm'); this.calmAt = null;
-    if (g.time < 1) this.toast(`${g.theme.name}: survive ${g.totalDays} days. Build Tents next to the Command Center first.`, 'good');
+    if (g.time < 1) this.toast(`${g.theme.name}${g.world.layout ? ' · ' + layoutName(g.world.layout) : ''}: survive ${g.totalDays} days. Build Tents next to the Command Center first.`, 'good');
   }
 
   saveMeta() {
