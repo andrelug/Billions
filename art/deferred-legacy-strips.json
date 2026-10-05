@@ -1,0 +1,146 @@
+{
+  "unit/pyro_walk": {
+    "file": "unit/pyro_walk.png",
+    "w": 128,
+    "h": 128,
+    "frames": 4,
+    "fps": 8,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "unit/pyro_attack": {
+    "file": "unit/pyro_attack.png",
+    "w": 128,
+    "h": 128,
+    "frames": 4,
+    "fps": 12,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "unit/rocketeer_walk": {
+    "file": "unit/rocketeer_walk.png",
+    "w": 128,
+    "h": 128,
+    "frames": 4,
+    "fps": 8,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "unit/rocketeer_attack": {
+    "file": "unit/rocketeer_attack.png",
+    "w": 128,
+    "h": 128,
+    "frames": 4,
+    "fps": 12,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "unit/titan_attack": {
+    "file": "unit/titan_attack.png",
+    "w": 256,
+    "h": 256,
+    "frames": 4,
+    "fps": 12,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "unit/titan_walk": {
+    "file": "unit/titan_walk.png",
+    "w": 256,
+    "h": 256,
+    "frames": 4,
+    "fps": 8,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "infected/decrepit_walk": {
+    "file": "infected/decrepit_walk.png",
+    "w": 96,
+    "h": 96,
+    "frames": 4,
+    "fps": 8,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "infected/decrepit_attack": {
+    "file": "infected/decrepit_attack.png",
+    "w": 96,
+    "h": 96,
+    "frames": 4,
+    "fps": 12,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "infected/aged_attack": {
+    "file": "infected/aged_attack.png",
+    "w": 96,
+    "h": 96,
+    "frames": 4,
+    "fps": 12,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "infected/aged_walk": {
+    "file": "infected/aged_walk.png",
+    "w": 96,
+    "h": 96,
+    "frames": 4,
+    "fps": 8,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "infected/young_walk": {
+    "file": "infected/young_walk.png",
+    "w": 96,
+    "h": 96,
+    "frames": 4,
+    "fps": 8,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "infected/young_attack": {
+    "file": "infected/young_attack.png",
+    "w": 96,
+    "h": 96,
+    "frames": 4,
+    "fps": 12,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "infected/colonist_walk": {
+    "file": "infected/colonist_walk.png",
+    "w": 128,
+    "h": 128,
+    "frames": 4,
+    "fps": 8,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "infected/colonist_attack": {
+    "file": "infected/colonist_attack.png",
+    "w": 128,
+    "h": 128,
+    "frames": 4,
+    "fps": 12,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "infected/executive_attack": {
+    "file": "infected/executive_attack.png",
+    "w": 128,
+    "h": 128,
+    "frames": 4,
+    "fps": 12,
+    "ax": 0.5,
+    "ay": 0.5
+  },
+  "infected/executive_walk": {
+    "file": "infected/executive_walk.png",
+    "w": 128,
+    "h": 128,
+    "frames": 4,
+    "fps": 8,
+    "ax": 0.5,
+    "ay": 0.5
+  }
+}
