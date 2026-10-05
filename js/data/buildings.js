@@ -73,14 +73,14 @@ export const BUILDINGS = {
     cost: { gold: 300, wood: 30 }, need: { workers: 4, energy: 4 }, upkeep: { gold: 6 },
     harvest: { kind: 'mine', radius: 2, per: 0.5, goldPer: 10 }, place: 'nearMineral', margin: 1, toggle: true, upgradeTo: 'advquarry',
     infectable: true, fire: 1,
-    desc: 'Mines stone and iron within radius 2 (0.5 per cell) and 10 gold per gold-ore cell.',
+    desc: 'Mines stone from mountains and stone deposits, and iron, within radius 2 (0.5 per cell), plus 10 gold per gold-ore cell.',
   },
   advquarry: {
     name: 'Advanced Quarry', cat: 'resource', size: [2, 2], hp: 600, barrier: 150, vision: 7, build: 45, upgradeTime: 21,
     cost: { gold: 1200, wood: 30, iron: 20, oil: 20 }, need: { workers: 6, energy: 15 }, upkeep: { gold: 30 },
     harvest: { kind: 'mine', radius: 2, per: 1, goldPer: 20 }, place: 'nearMineral', margin: 1, toggle: true, tech: 'advquarry', needs: 'foundry',
     infectable: true, fire: 0.5,
-    desc: 'Mines 1 stone or iron per cell and 20 gold per gold-ore cell within radius 2.',
+    desc: 'Mines 1 stone (mountains and stone deposits) or iron per cell and 20 gold per gold-ore cell within radius 2.',
   },
   oilplatform: {
     name: 'Oil Platform', cat: 'resource', size: [2, 2], hp: 500, barrier: 125, vision: 7, build: 60,

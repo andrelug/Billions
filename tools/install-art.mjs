@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { jobs } from './art-prompts.mjs';
 import { animationJobs } from './animation-prompts.mjs';
 import { writeSpriteList } from './sprite-list.mjs';
+import { UPDATE_ID } from './asset-update-spec.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 function saveJSON(file, value, indent) {
@@ -20,6 +21,9 @@ const job = [...jobs,...animationJobs].find(j => j.key === key);
 if (!job || !source) throw new Error('Provide a known sprite key and generated source PNG.');
 const w = Number(width || job.w), h = Number(height || job.h);
 const frames = job.frames || 1;
+if (![w,h,frames].every(n=>Number.isInteger(n)&&n>0)) throw new Error('Dimensions and frames must be positive integers.');
+const promptFile = process.env.ART_PROMPT_FILE;
+const actualPrompt = promptFile ? fs.readFileSync(promptFile,'utf8').trim() : job.prompt;
 // Keep manifest and provenance updates together when batches export at once.
 const lock = path.join(root, 'art/.bin/install.lock');
 fs.mkdirSync(path.dirname(lock), { recursive:true });
@@ -50,19 +54,31 @@ if (key.startsWith('unit/') || key.startsWith('infected/')) {
   if (!fs.existsSync(bin) || fs.statSync(bin).mtimeMs < fs.statSync(swift).mtimeMs)
     execFileSync('swiftc', [swift, '-o', bin], { stdio:'inherit' });
   execFileSync(bin, [source, target, String(w), String(h), ...(frames>1?[String(frames)]:[])], { stdio:'inherit' });
+} else if (job.slice) {
+  const bin=path.join(root,'art/.bin/pack-ui'), swift=path.join(root,'tools/pack-ui.swift');
+  if (!fs.existsSync(bin) || fs.statSync(bin).mtimeMs < fs.statSync(swift).mtimeMs)
+    execFileSync('swiftc',[swift,'-o',bin],{stdio:'inherit'});
+  execFileSync(bin,[source,target,String(w),String(h),String(job.slice[3]),String(job.slice[1])],{stdio:'inherit'});
 } else {
-  execFileSync('/usr/bin/sips', ['-z', String(h), String(w), source, '--out', target], { stdio:'ignore' });
+  execFileSync('/usr/bin/sips', ['-s','format',job.file.endsWith('.jpg')?'jpeg':'png','-z', String(h), String(w), source, '--out', target], { stdio:'ignore' });
+  if (/^(building|nest|prop)\//.test(key)) {
+    const bin=path.join(root,'art/.bin/anchor-object'), swift=path.join(root,'tools/anchor-object.swift');
+    if (!fs.existsSync(bin) || fs.statSync(bin).mtimeMs < fs.statSync(swift).mtimeMs)
+      execFileSync('swiftc',[swift,'-o',bin],{stdio:'inherit'});
+    execFileSync(bin,[target,target],{stdio:'inherit'});
+  }
 }
 const png = fs.readFileSync(target);
-if (png.readUInt32BE(16) !== w * frames || png.readUInt32BE(20) !== h) throw new Error('Unexpected output dimensions.');
+if (!job.file.endsWith('.jpg') && (png.readUInt32BE(16) !== w * frames || png.readUInt32BE(20) !== h)) throw new Error('Unexpected output dimensions.');
 const manifestFile = path.join(root, 'assets/manifest.json');
 const manifest = JSON.parse(fs.readFileSync(manifestFile));
 manifest[key] = { ...manifest[key], file:job.file, w,h,frames,
-  ...(job.frames?{fps:job.fps,ax:0.5,ay:0.5}:{}) };
+  ...(job.frames?{fps:job.fps,ax:0.5,ay:0.5}:{}),
+  ...(job.cells?{cells:job.cells}:{}), ...(job.slice?{slice:job.slice}:{}), ...(job.border?{border:job.border}:{}) };
 saveJSON(manifestFile, manifest, 1);
 writeSpriteList(root, manifest);
 const ledgerFile = path.join(root, 'art/generated.json');
 const ledger = fs.existsSync(ledgerFile) ? JSON.parse(fs.readFileSync(ledgerFile)) : {};
-ledger[key] = { file:'assets/'+job.file, w,h, ...(job.frames?{frames,fps:job.fps,baseKey:job.baseKey}:{}), sha256:crypto.createHash('sha256').update(png).digest('hex'), source, provider:'built-in image_gen', prompt:job.prompt };
+ledger[key] = { file:'assets/'+job.file, w,h, ...(job.frames?{frames,fps:job.fps,baseKey:job.baseKey,baseSha256:ledger[job.baseKey]?.sha256}:{}), sha256:crypto.createHash('sha256').update(png).digest('hex'), source, provider:'built-in image_gen', update:UPDATE_ID, prompt:actualPrompt };
 saveJSON(ledgerFile, ledger, 2);
 console.log(`${key}: installed ${w*frames}x${h}, ${frames} frame(s)`);

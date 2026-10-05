@@ -11,6 +11,7 @@ import { Panel } from './panel.js';
 import { Screens, weekInfo } from './screens.js';
 import { Profile } from './profile.js';
 import { assetSpecs } from '../data/art.js';
+import { applySkin } from './skin.js';
 import { ACHIEVEMENTS } from '../data/achievements.js';
 import { THEMES, THEME_ORDER, POPULATIONS } from '../data/maps.js';
 import { TERRAIN } from '../data/terrain.js';
@@ -19,6 +20,7 @@ import { UNITS } from '../data/units.js';
 const TRAIN_KEYS = { q: 'ranger', w: 'soldier', r: 'sniper', u: 'pyro', i: 'titan', o: 'rocketeer', p: 'mutant' };
 
 const AUTOSAVE = 120;   // seconds of real play between autosaves
+const SWARM_MUSIC = 150;  // game seconds of swarm music after a swarm arrives, then back to calm
 
 export class App {
   constructor() {
@@ -47,6 +49,7 @@ export class App {
   async boot() {
     this.screens.show('scr-loading');
     await this.assets.load((f) => { $('load-bar').style.width = (f * 100).toFixed(0) + '%'; });
+    applySkin(this.assets.manifest);
     this.hud = new Hud(this);
     this.tray = new Tray(this);
     this.panel = new Panel(this);
@@ -57,7 +60,7 @@ export class App {
 
   applySettings() {
     const s = this.profile.settings;
-    this.audio.setEnabled(s.sound); this.audio.setVolume(s.volume);
+    this.audio.setEnabled(s.sound); this.audio.setVolume(s.volume); this.audio.setMusic(s.music !== false);
     if (this.input) this.input.edgeScroll = !!s.edgeScroll;
     if (this.game) {
       this.setFlat(s.flat);
@@ -111,7 +114,8 @@ export class App {
     g.ev.on('mayor', (offer) => this.panel.mayor(offer));
     g.ev.on('completed', () => this.tray.refresh());
     g.ev.on('tech', () => this.tray.render());
-    g.ev.on('swarmWarning', () => { if (navigator.vibrate) navigator.vibrate([60, 40, 60]); });
+    g.ev.on('swarmWarning', (ev) => { if (navigator.vibrate) navigator.vibrate([60, 40, 60]); this.audio.mood(ev.final ? 'final' : 'tension'); });
+    g.ev.on('swarm', (ev) => { this.audio.mood(ev.final ? 'final' : 'swarm'); this.calmAt = ev.final ? null : g.time + SWARM_MUSIC; });
   }
 
   started() {
@@ -130,6 +134,8 @@ export class App {
     this.tray.render();
     this.saveT = AUTOSAVE;
     if (g.mayorOffer) this.panel.mayor(g.mayorOffer);
+    this.audio.setAmbience(g.settings.theme);
+    this.audio.mood(g.waves.finalSpawned ? 'final' : 'calm'); this.calmAt = null;
     if (g.time < 1) this.toast(`${g.theme.name}: survive ${g.totalDays} days. Build Tents next to the Command Center first.`, 'good');
   }
 
@@ -155,6 +161,7 @@ export class App {
 
   ended(r) {
     const g = this.game, p = this.profile, s = g.settings;
+    this.audio.mood(r.won ? 'victory' : 'defeat'); this.audio.setAmbience(null); this.calmAt = null;
     this.profile.deleteGame(this.gameId);
     this.syncKills();
     const extra = [];
@@ -193,8 +200,14 @@ export class App {
   goHome() { const g = this.game; if (g && g.cc) this.renderer.cam.center(g.cc.cx, g.cc.cy + 2); }
   jumpToAlert() { const g = this.game; if (g && g.lastAlert) { this.renderer.cam.center(g.lastAlert.x, g.lastAlert.y); this.ping = { x: g.lastAlert.x, y: g.lastAlert.y, t0: performance.now() }; } }
   setSelectMode(on) { this.input.selectMode = on; $('btn-select').classList.toggle('on', on); if (on) this.toast('Drag on the map to select units', 'info'); }
-  ack(x, y) { this.ping = null; this.game.fx('ring', x, y, 0.6); this.sound('click'); }
+  ack(x, y, what) { this.ping = null; this.game.fx('ring', x, y, 0.6); this.sound('click'); if (what) this.voice(what); }
   sound(k) { this.audio.play(k); }
+  // Unit voice lines, as in the original game: voice_<unit>_<what>, else
+  // voice_<what>. what = select, move, attack, garrison or pickup.
+  voice(what, units) {
+    const u = (units || this.ctrl.selectedUnits())[0]; if (!u) return;
+    this.audio.playFirst([`voice_${u.type}_${what}`, `voice_${what}`], 1.2);
+  }
 
   onSelection() { this.tray.render(); this.panel.update(0, true); }
   onPlacing() { this.ctrl.updateGhost(); this.tray.render(); this.panel.update(0, true); }
@@ -267,6 +280,7 @@ export class App {
       const L = this.audio.listener, cam = this.renderer.cam; L.x = cam.x; L.y = cam.y; L.scale = cam.scale; L.W = cam.W; L.H = cam.H;
       if (g.state === 'playing') {
         this.hud.update(dt);
+        if (this.calmAt != null && g.time > this.calmAt) { this.calmAt = null; if (this.audio.moodName === 'swarm') this.audio.mood('calm'); }
         this.panel.update(dt);
         this.trayT = (this.trayT || 0) - dt; if (this.trayT <= 0) { this.trayT = 0.5; this.tray.refresh(); }
         if (!g.paused) { this.saveT -= dt; if (this.saveT <= 0) { this.saveT = AUTOSAVE; this.autosave(); } }

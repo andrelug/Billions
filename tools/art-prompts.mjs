@@ -2,6 +2,7 @@ import { assetSpecs } from '../js/data/art.js';
 import { BUILDINGS } from '../js/data/buildings.js';
 import { UNITS } from '../js/data/units.js';
 import { THEMES } from '../js/data/maps.js';
+import { buildingSize, propJobs, uiJobs } from './asset-update-spec.mjs';
 
 const building = {
   cc: 'Fortified Victorian colony headquarters with teal slate roofs, central brass clock turret, brick and stone walls, two chimneys, warm windows and blue banners.',
@@ -55,12 +56,12 @@ const building = {
 };
 const units = {
   ranger: 'Female human bow scout, short blue hooded cape, brown leather armor, quiver, boots and bow held toward right.',
-  soldier: 'Armored human rifle soldier with blue steel breastplate, brass helmet, brown boots and compact long rifle held toward right.',
-  sniper: 'Human sharpshooter in short teal cloak, dark leather gear and goggles, long brass scoped rifle aimed toward right.',
-  pyro: 'Heavy human flamethrower trooper in orange and iron protective armor, brass fuel tanks on back, short hose and flamethrower nozzle held toward right; no emitted flame.',
+  soldier: 'Armored human soldier with blue steel breastplate, brass helmet, brown boots and a SHORT compact steampunk submachine gun with a drum magazine, held close to chest toward right. No long rifle, scope or bayonet. Neutral standing stance with both feet planted at the same ground level; gun never extends more than one torso-width beyond hands.',
+  sniper: 'Human sharpshooter in short teal cloak, dark leather gear and goggles, long brass scoped rifle carried diagonally down toward right, tucked close to torso so the complete weapon fits the frame.',
+  pyro: 'Heavy human flamethrower trooper in orange and iron protective armor, brass fuel tanks on back, short hose and SHORT flamethrower nozzle held close to the torso, angled diagonally down toward right with bent elbows; no emitted flame. Compact standing silhouette taller than it is wide.',
   rocketeer: 'Human rocket artillery trooper in violet and iron armor, brass rocket pack and shoulder launcher pointing right; no launched projectile.',
   titan: 'Large bipedal steam war machine, blue-gray iron armor, brass pistons, stout legs and twin heavy machine-gun arms pointing right.',
-  mutant: 'Large allied muscular engineered humanoid brute, purple-gray skin, blue colony harness with brass fittings, giant clawed hands reaching toward right.',
+  mutant: 'Large allied muscular engineered humanoid brute, purple-gray skin, blue colony harness with brass fittings, giant clawed hands held close to torso with elbows bent, facing right. Compact standing silhouette taller than it is wide, feet close together at the same ground level.',
 };
 const infected = {
   decrepit: 'Frail hunched elderly adult infected, olive-gray skin, ragged tan clothes, thin limbs and slack reaching arms.',
@@ -95,7 +96,7 @@ const fx = {
 };
 const biomeNotes = {
   FA: 'lush temperate deep forest, moss greens, dark evergreen foliage, cool gray rocks, calm blue water',
-  BR: 'dark moorland, muted gray olive ground, sparse dark pines, charcoal cliffs, dark blue water, wet brown soil',
+  BR: 'autumn moorland, muted ochre olive ground, orange and red deciduous foliage with white birch trunks, dark damp cliffs, dark blue water, wet brown soil',
   TM: 'peaceful lowlands, fresh warm green meadows, broadleaf green woods, warm gray rocks, clear blue water',
   AL: 'frozen highlands, pale blue-white snowy ground, snow-dusted dark firs, icy blue-gray rock, cold blue water and frost',
   DS: 'desolated wasteland, ochre sandy ground, sparse dusty olive scrub, reddish sandstone, muted turquoise water',
@@ -122,12 +123,12 @@ export function makeJob(s) {
     w = h = 64; transparent = false;
     prompt = `Use case: stylized-concept. Asset type: one square seamless tileable terrain PNG, game key ${s.key}. ${style}\nSubject: ${terrainSubject[type]}. Setting: ${THEMES[id].name}. Color and climate only: ${biomeNotes[id].split(',').slice(0,2).join(',')}. Palette base ${s.color}${s.color3 ? ', mineral accent ' + s.color3 : ''}.\nONE MATERIAL ONLY: this image represents ONLY ${type}; ${type==='water' ? 'no ground, shore, trees or rocks' : 'absolutely no water, rivers, lakes, streams or shoreline'}${type==='forest' ? ', no rocks, clearings, paths, buildings, logs or landscape compositions' : ''}. This is one SMALL 64x64 game tile, not a large aerial landscape; use 2-4 broad texture masses rather than dozens of tiny objects.\nCamera: high overhead orthographic terrain texture matching a top-down RTS, no horizon, no perspective landscape. Full-bleed opaque square tile. This is variant ${Number(variant)+1} of four interchangeable random tiles; change interior arrangement subtly while preserving identical edge palette, density and scale. Ground and edge textures must be homogeneous so ALL variants join at any edge. No frame, edge bevel, vignette, gradient, bright center, cast shadow outside tile, diorama or isolated square platform. Fine details must remain readable when reduced to 64x64. No transparent pixels.`;
   } else if (group === 'building' || group === 'nest') {
-    const tall = ['tesla','lookout','radar','woodtower','stonetower','shocking','spire'].includes(id);
-    if (tall) h = Math.round(w * 1.5);
+    [w,h] = buildingSize(id, [s.w/64,s.h/64]);
     const subject = group === 'nest' ? `${id === 'small' ? 'Small abandoned timber cottage' : id === 'medium' ? 'Ruined two-storey stone dwelling' : 'Large ruined Victorian town hall'} infested by infected: broken brown roof, boarded black windows, sickly moss, dark red hanging scraps and scattered rubble contained inside footprint. No living figures.` : building[id];
-    prompt = `Use case: stylized-concept. Asset type: ONE transparent building PNG sprite, game key ${s.key}, ${s.desc}. ${style}\nSubject: ${subject}\nCamera: high top-down three-quarter orthographic, front facade at bottom; axis-aligned rectangular base matching ${s.w/64} tiles wide by ${s.h/64} tiles deep. NOT diamond isometric. Canvas aspect ${w}:${h}. Complete object centered, occupying about 90% of width, all silhouette and roof fully visible, transparent 5% margin. Footprint bottom near lower image edge${tall ? ', extra tower height rises upward above compact square base' : ''}. Small subtle contact shadow. Transparent background with REAL alpha. No ground plane outside footprint, no scenery, characters, extra buildings or floating platform.`;
+    prompt = `Use case: stylized-concept. Asset type: ONE transparent building PNG sprite, game key ${s.key}, ${s.desc}. ${style}\nSubject: ${subject}\nCamera: high top-down three-quarter orthographic, front facade at bottom; axis-aligned rectangular base matching ${s.w/64} tiles wide by ${s.h/64} tiles deep. NOT diamond isometric. Canvas aspect ${w}:${h}. Complete object fills 96% of width, all silhouette and roof fully visible, only 2% side margin. Base anchored flush at bottom edge; dimensional walls, roof, turrets and chimneys rise into the upper portion above the footprint. ${id==='telescope'?'Observatory occupies only the central three cells of the five-cell width. ':''}${['woodwall','stonewall'].includes(id)?'Tileable square wall module: all four base edges must meet adjacent modules flush; no side margins or end caps, identical masonry or timber spacing at each edge. ':''}No painted ground or shadow outside the base. Transparent background with REAL alpha. No ground plane outside footprint, no scenery, characters, extra buildings or floating platform.`;
   } else if (group === 'unit' || group === 'infected') {
-    prompt = `Use case: stylized-concept. Asset type: ONE transparent character sprite, game key ${s.key}. ${style}\nSubject: ${group === 'unit' ? units[id] : infected[id] + ' Non-graphic undead horror; no exposed viscera.'}\nCamera: high top-down three-quarter orthographic, see head and shoulders from above, NOT eye-level or portrait. Full body including feet. Faces RIGHT, nose, chest and weapon or reaching hands toward right. One compact idle combat pose, no motion blur. Keep entire body in CENTRAL 40% of square canvas width and height, center of torso at exact image center, about 30% empty transparent padding on ALL sides. Small compact contact shadow only. Large silhouette differences readable at 25px tall in crowds. REAL alpha transparency, no floor, scenery, writing or additional characters.`;
+    w = h = 256;
+    prompt = `Use case: stylized-concept. Asset type: ONE transparent character sprite, game key ${s.key}. ${style}\nSubject: ${group === 'unit' ? units[id] : infected[id] + ' Non-graphic undead horror; no exposed viscera.'}\nCamera: high top-down three-quarter orthographic, see head and shoulders from above, NOT eye-level or portrait. Full body including feet. Faces RIGHT, nose, chest and weapon or reaching hands toward right. One compact idle combat pose, no motion blur. 256x256 target frame. Body fills about 75% of frame height, top of head at 15%, feet centered at 90% of frame height. Complete weapons and limbs remain inside the frame. No painted contact shadow or cast shadow. Bold distinct dark silhouette, head and weapon readable at 40px tall in crowds. REAL alpha transparency, no floor, scenery, writing or additional characters.`;
   } else if (group === 'mayor') {
     transparent = false;
     prompt = `Use case: stylized-concept. Asset type: ONE square mayor portrait for a steampunk RTS HUD. ${style}\nSubject: ${id === 'm' ? 'Distinguished middle-aged male colony mayor, salt-and-pepper beard, navy Victorian coat, brass collar pin, kind resolute expression' : 'Distinguished middle-aged female colony mayor, brown hair in a practical updo, navy Victorian jacket, brass collar pin, kind resolute expression'}. Head and upper shoulders fill 90% of square, face centered. Muted dark teal plain painted background, warm gentle face lighting, recognizable at 64px. No ornate frame, no words.`;
@@ -140,5 +141,5 @@ export function makeJob(s) {
   return { key:s.key, file:s.file, w,h, transparent_background:transparent, prompt };
 }
 
-export const jobs = assetSpecs().map(makeJob);
+export const jobs = [...assetSpecs().map(makeJob), ...propJobs, ...uiJobs];
 if (process.argv.includes('--json')) process.stdout.write(JSON.stringify(jobs));

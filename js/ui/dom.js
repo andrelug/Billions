@@ -23,8 +23,10 @@ export function spriteIcon(assets, key, size = 34) {
   c.width = size * 2; c.height = size * 2; c.className = 'ic';
   c.style.width = size + 'px'; c.style.height = size + 'px';
   if (a) {
-    const ctx = c.getContext('2d'), k = Math.min(c.width / a.w, c.height / a.h);
-    ctx.drawImage(a.img, 0, 0, a.w, a.h, (c.width - a.w * k) / 2, (c.height - a.h * k) / 2, a.w * k, a.h * k);
+    // Only the opaque part of the frame, so characters fill their icon.
+    const r = (assets.crop && assets.crop(key)) || { x: 0, y: 0, w: a.w, h: a.h };
+    const ctx = c.getContext('2d'), k = Math.min(c.width / r.w, c.height / r.h);
+    ctx.drawImage(a.img, r.x, r.y, r.w, r.h, (c.width - r.w * k) / 2, (c.height - r.h * k) / 2, r.w * k, r.h * k);
   }
   return c;
 }

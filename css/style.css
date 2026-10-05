@@ -218,10 +218,9 @@ button.big { width: min(320px, 82vw); padding: 13px; font-size: 17px; }
   #place-bar .desc { display: none; }
   #place-bar .acts button { padding: 6px; font-size: 14px; }
 }
-}
 
 /* ------------------------------------------------------------ panels */
-.small { font-size: 11px; }
+.small { font-size: 12px; }
 .cost { display: inline-flex; align-items: center; gap: 2px; margin-right: 4px; white-space: nowrap; }
 .cost.bad { color: var(--bad); }
 .section { margin: 10px 0 4px; font-weight: 600; color: var(--accent); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }

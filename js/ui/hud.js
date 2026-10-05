@@ -41,9 +41,9 @@ export class Hud {
     }
     const sp = clear($('speed'));
     this.speedBtns = [];
-    const add = (label, v, title) => { const b = el('button', { title, onclick: () => this.app.setSpeed(v) }, label); sp.append(b); this.speedBtns.push([v, b]); };
-    add('⏸', 0, 'Pause (Space)'); add('▶', 1, 'Play');
-    if (this.app.profile.settings.fastForward) { add('⏩', 2, 'Fast'); add('⏭', 3, 'Faster'); }
+    const add = (label, v, title, icon) => { const b = el('button', { title, onclick: () => this.app.setSpeed(v) }, el('span', { class: 'ico', 'data-icon': icon }, label)); sp.append(b); this.speedBtns.push([v, b]); };
+    add('⏸', 0, 'Pause (Space)', 'pause'); add('▶', 1, 'Play', 'play');
+    if (this.app.profile.settings.fastForward) { add('⏩', 2, 'Fast', 'fast'); add('⏭', 3, 'Faster', 'faster'); }
   }
 
   renderGroups() {

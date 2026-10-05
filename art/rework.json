@@ -1,0 +1,38 @@
+{
+  "unit/mutant": {
+    "file": "assets/unit/mutant.png",
+    "w": 256,
+    "h": 256,
+    "sha256": "270f6ea216a4120265b6488d144197dedb0e7ab33e84fe2149c850db61619479",
+    "source": "/Users/andrelug/.codex/generated_images/01a10dab-2f13-7ae3-8761-8669a76651ac/exec-27cd446f-759c-445a-bb69-60a5bfd44ecf.png",
+    "provider": "built-in image_gen",
+    "update": "tab-scale-2026-10",
+    "prompt": "Use case: stylized-concept. Asset type: ONE transparent character sprite, game key unit/mutant. Original detailed painterly steampunk RTS game art. Broad readable material planes, crisp silhouettes, subdued weathering, warm timber and brass, teal slate roofs and restrained blue colony accents. Consistent soft light from upper left. No text, letters, labels, logos, watermark, UI, borders or collage.\nSubject: Large allied muscular engineered humanoid brute, purple-gray skin, blue colony harness with brass fittings, giant clawed hands reaching toward right.\nCamera: high top-down three-quarter orthographic, see head and shoulders from above, NOT eye-level or portrait. Full body including feet. Faces RIGHT, nose, chest and weapon or reaching hands toward right. One compact idle combat pose, no motion blur. 256x256 target frame. Body fills about 75% of frame height, top of head at 15%, feet centered at 90% of frame height. Complete weapons and limbs remain inside the frame. No painted contact shadow or cast shadow. Bold distinct dark silhouette, head and weapon readable at 40px tall in crowds. REAL alpha transparency, no floor, scenery, writing or additional characters.\nIsolation requirement: outside the silhouette is fully transparent with alpha zero. No brown halo, vignette, gradient, backdrop, ground wash or aura. Retain the complete subject and requested top-down camera.",
+    "candidate": "art/rework/unit-mutant-source.png",
+    "reason": "Body fits only 60.16% of the frame because the outstretched arm is too wide. Regenerate using bent elbows, hands near torso, feet close together before replacing idle or generating strips."
+  },
+  "unit/sniper": {
+    "file": "assets/unit/sniper.png",
+    "w": 256,
+    "h": 256,
+    "sha256": "3729b8bf17e57158888b2f8346c935a314d5241c834652a2468700b424e9b7ae",
+    "source": "/Users/andrelug/.codex/generated_images/01a10dab-2f13-7ae3-8761-8669a76651ac/exec-aea36e94-b2d3-4108-9ded-f42ab31727a4.png",
+    "provider": "built-in image_gen",
+    "update": "tab-scale-2026-10",
+    "prompt": "Use case: stylized-concept. Asset type: ONE transparent character sprite, game key unit/sniper. Original detailed painterly steampunk RTS game art. Broad readable material planes, crisp silhouettes, subdued weathering, warm timber and brass, teal slate roofs and restrained blue colony accents. Consistent soft light from upper left. No text, letters, labels, logos, watermark, UI, borders or collage.\nSubject: Human sharpshooter in short teal cloak, dark leather gear and goggles, long brass scoped rifle carried diagonally down toward right, tucked close to torso so the complete weapon fits the frame.\nCamera: high top-down three-quarter orthographic, see head and shoulders from above, NOT eye-level or portrait. Full body including feet. Faces RIGHT, nose, chest and weapon or reaching hands toward right. One compact idle combat pose, no motion blur. 256x256 target frame. Body fills about 75% of frame height, top of head at 15%, feet centered at 90% of frame height. Complete weapons and limbs remain inside the frame. No painted contact shadow or cast shadow. Bold distinct dark silhouette, head and weapon readable at 40px tall in crowds. REAL alpha transparency, no floor, scenery, writing or additional characters.\nIsolation requirement: outside the silhouette is fully transparent with alpha zero. No brown halo, vignette, gradient, backdrop, ground wash or aura. Retain the complete subject and requested top-down camera.",
+    "candidate": "art/rework/unit-sniper-source.png",
+    "reason": "Pose is too wide around its foot anchor and the body shrinks below 68% of frame height. Regenerate a compact pose with feet close together, rifle angled diagonally down and bent elbows before installing or generating strips."
+  },
+  "infected/fresh": {
+    "file": "assets/infected/fresh.png",
+    "w": 256,
+    "h": 256,
+    "sha256": "f9ceed3145f90e425f7755ec4af34547be446afcb8e4d38776d4b26b235e10b1",
+    "source": "/Users/andrelug/.codex/generated_images/01a10dab-2f13-7ae3-8761-8669a76651ac/exec-c024bbbd-b1e8-4b8e-bbd2-f57322b8e974.png",
+    "provider": "built-in image_gen",
+    "update": "tab-scale-2026-10",
+    "prompt": "Use case: stylized-concept. Asset type: ONE transparent character sprite, game key infected/fresh. Original detailed painterly steampunk RTS game art. Broad readable material planes, crisp silhouettes, subdued weathering, warm timber and brass, teal slate roofs and restrained blue colony accents. Consistent soft light from upper left. No text, letters, labels, logos, watermark, UI, borders or collage.\nSubject: Recently infected adult runner, torn green jacket, dark trousers, mottled pale green skin, aggressive compact crouch. Non-graphic undead horror; no exposed viscera.\nCamera: high top-down three-quarter orthographic, see head and shoulders from above, NOT eye-level or portrait. Full body including feet. Faces RIGHT, nose, chest and weapon or reaching hands toward right. One compact idle combat pose, no motion blur. 256x256 target frame. Body fills about 75% of frame height, top of head at 15%, feet centered at 90% of frame height. Complete weapons and limbs remain inside the frame. No painted contact shadow or cast shadow. Bold distinct dark silhouette, head and weapon readable at 40px tall in crowds. REAL alpha transparency, no floor, scenery, writing or additional characters.\nIsolation requirement: outside the silhouette is fully transparent with alpha zero. No brown halo, vignette, gradient, backdrop, ground wash or aura. Retain the complete subject and requested top-down camera.",
+    "candidate": "art/rework/infected-fresh-source.png",
+    "reason": "Pose is too wide around its foot anchor and the body shrinks below 68% of frame height. Regenerate a compact pose with feet close together, rifle angled diagonally down and bent elbows before installing or generating strips."
+  }
+}

@@ -5,7 +5,7 @@ const KEY = 'billions-profile-v2';
 const SAVE_PREFIX = 'billions-save-v2:';
 
 const DEFAULTS = {
-  settings: { sound: true, volume: 0.7, showHp: false, visibleAlerts: false, fastForward: false, flat: false, edgeScroll: false },
+  settings: { sound: true, music: true, volume: 0.7, showHp: false, visibleAlerts: false, fastForward: false, flat: false, edgeScroll: false },
   unlocked: ['FA'], bestFactor: {}, scores: [], achievements: {}, lifetimeKills: 0, weekly: {}, saves: [],
 };
 

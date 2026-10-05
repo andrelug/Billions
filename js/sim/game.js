@@ -459,7 +459,7 @@ export class Game {
     for (const uid of b.garrison) this.ungarrison(this.byId.get(uid), b);
     if (!b.neutral) { this.stats.buildingsLost++; if (!b.def.wall) this.notify(`${b.def.name} destroyed`, 'danger', pos); }
     this.fx('burst', b.cx, b.cy, Math.max(b.w, b.h));
-    this.ev.emit('sound', 'explosion', b.cx, b.cy);
+    this.ev.emit('sound', 'collapse', b.cx, b.cy);
     if (b.type === 'cc') { this.endGame(false, 'The Command Center was destroyed'); }
     this.removeBuilding(b);
   }
@@ -478,6 +478,7 @@ export class Game {
     const n = (def.house ? (def.supply.workers || 0) : (def.need.workers || def.supply.colonists || 0)) + (def.extraInfected || 0);
     const prevState = b.state;
     b.state = 'infected'; b.barrier = 0; b.queue = []; b.rq = [];
+    this.ev.emit('sound', 'infect', b.cx, b.cy);
     for (const uid of b.garrison) this.ungarrison(this.byId.get(uid), b);
     if (!(def.house && prevState === 'build')) {
       for (let i = 0; i < n; i++) {
@@ -535,6 +536,7 @@ export class Game {
   spawnTrained(b, type, vet) {
     const p = this.freeCellNear(b.cx, b.cy + b.h / 2 + 0.5, 6) || { x: b.cx, y: b.y + b.h + 0.5 };
     const u = this.addUnit(type, p.x, p.y, { vet });
+    this.ev.emit('sound', 'trained', p.x, p.y);
     if (b.rally) { this.unitSys.command([u], { t: 'move', x: b.rally.x, y: b.rally.y }); }
     this.fx('ring', p.x, p.y, 1);
     this.ev.emit('sound', 'complete', p.x, p.y);
@@ -728,6 +730,7 @@ export class Game {
       if (src.xp >= src.def.xp) { src.vet = true; this.notify(`A ${src.def.name} became a veteran`, 'good', src); this.fx('ring', src.x, src.y, 1); }
     }
     if (this.corpses.length < 600) this.corpses.push({ x: z.x, y: z.y, t: this.time, type: z.type, r: z.r });
+    this.ev.emit('sound', 'zdie', z.x, z.y);
     this.fx('splat', z.x, z.y, z.r);
   }
   killUnit(u, src) {

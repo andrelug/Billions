@@ -6,6 +6,11 @@ export const MAP_SIZE = 184;     // playable square; swarm generators sit 85 cel
 export const HOUR = 3.75;          // seconds per game hour
 export const DAY = 90;             // seconds per game day
 export const TICK = 30;            // resources are paid every 8 game hours
+// Movement pace. Speeds in the unit and infected tables are the original
+// game's panel values (Ranger 4, Soldier 2.4); everything walks at this
+// fraction of them. Tuned by eye against footage of the original game, where
+// troops, patrols and swarms move more slowly than the raw numbers suggest.
+export const MOVE_SCALE = 0.75;
 
 export const THEMES = {
   FA: {

@@ -123,50 +123,61 @@ if needsIsolation {
         isolated.append(result)
     }
 }
-var halfX = 1.0, halfY = 1.0
-var scale = Double.greatestFiniteMagnitude
+// Keep one body scale for the entire strip; align the planted feet in every pose.
+struct Pose {
+    let pixels: [UInt8]
+    let w: Int
+    let h: Int
+    let cx: Double
+    let bottom: Int
+    let bodyHeight: Int
+    let halfWidth: Double
+}
+var poses: [Pose] = []
 for frame in 0..<frames {
     let left = needsIsolation ? 0 : boundaries[frame]
     let right = needsIsolation ? image.width : boundaries[frame+1]
-    let anchor = (Double(frame)+0.5) * Double(image.width) / Double(frames)
-    guard let cell = needsIsolation ? isolated[frame] : image.cropping(to: CGRect(x: left, y: 0, width: right-left, height: image.height)) else {
-        fail("Cannot read animation cell")
+    guard let cell = needsIsolation ? isolated[frame] : image.cropping(to:CGRect(x:left,y:0,width:right-left,height:image.height)) else { fail("Cannot read animation cell") }
+    let iw=cell.width, ih=cell.height
+    var pixels=[UInt8](repeating:0,count:iw*ih*4)
+    pixels.withUnsafeMutableBytes { b in
+        let c=CGContext(data:b.baseAddress,width:iw,height:ih,bitsPerComponent:8,bytesPerRow:iw*4,space:space,bitmapInfo:info)!
+        c.draw(cell,in:CGRect(x:0,y:0,width:iw,height:ih))
     }
-    cells.append(cell)
-    let iw = cell.width, ih = cell.height
-    var pixels = [UInt8](repeating: 0, count: iw * ih * 4)
-    var visible = false
-    pixels.withUnsafeMutableBytes { buffer in
-        let context = CGContext(data: buffer.baseAddress, width: iw, height: ih,
-            bitsPerComponent: 8, bytesPerRow: iw * 4, space: space, bitmapInfo: info)!
-        context.draw(cell, in: CGRect(x: 0, y: 0, width: iw, height: ih))
-        for y in 0..<ih {
-            for x in 0..<iw where buffer[(y * iw + x) * 4 + 3] > 48 {
-                visible = true
-                halfX = max(halfX, abs(Double(left+x) + 0.5 - anchor))
-                halfY = max(halfY, abs(Double(y) + 0.5 - Double(ih) / 2))
-            }
+    var top=ih, bottom=0, x0=iw, x1=0
+    for y in 0..<ih { for x in 0..<iw where pixels[(y*iw+x)*4+3]>40 {
+        top=min(top,y); bottom=max(bottom,y+1); x0=min(x0,x); x1=max(x1,x+1)
+    } }
+    guard bottom>top else { fail("Animation cell \(frame+1) is empty") }
+    var sx=0.0,n=0.0
+    for y in max(top,bottom-(bottom-top)/5)..<bottom { for x in x0..<x1 where pixels[(y*iw+x)*4+3]>40 { sx+=Double(x)+0.5; n+=1 } }
+    let cx=n>0 ? sx/n : Double(x0+x1)/2
+    poses.append(Pose(pixels:pixels,w:iw,h:ih,cx:cx,bottom:bottom,bodyHeight:bottom-top,halfWidth:max(cx-Double(x0),Double(x1)-cx)))
+}
+let maxHeight=poses.map{$0.bodyHeight}.max()!, maxHalfWidth=poses.map{$0.halfWidth}.max()!
+let scale=min(Double(height)*0.75/Double(maxHeight),Double(width)*0.45/max(1,maxHalfWidth))
+let outWidth=width*frames
+var pixels=[UInt8](repeating:0,count:outWidth*height*4)
+for (frame,p) in poses.enumerated() {
+    for y in 0..<height { for x in 0..<width {
+        let px=(Double(x)+0.5-Double(width)*0.5)/scale+p.cx-0.5
+        let py=(Double(y)+0.5-Double(height)*0.9)/scale+Double(p.bottom)-0.5
+        let x0=Int(floor(px)),y0=Int(floor(py)),dx=px-Double(x0),dy=py-Double(y0)
+        for channel in 0..<4 {
+            var value=0.0
+            for yy in 0...1 { for xx in 0...1 {
+                let ix=x0+xx,iy=y0+yy
+                if ix>=0 && ix<p.w && iy>=0 && iy<p.h {
+                    value += Double(p.pixels[(iy*p.w+ix)*4+channel]) * (xx==0 ? 1-dx : dx) * (yy==0 ? 1-dy : dy)
+                }
+            } }
+            pixels[(y*outWidth+frame*width+x)*4+channel]=UInt8(max(0,min(255,value.rounded())))
         }
-    }
-    guard visible else { fail("Animation cell \(frame+1) is empty") }
-    if !needsIsolation { scale = min(scale, Double(width) / Double(iw), Double(height) / Double(ih)) }
+    } }
 }
-scale = min(scale, Double(width) * 0.35 / halfX, Double(height) * 0.23 / halfY)
-let output = CGContext(data: nil, width: width * frames, height: height,
-    bitsPerComponent: 8, bytesPerRow: width * frames * 4, space: space, bitmapInfo: info)!
-output.interpolationQuality = .high
-for (frame, cell) in cells.enumerated() {
-    let dw = Double(cell.width) * scale, dh = Double(cell.height) * scale
-    output.saveGState()
-    output.clip(to: CGRect(x: frame * width, y: 0, width: width, height: height))
-    let anchor = (Double(frame)+0.5) * Double(image.width) / Double(frames)
-    let left = needsIsolation ? 0 : boundaries[frame]
-    output.draw(cell, in: CGRect(x: Double(frame * width) + Double(width)/2 + (Double(left)-anchor)*scale,
-                                y: (Double(height)-dh)/2, width: dw, height: dh))
-    output.restoreGState()
+let final=pixels.withUnsafeMutableBytes { b -> CGImage in
+    CGContext(data:b.baseAddress,width:outWidth,height:height,bitsPerComponent:8,bytesPerRow:outWidth*4,space:space,bitmapInfo:info)!.makeImage()!
 }
-guard let final = output.makeImage(),
-      let destination = CGImageDestinationCreateWithURL(URL(fileURLWithPath: args[2]) as CFURL,
-          UTType.png.identifier as CFString, 1, nil) else { fail("Cannot create PNG") }
-CGImageDestinationAddImage(destination, final, nil)
+guard let destination=CGImageDestinationCreateWithURL(URL(fileURLWithPath:args[2]) as CFURL,UTType.png.identifier as CFString,1,nil) else { fail("Cannot create PNG") }
+CGImageDestinationAddImage(destination,final,nil)
 guard CGImageDestinationFinalize(destination) else { fail("Cannot save PNG") }

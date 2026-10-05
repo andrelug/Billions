@@ -26,7 +26,7 @@
   <h1>Billions art catalog</h1>
   <p id="summary">Loading sprite inventory…</p>
   <nav>
-    <label>Category <select id="category"><option value="">All art</option><option>building</option><option>unit</option><option>infected</option><option>nest</option><option>terrain</option><option>icon</option><option>pickup</option><option>mayor</option><option>fx</option></select></label>
+    <label>Category <select id="category"><option value="">All art</option><option>building</option><option>unit</option><option>infected</option><option>nest</option><option>terrain</option><option>prop</option><option>ui</option><option>icon</option><option>pickup</option><option>mayor</option><option>fx</option></select></label>
     <label>Find <input id="search" type="search" placeholder="Name or sprite key"></label>
     <label><input id="pending" type="checkbox"> Include placeholders</label>
     <a href="../">Open game</a>
@@ -42,13 +42,13 @@ async function refresh(){
  const changed=!generated||JSON.stringify(next[1])!==JSON.stringify(generated);
  [manifest,generated]=next;
  const baseCount=specs.filter(s=>generated[s.key]).length, animatedCount=Object.keys(generated).filter(key=>manifest[key]?.frames>1).length;
- document.querySelector('#summary').textContent=`${baseCount} of ${specs.length} base sprites replaced; ${animatedCount} animation strips installed. Animations play below. Click any sprite to open its PNG.`;
+ document.querySelector('#summary').textContent=`${baseCount} of ${specs.length} base sprites replaced; ${animatedCount} animation strips installed; ${Object.values(generated).filter(g=>g.update==='tab-scale-2026-10').length} assets delivered from the October volume/scale update. Animations play below. Click any sprite to open its PNG.`;
  if(changed)render();
 }
 function render(){
  const category=document.querySelector('#category').value, search=document.querySelector('#search').value.toLowerCase(), pending=document.querySelector('#pending').checked;
  const known=new Set(specs.map(s=>s.key));
- const extra=Object.keys(manifest).filter(key=>!known.has(key)).map(key=>({key,desc:key.replace(/[_/]/g,' ')}));
+ const extra=Object.keys(manifest).filter(key=>!known.has(key)&&manifest[key].file&&!key.endsWith('/font')).map(key=>({key,desc:key.replace(/[_/]/g,' ')}));
  const visible=[...specs,...extra].filter(s=>(pending||generated[s.key])&&(!category||s.key.startsWith(category+'/'))&&(s.key+' '+s.desc).toLowerCase().includes(search));
  animations=[];
  const grid=document.querySelector('#grid'); grid.replaceChildren();

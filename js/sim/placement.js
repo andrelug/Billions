@@ -4,6 +4,8 @@ import { footprintPowered } from './power.js';
 
 // All building placement rules. Returns null when allowed, else a reason.
 const WALLISH = (def) => def.wall || def.gate;
+// Rock a quarry can mine: mountains are stone too, as in the original game.
+export const isMineral = (t) => t === T.MOUNTAIN || t === T.STONE || t === T.IRON || t === T.GOLD;
 
 export function footprint(def, rot) {
   const [w, h] = def.size;
@@ -44,7 +46,7 @@ export function placementBlocker(game, type, x, y, rot, opts = {}) {
   // Location requirements.
   if (def.place === 'nearSea' && !touches(W, x, y, w, h, (t) => t === T.WATER)) return 'Must be next to water';
   if (def.place === 'nearWood' && !near(W, x, y, w, h, 1, (t) => t === T.FOREST)) return 'Must be next to forest';
-  if (def.place === 'nearMineral' && !near(W, x, y, w, h, 1, (t) => t === T.STONE || t === T.IRON || t === T.GOLD)) return 'Must be next to stone, iron or gold';
+  if (def.place === 'nearMineral' && !near(W, x, y, w, h, 1, isMineral)) return 'Must be next to stone, iron or gold';
   if (def.place === 'nearGrass' && !near(W, x, y, w, h, 1, (t) => t === T.GRASS)) return 'Must be next to grass';
   // Margins: other buildings may not sit inside this building's margin and vice versa.
   for (const b of game.buildings) {

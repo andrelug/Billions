@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Game } from '../js/sim/game.js';
+import { placementBlocker } from '../js/sim/placement.js';
+import { T } from '../js/sim/worldgen.js';
+import { MOVE_SCALE } from '../js/data/maps.js';
 
 function freshGame(theme = 'FA', seed = 11) {
   const g = new Game();
@@ -36,7 +39,7 @@ test('rangers kill approaching walkers', () => {
   for (const u of g.units) { u.x = cx + 0.5; u.y = cy + 4; u.post = { x: u.x, y: u.y }; }
   const far = find(g, (x, y) => g.world.walkable(x, y) && g.colonyField.dist[x + y * g.world.w] < 0xFFFFFFFF, 14, 30);
   for (let i = 0; i < 6; i++) { const p = g.freeCellNear(far.x, far.y, 4); g.addInfected('decrepit', p.x, p.y, { cc: true }); }
-  run(g, 60);
+  run(g, 60 / MOVE_SCALE);   // walkers need longer to arrive at the slower pace
   assert.equal(g.infected.length, 0, 'all walkers dead');
   assert.equal(g.stats.kills, 6);
   assert.ok(g.units.length === 5);
@@ -131,4 +134,45 @@ test('swarm schedule matches the reference for 100 and 80 days', () => {
   days.forEach((d, i) => assert.ok(d >= ref[i] && d <= ref[i] + 1, `swarm ${i + 1} on day ${d}`));
   const f = new Game(); f.setup({ theme: 'FA', pop: 'medium', days: 80, seed: 1 });
   assert.equal(Math.floor(f.waves.list.find((e) => e.final).at), Math.ceil(2208 * 0.8));
+});
+
+test('quarry: mountains count as stone for placement and mining', () => {
+  const g = freshGame();
+  const W = g.world;
+  const ring = (x, y, pred) => {
+    for (let ty = y - 1; ty < y + 3; ty++) for (let tx = x - 1; tx < x + 3; tx++) {
+      if (tx >= x && tx < x + 2 && ty >= y && ty < y + 2) continue;
+      if (W.inside(tx, ty) && pred(W.tiles[tx + ty * W.w])) return true;
+    }
+    return false;
+  };
+  const grass2x2 = (x, y) => [0, 1].every((dy) => [0, 1].every((dx) => W.tile(x + dx, y + dy) === T.GRASS && W.occAt(x + dx, y + dy) === -1));
+  const deposit = (t) => t === T.STONE || t === T.IRON || t === T.GOLD;
+  const opts = { ignorePower: true, ignoreLock: true };
+  // Next to a mountain only: allowed, and the mountain cells yield stone.
+  const m = find(g, (x, y) => grass2x2(x, y) && ring(x, y, (t) => t === T.MOUNTAIN) && !ring(x, y, deposit), 4, 60);
+  assert.ok(m, 'found grass next to a mountain');
+  assert.equal(placementBlocker(g, 'quarry', m.x, m.y, 0, opts), null);
+  assert.ok(g.eco.preview('quarry', m.x, m.y, 2, 2).stone > 0, 'mountain cells give stone');
+  // Next to a stone deposit still works.
+  const s = find(g, (x, y) => grass2x2(x, y) && ring(x, y, (t) => t === T.STONE), 4, 60);
+  assert.ok(s, 'found grass next to a stone deposit');
+  assert.equal(placementBlocker(g, 'quarry', s.x, s.y, 0, opts), null);
+  // Open grass with no rock around is still refused.
+  const rock = (t) => t === T.MOUNTAIN || deposit(t);
+  const o = find(g, (x, y) => grass2x2(x, y) && !ring(x, y, rock), 4, 60);
+  assert.ok(o, 'found open grass');
+  assert.equal(placementBlocker(g, 'quarry', o.x, o.y, 0, opts), 'Must be next to stone, iron or gold');
+});
+
+test('movement runs at the tuned pace', () => {
+  const g = freshGame();
+  const u = g.units.find((x) => x.type === 'soldier');
+  const x0 = u.x, y0 = u.y;
+  const to = find(g, (x, y) => g.world.walkable(x, y) && Math.hypot(x + 0.5 - x0, y + 0.5 - y0) > 6, 6, 12);
+  g.unitSys.command([u], { t: 'move', x: to.x + 0.5, y: to.y + 0.5 });
+  run(g, 1);
+  const moved = Math.hypot(u.x - x0, u.y - y0);
+  assert.ok(moved <= 2.4 * MOVE_SCALE * 1.05 + 1e-6, `soldier moved ${moved.toFixed(2)} cells in 1 s`);
+  assert.ok(moved >= 2.4 * MOVE_SCALE * 0.5, `soldier moved ${moved.toFixed(2)} cells in 1 s`);
 });

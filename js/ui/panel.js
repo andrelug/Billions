@@ -37,8 +37,8 @@ export class Panel {
 
   head(box, icon, title, sub) {
     box.append(el('h3', {}, icon, el('span', {}, title, sub ? el('small', { class: 'muted' }, ' ' + sub) : null),
-      el('button', { class: 'x info' + (this.open ? ' on' : ''), title: 'Details', onclick: () => { this.open = !this.open; this.update(0, true); } }, 'ⓘ'),
-      el('button', { class: 'x', onclick: () => this.app.ctrl.clear() }, '✕')));
+      el('button', { class: 'x info' + (this.open ? ' on' : ''), title: 'Details', onclick: () => { this.open = !this.open; this.update(0, true); } }, el('span', { class: 'ico', 'data-icon': 'info' }, 'ⓘ')),
+      el('button', { class: 'x', onclick: () => this.app.ctrl.clear() }, el('span', { class: 'ico', 'data-icon': 'close' }, '✕'))));
   }
 
   bars(box, e) {
