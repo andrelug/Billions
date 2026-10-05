@@ -5,67 +5,67 @@ The reference scale is 64 px per map tile; higher-resolution art is scaled by th
 
 | Key | File | Size | Notes |
 |---|---|---|---|
-| building/cc | assets/building/cc.png | 640x640 | Command Center, 5x5 tiles |
-| building/tent | assets/building/tent.png | 256x256 | Tent, 2x2 tiles |
-| building/cottage | assets/building/cottage.png | 256x256 | Wooden Cottage, 2x2 tiles |
-| building/stonehouse | assets/building/stonehouse.png | 256x256 | Stone House, 2x2 tiles |
-| building/hunter | assets/building/hunter.png | 128x128 | Hunter Cottage, 1x1 tiles |
-| building/fisherman | assets/building/fisherman.png | 128x128 | Fisherman Cottage, 1x1 tiles |
-| building/farm | assets/building/farm.png | 256x256 | Farm, 2x2 tiles |
-| building/advfarm | assets/building/advfarm.png | 256x256 | Advanced Farm, 2x2 tiles |
-| building/sawmill | assets/building/sawmill.png | 256x256 | Sawmill, 2x2 tiles |
-| building/quarry | assets/building/quarry.png | 256x256 | Quarry, 2x2 tiles |
-| building/advquarry | assets/building/advquarry.png | 256x256 | Advanced Quarry, 2x2 tiles |
-| building/oilplatform | assets/building/oilplatform.png | 256x256 | Oil Platform, 2x2 tiles |
-| building/tesla | assets/building/tesla.png | 128x192 | Tesla Tower, 1x1 tiles |
-| building/mill | assets/building/mill.png | 256x256 | Mill, 2x2 tiles |
-| building/advmill | assets/building/advmill.png | 256x256 | Advanced Mill, 2x2 tiles |
-| building/powerplant | assets/building/powerplant.png | 384x384 | Power Plant, 3x3 tiles |
-| building/warehouse | assets/building/warehouse.png | 512x512 | Warehouse, 4x4 tiles |
-| building/market | assets/building/market.png | 384x384 | Market, 3x3 tiles |
-| building/bank | assets/building/bank.png | 384x384 | Bank, 3x3 tiles |
-| building/inn | assets/building/inn.png | 512x512 | Inn, 4x4 tiles |
-| building/woodworkshop | assets/building/woodworkshop.png | 512x512 | Wood Workshop, 4x4 tiles |
-| building/stoneworkshop | assets/building/stoneworkshop.png | 512x512 | Stone Workshop, 4x4 tiles |
-| building/foundry | assets/building/foundry.png | 512x512 | Foundry, 4x4 tiles |
-| building/soldierscenter | assets/building/soldierscenter.png | 384x384 | Soldiers Center, 3x3 tiles |
-| building/engineeringcenter | assets/building/engineeringcenter.png | 384x384 | Engineering Center, 3x3 tiles |
-| building/lookout | assets/building/lookout.png | 128x192 | Lookout Tower, 1x1 tiles |
-| building/radar | assets/building/radar.png | 128x192 | Radar Tower, 1x1 tiles |
-| building/woodwall | assets/building/woodwall.png | 128x128 | Wood Wall, 1x1 tiles |
-| building/stonewall | assets/building/stonewall.png | 128x128 | Stone Wall, 1x1 tiles |
-| building/woodgate | assets/building/woodgate.png | 384x128 | Wood Gate, 3x1 tiles |
-| building/woodgate_v | assets/building/woodgate_v.png | 128x384 | Wood Gate, rotated 1x3 |
-| building/stonegate | assets/building/stonegate.png | 384x128 | Stone Gate, 3x1 tiles |
-| building/stonegate_v | assets/building/stonegate_v.png | 128x384 | Stone Gate, rotated 1x3 |
-| building/woodtower | assets/building/woodtower.png | 128x192 | Wood Tower, 1x1 tiles |
-| building/stonetower | assets/building/stonetower.png | 128x192 | Stone Tower, 1x1 tiles |
-| building/ballista | assets/building/ballista.png | 256x256 | Great Ballista, 2x2 tiles |
-| building/executor | assets/building/executor.png | 256x256 | Executor, 2x2 tiles |
+| building/cc | assets/building/cc.png | 640x896 | Command Center, 5x5 tiles |
+| building/tent | assets/building/tent.png | 256x384 | Tent, 2x2 tiles |
+| building/cottage | assets/building/cottage.png | 256x384 | Wooden Cottage, 2x2 tiles |
+| building/stonehouse | assets/building/stonehouse.png | 256x384 | Stone House, 2x2 tiles |
+| building/hunter | assets/building/hunter.png | 128x256 | Hunter Cottage, 1x1 tiles |
+| building/fisherman | assets/building/fisherman.png | 128x256 | Fisherman Cottage, 1x1 tiles |
+| building/farm | assets/building/farm.png | 256x384 | Farm, 2x2 tiles |
+| building/advfarm | assets/building/advfarm.png | 256x384 | Advanced Farm, 2x2 tiles |
+| building/sawmill | assets/building/sawmill.png | 256x384 | Sawmill, 2x2 tiles |
+| building/quarry | assets/building/quarry.png | 256x384 | Quarry, 2x2 tiles |
+| building/advquarry | assets/building/advquarry.png | 256x384 | Advanced Quarry, 2x2 tiles |
+| building/oilplatform | assets/building/oilplatform.png | 256x384 | Oil Platform, 2x2 tiles |
+| building/tesla | assets/building/tesla.png | 128x256 | Tesla Tower, 1x1 tiles |
+| building/mill | assets/building/mill.png | 256x384 | Mill, 2x2 tiles |
+| building/advmill | assets/building/advmill.png | 256x384 | Advanced Mill, 2x2 tiles |
+| building/powerplant | assets/building/powerplant.png | 384x576 | Power Plant, 3x3 tiles |
+| building/warehouse | assets/building/warehouse.png | 512x704 | Warehouse, 4x4 tiles |
+| building/market | assets/building/market.png | 384x576 | Market, 3x3 tiles |
+| building/bank | assets/building/bank.png | 384x576 | Bank, 3x3 tiles |
+| building/inn | assets/building/inn.png | 512x704 | Inn, 4x4 tiles |
+| building/woodworkshop | assets/building/woodworkshop.png | 512x704 | Wood Workshop, 4x4 tiles |
+| building/stoneworkshop | assets/building/stoneworkshop.png | 512x704 | Stone Workshop, 4x4 tiles |
+| building/foundry | assets/building/foundry.png | 512x704 | Foundry, 4x4 tiles |
+| building/soldierscenter | assets/building/soldierscenter.png | 384x576 | Soldiers Center, 3x3 tiles |
+| building/engineeringcenter | assets/building/engineeringcenter.png | 384x576 | Engineering Center, 3x3 tiles |
+| building/lookout | assets/building/lookout.png | 128x256 | Lookout Tower, 1x1 tiles |
+| building/radar | assets/building/radar.png | 128x256 | Radar Tower, 1x1 tiles |
+| building/woodwall | assets/building/woodwall.png | 128x192 | Wood Wall, 1x1 tiles |
+| building/stonewall | assets/building/stonewall.png | 128x192 | Stone Wall, 1x1 tiles |
+| building/woodgate | assets/building/woodgate.png | 384x192 | Wood Gate, 3x1 tiles |
+| building/woodgate_v | assets/building/woodgate_v.png | 128x448 | Wood Gate, rotated 1x3 |
+| building/stonegate | assets/building/stonegate.png | 384x192 | Stone Gate, 3x1 tiles |
+| building/stonegate_v | assets/building/stonegate_v.png | 128x448 | Stone Gate, rotated 1x3 |
+| building/woodtower | assets/building/woodtower.png | 128x256 | Wood Tower, 1x1 tiles |
+| building/stonetower | assets/building/stonetower.png | 128x256 | Stone Tower, 1x1 tiles |
+| building/ballista | assets/building/ballista.png | 256x384 | Great Ballista, 2x2 tiles |
+| building/executor | assets/building/executor.png | 256x384 | Executor, 2x2 tiles |
 | building/shocking | assets/building/shocking.png | 256x384 | Shocking Tower, 2x2 tiles |
-| building/wasp | assets/building/wasp.png | 128x128 | Wasp, 1x1 tiles |
-| building/stakes | assets/building/stakes.png | 128x128 | Stakes Trap, 1x1 tiles |
-| building/wirefence | assets/building/wirefence.png | 128x128 | Wire Fence Trap, 1x1 tiles |
-| building/mine | assets/building/mine.png | 128x128 | Land Mine, 1x1 tiles |
-| building/telescope | assets/building/telescope.png | 640x640 | The Great Telescope, 5x5 tiles |
-| building/crystalpalace | assets/building/crystalpalace.png | 768x768 | The Crystal Palace, 6x6 tiles |
-| building/academy | assets/building/academy.png | 512x512 | The War Academy, 4x4 tiles |
-| building/victory | assets/building/victory.png | 512x512 | The Victory Monument, 4x4 tiles |
-| building/spire | assets/building/spire.png | 768x1152 | The Lightning Spire, 6x6 tiles |
-| building/transmutator | assets/building/transmutator.png | 640x640 | The Transmutator, 5x5 tiles |
-| unit/ranger | assets/unit/ranger.png | 128x128 | Ranger, faces right |
-| unit/soldier | assets/unit/soldier.png | 128x128 | Soldier, faces right |
+| building/wasp | assets/building/wasp.png | 128x256 | Wasp, 1x1 tiles |
+| building/stakes | assets/building/stakes.png | 128x192 | Stakes Trap, 1x1 tiles |
+| building/wirefence | assets/building/wirefence.png | 128x192 | Wire Fence Trap, 1x1 tiles |
+| building/mine | assets/building/mine.png | 128x192 | Land Mine, 1x1 tiles |
+| building/telescope | assets/building/telescope.png | 640x896 | The Great Telescope, 5x5 tiles |
+| building/crystalpalace | assets/building/crystalpalace.png | 768x1024 | The Crystal Palace, 6x6 tiles |
+| building/academy | assets/building/academy.png | 512x704 | The War Academy, 4x4 tiles |
+| building/victory | assets/building/victory.png | 512x704 | The Victory Monument, 4x4 tiles |
+| building/spire | assets/building/spire.png | 768x1024 | The Lightning Spire, 6x6 tiles |
+| building/transmutator | assets/building/transmutator.png | 640x896 | The Transmutator, 5x5 tiles |
+| unit/ranger | assets/unit/ranger.png | 256x256 | Ranger, faces right |
+| unit/soldier | assets/unit/soldier.png | 256x256 | Soldier, faces right |
 | unit/sniper | assets/unit/sniper.png | 128x128 | Sniper, faces right |
-| unit/pyro | assets/unit/pyro.png | 128x128 | Pyro, faces right |
-| unit/rocketeer | assets/unit/rocketeer.png | 128x128 | Rocketeer, faces right |
+| unit/pyro | assets/unit/pyro.png | 256x256 | Pyro, faces right |
+| unit/rocketeer | assets/unit/rocketeer.png | 256x256 | Rocketeer, faces right |
 | unit/titan | assets/unit/titan.png | 256x256 | Titan, faces right |
 | unit/mutant | assets/unit/mutant.png | 256x256 | Mutant, faces right |
-| infected/decrepit | assets/infected/decrepit.png | 96x96 | Infected Decrepit, faces right |
-| infected/aged | assets/infected/aged.png | 96x96 | Infected Aged, faces right |
-| infected/young | assets/infected/young.png | 96x96 | Infected Young, faces right |
-| infected/colonist | assets/infected/colonist.png | 128x128 | Infected Colonist, faces right |
+| infected/decrepit | assets/infected/decrepit.png | 256x256 | Infected Decrepit, faces right |
+| infected/aged | assets/infected/aged.png | 256x256 | Infected Aged, faces right |
+| infected/young | assets/infected/young.png | 256x256 | Infected Young, faces right |
+| infected/colonist | assets/infected/colonist.png | 256x256 | Infected Colonist, faces right |
 | infected/fresh | assets/infected/fresh.png | 128x128 | Infected Fresh, faces right |
-| infected/executive | assets/infected/executive.png | 128x128 | Infected Executive, faces right |
+| infected/executive | assets/infected/executive.png | 256x256 | Infected Executive, faces right |
 | infected/chubby | assets/infected/chubby.png | 160x160 | Infected Chubby, faces right |
 | infected/harpy | assets/infected/harpy.png | 128x128 | Infected Harpy, faces right |
 | infected/venom | assets/infected/venom.png | 128x128 | Infected Venom, faces right |
@@ -320,18 +320,10 @@ The reference scale is 64 px per map tile; higher-resolution art is scaled by th
 | fx/blood | assets/fx/blood.png | 96x96 | Effect: blood |
 | fx/ichor | assets/fx/ichor.png | 96x96 | Effect: ichor |
 | fx/ring | assets/fx/ring.png | 128x128 | Effect: ring |
-| infected/aged_attack | assets/infected/aged_attack.png | 96x96 | Optional animation: infected/aged_attack, 4 frames at 12 fps |
-| infected/aged_walk | assets/infected/aged_walk.png | 96x96 | Optional animation: infected/aged_walk, 4 frames at 8 fps |
 | infected/behemoth_attack | assets/infected/behemoth_attack.png | 288x288 | Optional animation: infected/behemoth_attack, 4 frames at 12 fps |
 | infected/behemoth_walk | assets/infected/behemoth_walk.png | 288x288 | Optional animation: infected/behemoth_walk, 4 frames at 8 fps |
 | infected/chubby_attack | assets/infected/chubby_attack.png | 160x160 | Optional animation: infected/chubby_attack, 4 frames at 12 fps |
 | infected/chubby_walk | assets/infected/chubby_walk.png | 160x160 | Optional animation: infected/chubby_walk, 4 frames at 8 fps |
-| infected/colonist_attack | assets/infected/colonist_attack.png | 128x128 | Optional animation: infected/colonist_attack, 4 frames at 12 fps |
-| infected/colonist_walk | assets/infected/colonist_walk.png | 128x128 | Optional animation: infected/colonist_walk, 4 frames at 8 fps |
-| infected/decrepit_attack | assets/infected/decrepit_attack.png | 96x96 | Optional animation: infected/decrepit_attack, 4 frames at 12 fps |
-| infected/decrepit_walk | assets/infected/decrepit_walk.png | 96x96 | Optional animation: infected/decrepit_walk, 4 frames at 8 fps |
-| infected/executive_attack | assets/infected/executive_attack.png | 128x128 | Optional animation: infected/executive_attack, 4 frames at 12 fps |
-| infected/executive_walk | assets/infected/executive_walk.png | 128x128 | Optional animation: infected/executive_walk, 4 frames at 8 fps |
 | infected/fresh_attack | assets/infected/fresh_attack.png | 128x128 | Optional animation: infected/fresh_attack, 4 frames at 12 fps |
 | infected/fresh_walk | assets/infected/fresh_walk.png | 128x128 | Optional animation: infected/fresh_walk, 4 frames at 8 fps |
 | infected/giant_attack | assets/infected/giant_attack.png | 352x352 | Optional animation: infected/giant_attack, 4 frames at 12 fps |
@@ -340,19 +332,67 @@ The reference scale is 64 px per map tile; higher-resolution art is scaled by th
 | infected/harpy_walk | assets/infected/harpy_walk.png | 128x128 | Optional animation: infected/harpy_walk, 4 frames at 8 fps |
 | infected/venom_attack | assets/infected/venom_attack.png | 128x128 | Optional animation: infected/venom_attack, 4 frames at 12 fps |
 | infected/venom_walk | assets/infected/venom_walk.png | 128x128 | Optional animation: infected/venom_walk, 4 frames at 8 fps |
-| infected/young_attack | assets/infected/young_attack.png | 96x96 | Optional animation: infected/young_attack, 4 frames at 12 fps |
-| infected/young_walk | assets/infected/young_walk.png | 96x96 | Optional animation: infected/young_walk, 4 frames at 8 fps |
+| prop/BR/iron_0 | assets/prop/BR/iron_0.png | 192x160 | Terrain volume prop |
+| prop/BR/iron_1 | assets/prop/BR/iron_1.png | 192x160 | Terrain volume prop |
+| prop/BR/rock_0 | assets/prop/BR/rock_0.png | 320x384 | Terrain volume prop |
+| prop/BR/rock_1 | assets/prop/BR/rock_1.png | 320x384 | Terrain volume prop |
+| prop/BR/rock_2 | assets/prop/BR/rock_2.png | 320x384 | Terrain volume prop |
+| prop/BR/rock_3 | assets/prop/BR/rock_3.png | 320x384 | Terrain volume prop |
+| prop/BR/rock_4 | assets/prop/BR/rock_4.png | 320x384 | Terrain volume prop |
+| prop/BR/rock_5 | assets/prop/BR/rock_5.png | 320x384 | Terrain volume prop |
+| prop/BR/stone_0 | assets/prop/BR/stone_0.png | 192x160 | Terrain volume prop |
+| prop/BR/stone_1 | assets/prop/BR/stone_1.png | 192x160 | Terrain volume prop |
+| prop/BR/tree_0 | assets/prop/BR/tree_0.png | 256x448 | Terrain volume prop |
+| prop/BR/tree_1 | assets/prop/BR/tree_1.png | 256x448 | Terrain volume prop |
+| prop/BR/tree_2 | assets/prop/BR/tree_2.png | 256x448 | Terrain volume prop |
+| prop/BR/tree_3 | assets/prop/BR/tree_3.png | 256x448 | Terrain volume prop |
+| prop/BR/tree_4 | assets/prop/BR/tree_4.png | 256x448 | Terrain volume prop |
+| prop/BR/tree_5 | assets/prop/BR/tree_5.png | 256x448 | Terrain volume prop |
+| prop/FA/gold_0 | assets/prop/FA/gold_0.png | 192x160 | Terrain volume prop |
+| prop/FA/gold_1 | assets/prop/FA/gold_1.png | 192x160 | Terrain volume prop |
+| prop/FA/gold_2 | assets/prop/FA/gold_2.png | 192x160 | Terrain volume prop |
+| prop/FA/iron_0 | assets/prop/FA/iron_0.png | 192x160 | Terrain volume prop |
+| prop/FA/iron_1 | assets/prop/FA/iron_1.png | 192x160 | Terrain volume prop |
+| prop/FA/iron_2 | assets/prop/FA/iron_2.png | 192x160 | Terrain volume prop |
+| prop/FA/rock_0 | assets/prop/FA/rock_0.png | 320x384 | Terrain volume prop |
+| prop/FA/rock_1 | assets/prop/FA/rock_1.png | 320x384 | Terrain volume prop |
+| prop/FA/rock_2 | assets/prop/FA/rock_2.png | 320x384 | Terrain volume prop |
+| prop/FA/rock_3 | assets/prop/FA/rock_3.png | 320x384 | Terrain volume prop |
+| prop/FA/rock_4 | assets/prop/FA/rock_4.png | 320x384 | Terrain volume prop |
+| prop/FA/rock_5 | assets/prop/FA/rock_5.png | 320x384 | Terrain volume prop |
+| prop/FA/stone_0 | assets/prop/FA/stone_0.png | 192x160 | Terrain volume prop |
+| prop/FA/stone_1 | assets/prop/FA/stone_1.png | 192x160 | Terrain volume prop |
+| prop/FA/stone_2 | assets/prop/FA/stone_2.png | 192x160 | Terrain volume prop |
+| prop/FA/tree_0 | assets/prop/FA/tree_0.png | 256x448 | Terrain volume prop |
+| prop/FA/tree_1 | assets/prop/FA/tree_1.png | 256x448 | Terrain volume prop |
+| prop/FA/tree_2 | assets/prop/FA/tree_2.png | 256x448 | Terrain volume prop |
+| prop/FA/tree_3 | assets/prop/FA/tree_3.png | 256x448 | Terrain volume prop |
+| prop/FA/tree_4 | assets/prop/FA/tree_4.png | 256x448 | Terrain volume prop |
+| prop/FA/tree_5 | assets/prop/FA/tree_5.png | 256x448 | Terrain volume prop |
+| ui/bar_bottom | assets/ui/bar_bottom.png | 1024x192 | Interface skin |
+| ui/bar_top | assets/ui/bar_top.png | 1024x96 | Interface skin |
+| ui/button | assets/ui/button.png | 192x80 | Interface skin |
+| ui/button_danger | assets/ui/button_danger.png | 192x80 | Interface skin |
+| ui/button_down | assets/ui/button_down.png | 192x80 | Interface skin |
+| ui/button_on | assets/ui/button_on.png | 192x80 | Interface skin |
+| ui/button_primary | assets/ui/button_primary.png | 192x80 | Interface skin |
+| ui/chip | assets/ui/chip.png | 128x48 | Interface skin |
+| ui/clock | assets/ui/clock.png | 256x96 | Interface skin |
+| ui/font | assets/ui/cinzel.woff2 | — | Interface skin |
+| ui/frame | assets/ui/frame.png | 192x192 | Interface skin |
+| ui/logo | assets/ui/logo.png | 1200x360 | Interface skin |
+| ui/minimap | assets/ui/minimap.png | 256x256 | Interface skin |
+| ui/slot | assets/ui/slot.png | 128x128 | Interface skin |
+| ui/tab | assets/ui/tab.png | 160x56 | Interface skin |
+| ui/tab_on | assets/ui/tab_on.png | 160x56 | Interface skin |
+| ui/title_bg | assets/ui/title_bg.jpg | 1920x1080 | Interface skin |
+| ui/toast | assets/ui/toast.png | 192x64 | Interface skin |
+| ui/vars | CSS variables | — | Interface skin |
 | unit/mutant_attack | assets/unit/mutant_attack.png | 256x256 | Optional animation: unit/mutant_attack, 4 frames at 12 fps |
 | unit/mutant_walk | assets/unit/mutant_walk.png | 256x256 | Optional animation: unit/mutant_walk, 4 frames at 8 fps |
-| unit/pyro_attack | assets/unit/pyro_attack.png | 128x128 | Optional animation: unit/pyro_attack, 4 frames at 12 fps |
-| unit/pyro_walk | assets/unit/pyro_walk.png | 128x128 | Optional animation: unit/pyro_walk, 4 frames at 8 fps |
-| unit/ranger_attack | assets/unit/ranger_attack.png | 128x128 | Optional animation: unit/ranger_attack, 4 frames at 12 fps |
-| unit/ranger_walk | assets/unit/ranger_walk.png | 128x128 | Optional animation: unit/ranger_walk, 4 frames at 8 fps |
-| unit/rocketeer_attack | assets/unit/rocketeer_attack.png | 128x128 | Optional animation: unit/rocketeer_attack, 4 frames at 12 fps |
-| unit/rocketeer_walk | assets/unit/rocketeer_walk.png | 128x128 | Optional animation: unit/rocketeer_walk, 4 frames at 8 fps |
+| unit/ranger_attack | assets/unit/ranger_attack.png | 256x256 | Optional animation: unit/ranger_attack, 4 frames at 12 fps |
+| unit/ranger_walk | assets/unit/ranger_walk.png | 256x256 | Optional animation: unit/ranger_walk, 6 frames at 10 fps |
 | unit/sniper_attack | assets/unit/sniper_attack.png | 128x128 | Optional animation: unit/sniper_attack, 4 frames at 12 fps |
 | unit/sniper_walk | assets/unit/sniper_walk.png | 128x128 | Optional animation: unit/sniper_walk, 4 frames at 8 fps |
-| unit/soldier_attack | assets/unit/soldier_attack.png | 128x128 | Optional animation: unit/soldier_attack, 4 frames at 12 fps |
-| unit/soldier_walk | assets/unit/soldier_walk.png | 128x128 | Optional animation: unit/soldier_walk, 4 frames at 8 fps |
-| unit/titan_attack | assets/unit/titan_attack.png | 256x256 | Optional animation: unit/titan_attack, 4 frames at 12 fps |
-| unit/titan_walk | assets/unit/titan_walk.png | 256x256 | Optional animation: unit/titan_walk, 4 frames at 8 fps |
+| unit/soldier_attack | assets/unit/soldier_attack.png | 256x256 | Optional animation: unit/soldier_attack, 4 frames at 12 fps |
+| unit/soldier_walk | assets/unit/soldier_walk.png | 256x256 | Optional animation: unit/soldier_walk, 6 frames at 10 fps |
