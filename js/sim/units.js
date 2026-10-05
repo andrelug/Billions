@@ -1,5 +1,6 @@
 import { dist, rectDist } from '../core/util.js';
 import { smoothPath } from '../core/pathing.js';
+import { MOVE_SCALE } from '../data/maps.js';
 
 // Player units. Commands (u.cmd.t):
 //   idle     stand at post; shoot targets in sight, close in briefly, return
@@ -45,7 +46,7 @@ export class UnitSystem {
       if (u.target && (u.target.dead || u.target.hp <= 0)) { u.target = null; if (c.t === 'attack') { u.cmd = { t: 'idle' }; u.post = { x: u.x, y: u.y }; } }
       if (u.carrying) { u.carrying.x = u.x; u.carrying.y = u.y; }
       const range = g.unitStat(u, 'range'), vision = g.unitStat(u, 'vision');
-      const speed = g.unitStat(u, 'speed') * g.terrainSpeed(u.x, u.y);
+      const speed = g.unitStat(u, 'speed') * MOVE_SCALE * g.terrainSpeed(u.x, u.y);
 
       // Target acquisition (20-frame reaction; the Mutant reacts faster).
       const reacting = c.t !== 'move' && c.t !== 'garrison' && c.t !== 'pickup' && c.t !== 'attack';

@@ -9,8 +9,16 @@ import { PX } from '../view/placeholder.js';
 // Rules (also in ASSETS.md):
 //  - 64 px = 1 map tile. Top-down view.
 //  - Buildings: anchor top-left of the footprint; size = footprint x 64.
-//  - Units and infected: centred; art faces RIGHT (the game mirrors it).
+//  - Units and infected: art faces RIGHT (the game mirrors it); the body is
+//    measured and scaled to FIGURE_H radii tall, feet on the ground point.
 //  - Terrain tiles: 64x64, seamless, 4 variants per type and theme.
+// Characters stand FIGURE_H collision radii tall from feet to head (a Ranger
+// is about 0.8 cell, so a squad reads clearly next to a 2x2 house, as in They
+// Are Billions), with their feet FEET radii below the entity's centre. The renderer measures the body in each sprite,
+// so the art's padding does not change the size on screen.
+export const FIGURE_H = 2.6;
+export const FEET = 0.4;
+
 const CAT_COLOR = { colony: '#c9a24b', food: '#9fbf4a', resource: '#9c6b3c', energy: '#5aa0d8', research: '#8f6bc4', military: '#b04a4a', defense: '#7d7d86', wonder: '#e0c060' };
 const LABEL = {
   cc: 'CC', tent: 'TENT', cottage: 'COT', stonehouse: 'HOUSE', hunter: 'HUNT', fisherman: 'FISH', farm: 'FARM', advfarm: 'FARM+',

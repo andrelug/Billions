@@ -25,6 +25,7 @@ export class Screens {
 
   title() {
     const app = this.app, p = app.profile;
+    app.audio.mood('menu'); app.audio.setAmbience(null);
     const saves = p.listSaves();
     $('t-continue').classList.toggle('hidden', !saves.length);
     $('t-continue').onclick = () => saves.length === 1 ? app.continueGame(saves[0].id) : this.loadList();
@@ -135,7 +136,7 @@ export class Screens {
     const toggle = (key, label, sub) => el('label', { class: 'setting' }, el('input', { type: 'checkbox', checked: s[key], onchange: (e) => { s[key] = e.target.checked; app.profile.save(); app.applySettings(); } }), el('span', {}, el('b', {}, label), el('small', { class: 'muted' }, sub)));
     const vol = el('input', { type: 'range', min: 0, max: 1, step: 0.05, value: s.volume, oninput: (e) => { s.volume = +e.target.value; app.profile.save(); app.applySettings(); } });
     const body = el('div', { class: 'settings' },
-      toggle('sound', 'Sound', 'Sound effects'), el('label', { class: 'setting' }, el('span', {}, el('b', {}, 'Volume')), vol),
+      toggle('sound', 'Sound', 'Sound effects'), toggle('music', 'Music', 'Soundtrack and map ambience'), el('label', { class: 'setting' }, el('span', {}, el('b', {}, 'Volume')), vol),
       toggle('showHp', 'Always show health bars', 'Otherwise bars show only when damaged (hold Alt on desktop)'),
       toggle('visibleAlerts', 'Show visible alerts', 'Also alert for attacks that are on screen'),
       toggle('flat', 'Flat mode', 'Draw terrain as flat colours to see gaps clearly'),

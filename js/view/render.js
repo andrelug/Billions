@@ -1,10 +1,11 @@
 import { Camera } from './camera.js';
-import { TerrainLayer, FogLayer } from './terrain.js';
+import { TerrainLayer, FogLayer, PROP_NAMES } from './terrain.js';
 import { TERRAIN } from '../data/terrain.js';
 import { BUILDINGS } from '../data/buildings.js';
 import { footprint } from '../sim/placement.js';
 import { gridRadius } from '../sim/power.js';
 import { clamp } from '../core/util.js';
+import { FIGURE_H, FEET } from '../data/art.js';
 
 const FX_LIFE = { tracer: 0.08, flame: 0.25, zap: 0.25, pulse: 0.45, blast: 0.5, splat: 0.6, infect: 1.2, ring: 0.6, burst: 0.7, smash: 0.3, acid: 0.5, hit: 0.15 };
 
@@ -34,6 +35,10 @@ export class Renderer {
     this.tileKeys = [];
     for (const id in TERRAIN) for (let v = 0; v < 4; v++) this.tileKeys[id * 4 + v] = `terrain/${theme}/${TERRAIN[id].key}_${v}`;
     this.terrain = new TerrainLayer(g.world, this.assets, (x, y) => { const i = x + y * g.world.w; return this.tileKeys[g.world.tiles[i] * 4 + g.world.variant[i]]; });
+    // Prop art for this map, if any: prop/<map>/tree_0, tree_1, rock_0 ...
+    const props = { any: false };
+    for (const name of Object.values(PROP_NAMES)) { props[name] = this.assets.keys(`prop/${theme}/${name}_`); if (props[name].length) props.any = true; }
+    this.terrain.props = props;
     this.fog = new FogLayer(g.vision);
     this.miniBase = null;
   }
@@ -78,6 +83,35 @@ export class Renderer {
     this.drawSprite(key, x, y + h - ht, w, ht, false, alpha);
   }
 
+  // Units and infected. The visible body (measured from the art, so padding
+  // does not matter) is FIGURE_H collision radii tall, with the feet on the
+  // ground just below the entity's centre. `base` is the still sprite whose
+  // framing every animation strip of that character shares.
+  drawFigure(key, base, x, y, r, flip, alpha) {
+    const a = this.assets.get(key); if (!a) return;
+    const f = this.assets.figure(base) || this.assets.figure(key);
+    const ctx = this.ctx, s = this.cam.scale;
+    const dh = FIGURE_H * r / Math.max(0.05, f.bottom - f.top), H = dh * s, W = H * a.w / a.h;
+    const [px, py] = this.cam.toScreen(x, y + FEET * r), top = py - f.bottom * H;
+    const src = a.frames > 1 ? (Math.floor(performance.now() / 1000 * a.fps) % a.frames) * a.w : 0;
+    const c = this.assets.crop(key), kx = W / a.w, ky = H / a.h;
+    const ox = c.x * kx, oy = top + c.y * ky, cw = c.w * kx, ch = c.h * ky;
+    if (alpha != null) ctx.globalAlpha = alpha;
+    if (flip) { ctx.save(); ctx.translate(px, 0); ctx.scale(-1, 1); ctx.drawImage(a.img, src + c.x, c.y, c.w, c.h, -f.cx * W + ox, oy, cw, ch); ctx.restore(); }
+    else ctx.drawImage(a.img, src + c.x, c.y, c.w, c.h, px - f.cx * W + ox, oy, cw, ch);
+    if (alpha != null) ctx.globalAlpha = 1;
+  }
+  headY(e) { return e.y + FEET * e.r - FIGURE_H * e.r; }
+  headBar(e, k, color) {
+    const w = Math.max(0.55, e.r * 2.2);
+    this.bar(e.x - w / 2, this.headY(e) - 0.16, w, k, color);
+  }
+  shadow(e) {
+    const ctx = this.ctx, s = this.cam.scale, [sx, sy] = this.cam.toScreen(e.x, e.y + FEET * e.r);
+    ctx.fillStyle = 'rgba(0,0,0,0.28)';
+    ctx.beginPath(); ctx.ellipse(sx, sy, e.r * 1.05 * s, e.r * 0.45 * s, 0, 0, 7); ctx.fill();
+  }
+
   draw(ui) {
     const g = this.g, ctx = this.ctx, cam = this.cam, s = cam.scale;
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
@@ -103,59 +137,73 @@ export class Renderer {
       this.drawSprite(c.human ? 'fx/blood' : 'fx/ichor', c.x, c.y, c.r * 2.4, c.r * 2.4, false, a);
     }
 
-    // Structures sorted top to bottom.
-    const blist = g.buildings.filter((x) => vis(x.cx, x.cy, Math.max(x.w, x.h) + 2) && (V.isExplored(x.cx | 0, x.cy | 0)));
-    blist.sort((a, b) => (a.y + a.h) - (b.y + b.h));   // tall art overlaps what stands behind it
-    blist.sort((a, c) => (a.y + a.h) - (c.y + c.h));
-    const selB = ui.selBuilding;
-    for (const x of blist) this.drawBuilding(x, x === selB, ui);
-    for (const n of g.nests) {
-      if (!vis(n.x, n.y, 4) || !V.isExplored(n.x | 0, n.y | 0)) continue;
-      this.drawBuildingSprite('nest/' + n.size, n.x, n.y, n.w, n.h, n.flash > 0 ? 0.6 : 1);
-      if (n.hp < n.maxHp && V.isVisible(n.x + 1, n.y + 1)) this.bar(n.x, n.y - 0.25, n.w, n.hp / n.maxHp, '#e04040');
-      if (ui.sel && ui.sel.has(n.id)) this.outline(n.x, n.y, n.w, n.h, '#ff6b6b');
-    }
+    // Loot and barrels lie on the ground, under everything that stands.
     for (const p of g.pickups) if (vis(p.x, p.y) && V.isExplored(p.x | 0, p.y | 0)) {
       const bob = Math.sin(performance.now() / 300 + p.id) * 0.06;
       this.drawSprite('pickup/' + p.type, p.x, p.y + bob, 0.75, 0.75);
     }
     for (const x of g.barrels) if (!x.carriedBy && vis(x.x, x.y) && V.isExplored(x.x | 0, x.y | 0)) this.drawSprite('barrel', x.x, x.y, 0.6, 0.6);
-    if (s >= 8) for (const r of g.ravens) if (!r.gone && vis(r.x, r.y) && V.isVisible(r.x, r.y)) this.drawSprite('raven', r.x + Math.sin(performance.now() / 700 + r.x) * 0.2, r.y, 0.45, 0.45);
 
-    // Units.
-    for (const u of g.units) {
-      if (u.garrisoned || !vis(u.x, u.y)) continue;
-      const d = u.r * 2.6;
-      if (ui.sel && ui.sel.has(u.id)) { this.ring(u.x, u.y, u.r + 0.12, '#7dff9a'); }
-      this.drawSprite(this.animKey('unit/' + u.type, u.moving, g.time - (u.firedAt ?? -9) < 0.35), u.x, u.y, d, d, u.face < 0);
-      if (u.flash > 0) { ctx.globalAlpha = 0.5; this.ring(u.x, u.y, u.r, '#ff4040', true); ctx.globalAlpha = 1; }
-      if (u.vet) this.star(u.x + u.r * 0.7, u.y - u.r * 0.9);
-      if (u.carrying) this.drawSprite('barrel', u.x + u.r * 0.7, u.y + u.r * 0.4, 0.35, 0.35);
-      if (u.hp < u.maxHp || ui.showHp) this.bar(u.x - u.r, u.y - u.r - 0.25, u.r * 2, u.hp / u.maxHp, '#5df07a');
-    }
-
-    // Infected (only where currently visible).
-    const dots = s < 13;
+    // Buildings, nests, units and infected share one pass sorted by the line
+    // they stand on, so tall art and characters overlap each other correctly.
+    const list = this.dl || (this.dl = []); list.length = 0;
+    for (const x of g.buildings) if (vis(x.cx, x.cy, Math.max(x.w, x.h) + 2) && V.isExplored(x.cx | 0, x.cy | 0)) { x._dk = x.y + x.h; list.push(x); }
+    for (const n of g.nests) if (vis(n.x, n.y, 4) && V.isExplored(n.x | 0, n.y | 0)) { n._dk = n.y + n.h; list.push(n); }
+    for (const u of g.units) if (!u.garrisoned && vis(u.x, u.y, 3)) { u._dk = u.y + FEET * u.r; list.push(u); }
+    // Far out, infected become dots so huge swarms stay cheap to draw.
+    const dots = s < 13, zdots = this.zl || (this.zl = []); zdots.length = 0;
     let drawn = 0;
     for (const z of g.infected) {
-      if (!vis(z.x, z.y, 1)) continue;
+      if (!vis(z.x, z.y, 3)) continue;
       if (!V.revealAll && V.visible[(z.x | 0) + (z.y | 0) * g.world.w] !== 1) continue;
       drawn++;
-      if (dots) {
-        const [sx, sy] = cam.toScreen(z.x, z.y), r = Math.max(1.2, z.r * s);
-        ctx.fillStyle = z.flash > 0 ? '#fff' : z.def.color;
-        ctx.fillRect(sx - r, sy - r, r * 2, r * 2);
+      if (dots) zdots.push(z); else { z._dk = z.y + FEET * z.r; list.push(z); }
+    }
+    list.sort((a, c) => a._dk - c._dk);
+    const selB = ui.selBuilding, shadows = s >= 16 && drawn < 800;   // skip infected shadows in huge swarms
+    for (const e of list) {
+      if (e.kind === 'b') this.drawBuilding(e, e === selB, ui);
+      else if (e.kind === 'n') {
+        this.drawBuildingSprite('nest/' + e.size, e.x, e.y, e.w, e.h, e.flash > 0 ? 0.6 : 1);
+        if (ui.sel && ui.sel.has(e.id)) this.outline(e.x, e.y, e.w, e.h, '#ff6b6b');
+      } else if (e.kind === 'u') {
+        if (ui.sel && ui.sel.has(e.id)) this.ring(e.x, e.y + FEET * e.r * 0.5, e.r + 0.14, '#7dff9a');
+        this.shadow(e);
+        this.drawFigure(this.animKey('unit/' + e.type, e.moving, g.time - (e.firedAt ?? -9) < 0.35), 'unit/' + e.type, e.x, e.y, e.r, e.face < 0, null);
+        if (e.flash > 0) { ctx.globalAlpha = 0.45; this.ring(e.x, e.y - FIGURE_H * e.r * 0.3, e.r, '#ff4040', true); ctx.globalAlpha = 1; }
+        if (e.carrying) this.drawSprite('barrel', e.x + e.r * 0.8, e.y + e.r * 0.2, 0.35, 0.35);
       } else {
-        const d = z.r * 2.6, key = 'infected/' + z.type;
+        const key = 'infected/' + e.type;
         let k = key;
         if (this.anims(key)) {
-          if (z.x !== z.rx || z.y !== z.ry) { z.rx = z.x; z.ry = z.y; z.rmt = g.time; }
-          k = this.animKey(key, g.time - (z.rmt ?? -9) < 0.2, g.time - (z.firedAt ?? -9) < 0.35);
+          if (e.x !== e.rx || e.y !== e.ry) { e.rx = e.x; e.ry = e.y; e.rmt = g.time; }
+          k = this.animKey(key, g.time - (e.rmt ?? -9) < 0.2, g.time - (e.firedAt ?? -9) < 0.35);
         }
-        this.drawSprite(k, z.x, z.y, d, d, z.face < 0, z.flash > 0 ? 0.55 : null);
-        if ((z.hp < z.maxHp && (z.def.special || ui.showHp)) || (ui.sel && ui.sel.has(z.id))) this.bar(z.x - z.r, z.y - z.r - 0.2, z.r * 2, z.hp / z.maxHp, '#e04040');
+        if (shadows) this.shadow(e);
+        this.drawFigure(k, key, e.x, e.y, e.r, e.face < 0, e.flash > 0 ? 0.55 : null);
       }
     }
+    for (const z of zdots) {
+      const [sx, sy] = cam.toScreen(z.x, z.y), r = Math.max(1.4, z.r * s * 1.2);
+      ctx.fillStyle = z.flash > 0 ? '#fff' : z.def.color;
+      ctx.fillRect(sx - r, sy - r, r * 2, r * 2);
+    }
+    if (s >= 8) for (const r of g.ravens) if (!r.gone && vis(r.x, r.y) && V.isVisible(r.x, r.y)) this.drawSprite('raven', r.x + Math.sin(performance.now() / 700 + r.x) * 0.2, r.y - 0.6, 0.55, 0.55);
+    // Health bars sit above everything, as in the original game: green for
+    // the colony, red for the infected. Shown when hurt, selected or on Alt.
+    this.batching = true;
+    for (const e of list) {
+      if (e.kind === 'b') this.buildingBars(e, ui);
+      else if (e.kind === 'u') {
+        if (e.hp < e.maxHp || ui.showHp || (ui.sel && ui.sel.has(e.id))) this.headBar(e, e.hp / e.maxHp, '#5df07a');
+      } else if (e.kind === 'z') {
+        if (e.hp < e.maxHp - 0.5 || ui.showHp || (ui.sel && ui.sel.has(e.id))) this.headBar(e, e.hp / e.maxHp, '#e03a3a');
+      } else if (e.kind === 'n') {
+        if (e.hp < e.maxHp && V.isVisible(e.x + 1, e.y + 1)) this.bar(e.x, e.y - 0.25, e.w, e.hp / e.maxHp, '#e04040');
+      }
+    }
+    this.batching = false; this.flushBars();
+    for (const e of list) if (e.kind === 'u' && e.vet) this.star(e.x + e.r * 0.9, this.headY(e) + 0.05);
     this.lastDrawn = drawn;
 
     // Projectiles.
@@ -256,11 +304,19 @@ export class Renderer {
       ctx.fillStyle = '#7dd3ff'; ctx.font = `bold ${Math.max(9, s * 0.35)}px system-ui`; ctx.textAlign = 'center'; ctx.fillText('●'.repeat(x.garrison.length), sx + sw / 2, sy + sh + Math.max(9, s * 0.3));
     }
     if (selected) this.outline(x.x, x.y, x.w, x.h, '#ffffff');
+  }
+
+  // Progress and health bars of a building, drawn after every sprite so a
+  // character walking in front never hides them. Health sits above the art.
+  buildingBars(x, ui) {
+    const def = x.def, s = this.cam.scale;
     if (x.state === 'build' || x.state === 'upgrade' || x.state === 'repair') this.bar(x.x, x.y + x.h + 0.05, x.w, x.progress, '#f2c14e');
     const damaged = x.hp < x.maxHp - 0.5 || (x.maxBarrier && x.barrier < x.maxBarrier - 0.5);
     if ((damaged || ui.showHp) && !def.trap && !def.mine && x.state !== 'build') {
-      this.bar(x.x, x.y - 0.22, x.w, x.hp / x.maxHp, '#5df07a');
-      if (x.maxBarrier) this.bar(x.x, x.y - 0.38, x.w, x.barrier / x.maxBarrier, '#f2c14e');
+      let key = 'building/' + x.type; if (def.rotate && x.rot) key += '_v';
+      const a = this.assets.get(key), top = a ? x.y + x.h - Math.max(x.h, x.w * a.h / a.w) : x.y;
+      this.bar(x.x, top - 0.22, x.w, x.hp / x.maxHp, '#5df07a');
+      if (x.maxBarrier) this.bar(x.x, top - 0.38, x.w, x.barrier / x.maxBarrier, '#f2c14e');
     }
     if (x.queue && x.queue.length && s > 8) this.bar(x.x, x.y + x.h + 0.05, x.w, x.queue[0].t / x.queue[0].time, '#6fb6ff');
     if (x.rq && x.rq.length && s > 8) this.bar(x.x, x.y + x.h + 0.05, x.w, x.rq[0].t / x.rq[0].time, '#c79bff');
@@ -351,10 +407,26 @@ export class Renderer {
   }
 
   // ------------------------------------------------------------ primitives
+  // Bars are queued and drawn together by flushBars(): hundreds of separate
+  // small fills are far slower than one path per colour.
   bar(x, y, w, k, color) {
-    const ctx = this.ctx, [sx, sy] = this.cam.toScreen(x, y), sw = w * this.cam.scale, h = Math.max(2, Math.min(5, this.cam.scale * 0.09));
-    ctx.fillStyle = 'rgba(0,0,0,0.65)'; ctx.fillRect(sx, sy, sw, h);
-    ctx.fillStyle = color; ctx.fillRect(sx, sy, sw * clamp(k, 0, 1), h);
+    const [sx, sy] = this.cam.toScreen(x, y), sw = Math.round(w * this.cam.scale), h = Math.round(Math.max(2, Math.min(5, this.cam.scale * 0.07)));
+    (this.barQ || (this.barQ = [])).push(Math.round(sx), Math.round(sy), sw, h, Math.max(1, Math.round(sw * clamp(k, 0, 1))), color);
+    if (!this.batching) this.flushBars();
+  }
+  flushBars() {
+    const q = this.barQ, ctx = this.ctx;
+    if (!q || !q.length) return;
+    ctx.fillStyle = 'rgba(0,0,0,0.75)'; ctx.beginPath();
+    for (let i = 0; i < q.length; i += 6) ctx.rect(q[i] - 1, q[i + 1] - 1, q[i + 2] + 2, q[i + 3] + 2);
+    ctx.fill();
+    const colors = new Set(); for (let i = 5; i < q.length; i += 6) colors.add(q[i]);
+    for (const c of colors) {
+      ctx.fillStyle = c; ctx.beginPath();
+      for (let i = 0; i < q.length; i += 6) if (q[i + 5] === c) ctx.rect(q[i], q[i + 1], q[i + 4], q[i + 3]);
+      ctx.fill();
+    }
+    q.length = 0;
   }
   ring(x, y, r, color, fill) {
     const ctx = this.ctx, [sx, sy] = this.cam.toScreen(x, y);

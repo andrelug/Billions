@@ -2,6 +2,7 @@ import { BUILDINGS } from '../data/buildings.js';
 import { UNITS } from '../data/units.js';
 import { footprint } from '../sim/placement.js';
 import { dist, line } from '../core/util.js';
+import { FIGURE_H, FEET } from '../data/art.js';
 
 // Interprets gestures into selection, placement and unit commands.
 export class Controller {
@@ -19,7 +20,7 @@ export class Controller {
 
   // ------------------------------------------------------------- selection
   selectedUnits() { const out = []; for (const id of this.sel) { const u = this.g.byId.get(id); if (u && u.kind === 'u' && !u.dead) out.push(u); } return out; }
-  setUnits(list) { this.sel = new Set(list.map((u) => u.id)); this.selBuilding = null; this.selOther = null; this.changed(); }
+  setUnits(list) { this.sel = new Set(list.map((u) => u.id)); this.selBuilding = null; this.selOther = null; this.changed(); if (list.length) this.app.voice('select', list); }
   setBuilding(b) { this.sel.clear(); this.selBuilding = b; this.selOther = null; this.changed(); }
   clear() { this.sel.clear(); this.selBuilding = null; this.selOther = null; this.targeting = null; this.changed(); }
   changed() { this.app.onSelection(); }
@@ -32,14 +33,22 @@ export class Controller {
   }
 
   // ------------------------------------------------------------ hit testing
+  // Characters are drawn standing above their position, so a tap on the body
+  // is matched against the body's middle, not the feet.
   unitAt(x, y) {
-    let best = null, bd = 0.7 * 0.7;
-    for (const u of this.g.units) { if (u.garrisoned) continue; const d = (u.x - x) ** 2 + (u.y - y) ** 2; if (d < Math.max(bd, u.r * u.r)) { bd = d; best = u; } }
+    let best = null, bd = Infinity;
+    for (const u of this.g.units) {
+      if (u.garrisoned) continue;
+      const feet = u.y + FEET * u.r, head = feet - FIGURE_H * u.r, hw = Math.max(0.4, u.r * 1.3);
+      if (Math.abs(u.x - x) > hw || y < head - 0.1 || y > feet + 0.25) continue;
+      const d = (u.x - x) ** 2 + (u.y - y) ** 2;
+      if (d < bd) { bd = d; best = u; }
+    }
     return best;
   }
   enemyAt(x, y) {
     const g = this.g;
-    const z = g.zgrid.nearest(x, y, 0.9, (q) => q.hp > 0 && (g.vision.revealAll || g.vision.isVisible(q.x, q.y)));
+    const z = g.zgrid.nearest(x, y + 0.45, 0.9, (q) => q.hp > 0 && (g.vision.revealAll || g.vision.isVisible(q.x, q.y)));
     if (z) return z;
     for (const n of g.nests) if (x >= n.x && x < n.x + n.w && y >= n.y && y < n.y + n.h && g.vision.isExplored(n.x | 0, n.y | 0)) return n;
     for (const b of g.barrels) if (!b.carriedBy && dist(b.x, b.y, x, y) < 0.6) return b;

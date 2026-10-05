@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { Game } from '../js/sim/game.js';
 import { placementBlocker } from '../js/sim/placement.js';
 import { T } from '../js/sim/worldgen.js';
+import { MOVE_SCALE } from '../js/data/maps.js';
 
 function freshGame(theme = 'FA', seed = 11) {
   const g = new Game();
@@ -38,7 +39,7 @@ test('rangers kill approaching walkers', () => {
   for (const u of g.units) { u.x = cx + 0.5; u.y = cy + 4; u.post = { x: u.x, y: u.y }; }
   const far = find(g, (x, y) => g.world.walkable(x, y) && g.colonyField.dist[x + y * g.world.w] < 0xFFFFFFFF, 14, 30);
   for (let i = 0; i < 6; i++) { const p = g.freeCellNear(far.x, far.y, 4); g.addInfected('decrepit', p.x, p.y, { cc: true }); }
-  run(g, 60);
+  run(g, 60 / MOVE_SCALE);   // walkers need longer to arrive at the slower pace
   assert.equal(g.infected.length, 0, 'all walkers dead');
   assert.equal(g.stats.kills, 6);
   assert.ok(g.units.length === 5);
@@ -162,4 +163,16 @@ test('quarry: mountains count as stone for placement and mining', () => {
   const o = find(g, (x, y) => grass2x2(x, y) && !ring(x, y, rock), 4, 60);
   assert.ok(o, 'found open grass');
   assert.equal(placementBlocker(g, 'quarry', o.x, o.y, 0, opts), 'Must be next to stone, iron or gold');
+});
+
+test('movement runs at the tuned pace', () => {
+  const g = freshGame();
+  const u = g.units.find((x) => x.type === 'soldier');
+  const x0 = u.x, y0 = u.y;
+  const to = find(g, (x, y) => g.world.walkable(x, y) && Math.hypot(x + 0.5 - x0, y + 0.5 - y0) > 6, 6, 12);
+  g.unitSys.command([u], { t: 'move', x: to.x + 0.5, y: to.y + 0.5 });
+  run(g, 1);
+  const moved = Math.hypot(u.x - x0, u.y - y0);
+  assert.ok(moved <= 2.4 * MOVE_SCALE * 1.05 + 1e-6, `soldier moved ${moved.toFixed(2)} cells in 1 s`);
+  assert.ok(moved >= 2.4 * MOVE_SCALE * 0.5, `soldier moved ${moved.toFixed(2)} cells in 1 s`);
 });

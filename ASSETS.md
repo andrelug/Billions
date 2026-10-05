@@ -38,10 +38,17 @@ resolution is up to you.
   need separate "under construction" or "damaged" sprites.
 
 **Units and infected** (`unit/*`, `infected/*`)
-- Centred on the entity's position, with the anchor at the middle of the image.
+- The game measures the opaque pixels of the still sprite and scales the character so the
+  body, feet to head, is 2.6 times its collision radius. A Ranger is about 0.8 cell tall, a
+  Titan about 1.6 and a Giant about 2.6. Padding around the body does not change the size
+  on screen.
+- The feet stand on the ground point and the body rises above it, so characters overlap
+  correctly in crowds. Units and infected are drawn in depth order with buildings.
 - Draw them **facing right**; the game mirrors them when they face left.
-- The image box is about 2.6 times the unit's collision radius. Keep the body inside the
-  middle ~40% of the box so that crowds read well.
+- Recommended frame: 256x256 px, body about 75% of the frame height, feet centred at about
+  90% of the height, transparent background, a soft contact shadow is drawn by the game.
+- Every animation strip of a character must use the same frame size and put the feet at the
+  same place as the still sprite. The game uses the still sprite's framing for all of them.
 - Optional animation states. Add a manifest entry (and a file) for:
   - `unit/<id>_walk` or `infected/<id>_walk`, used while moving;
   - `unit/<id>_attack` or `infected/<id>_attack`, used for 0.35 s after each attack.
@@ -55,6 +62,23 @@ resolution is up to you.
   Desolated Wasteland, VO Caustic Lands.
 - Types: grass, forest, mountain, stone, iron, gold, water, oil, mud.
 - The **Flat mode** setting and the **F4** view ignore terrain art and draw flat colours.
+
+**Terrain props** (`prop/<map>/<name>_<n>`)
+- Optional tall art that stands on terrain cells and replaces the procedural volume the
+  game draws for them. Names: `tree` (forest), `rock` (mountain), `stone`, `iron` and
+  `gold` (deposits). Number them from 0; any count works, and each cell picks one.
+- Each prop stands on the bottom edge of its cell, keeps its aspect ratio and is drawn
+  `cells` map cells wide (manifest field, default 1.3). A tree drawn at 256x448 with
+  `"cells": 1.4` rises about 2.5 cells. Half of the cells mirror it.
+- Light comes from the top left, as in the rest of the art. Transparent background.
+- Only manifest entries are needed; there are no placeholders for props:
+
+  ```json
+  "prop/FA/tree_0": { "file": "prop/FA/tree_0.png", "w": 256, "h": 448, "cells": 1.4 }
+  ```
+
+- Without props, forests get textured tree crowns, mountains get faceted peaks that grow
+  towards the middle of a range, and deposits get boulders, all cut from the terrain tiles.
 
 **Icons, pickups and effects**
 - `icon/*` are HUD resource icons, drawn at 14–28 px; keep them bold and simple.
@@ -105,22 +129,33 @@ The tool needs Playwright with Chromium (`npm i -D playwright && npx playwright 
 
 ## Sound
 
-Sounds are synthesized placeholders. To use real files, create
-`assets/audio/manifest.json` that maps sound keys to files in `assets/audio/`:
+Sounds are synthesized placeholders until real files are added. Put files in
+`assets/audio/` and list them in `assets/audio/manifest.json`. One-shot sounds map a key
+to a file; `music` and `ambience` map a mood or a map to one file or a list of files:
 
 ```json
-{ "rifle": "rifle.ogg", "horde": "horde.mp3" }
+{
+  "rifle": "sfx/rifle.mp3",
+  "bite": ["sfx/bite.mp3"],
+  "music": { "menu": "music/menu.mp3", "calm": ["music/calm_1.mp3", "music/calm_2.mp3"], "swarm": "music/swarm.mp3" },
+  "ambience": { "FA": "ambience/deep_forest.mp3" }
+}
 ```
 
-Any key you leave out keeps its synthesized sound. Use short, normalised clips; OGG or
-MP3 work everywhere except old Safari, where you should use MP3 or M4A.
+Any key you leave out keeps its current behaviour. Use short, normalised clips for
+one-shots. MP3 works everywhere; OGG does not play on old Safari.
 
 | Key | Played when |
 |---|---|
 | `bow`, `rifle`, `sniper`, `flame`, `rocket` | Ranger, Soldier, Sniper, Pyro, and Rocketeer rockets fire |
 | `mg`, `ballista`, `zap` | Titan, Executor and Wasp fire; Great Ballista fires; Shocking Tower pulses |
 | `hit` | Rocketeer and Mutant melee hits |
-| `explosion` | Rockets, mines and barrels explode; buildings and nests are destroyed |
+| `explosion` | Rockets, mines and barrels explode; nests are destroyed |
+| `collapse` | A building is destroyed (uses `explosion` until it has a file) |
+| `infect` | A building is overrun and turns infected (uses `groan` until it has a file) |
+| `bite`, `spit`, `smash` | Infected melee, Venom acid, Giant and Behemoth blows (silent until they have files) |
+| `zdie` | An infected dies (silent until it has a file) |
+| `trained` | A unit leaves its training building (silent until it has a file) |
 | `gate` | A gate opens |
 | `die` | A colony unit dies |
 | `build`, `complete` | Construction starts / finishes |
@@ -131,5 +166,22 @@ MP3 work everywhere except old Safari, where you should use MP3 or M4A.
 | `victory`, `defeat` | Wonder completed or game won / game lost |
 | `groan` | Reserved for infected ambience |
 
-There is no music yet. A `music` key would need a small loader change, because the
-manifest above is for one-shot sounds.
+**Voice lines** play when you select or command units, as in the original game. The
+game tries `voice_<unit>_<what>` first, then `voice_<what>`, where `<what>` is
+`select`, `move`, `attack`, `garrison` or `pickup` and `<unit>` is `ranger`, `soldier`,
+`sniper`, `pyro`, `rocketeer`, `titan` or `mutant`. They are silent until they have files.
+
+**Music** is streamed and crossfades between moods:
+
+| Mood | Plays |
+|---|---|
+| `menu` | Title and menus |
+| `calm` | Building the colony; a list of tracks plays in random order |
+| `tension` | From a swarm warning until it arrives |
+| `swarm` | For 150 game seconds after a swarm arrives, then back to `calm` |
+| `final` | From the final-wave warning to the end |
+| `victory`, `defeat` | Once, on the result screen |
+
+**Ambience** loops quietly under the music during a game: one entry per map id (`FA`,
+`BR`, `TM`, `AL`, `DS`, `VO`). The **Music** setting turns music and ambience off
+without muting sound effects.

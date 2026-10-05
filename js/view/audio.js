@@ -1,6 +1,7 @@
-// Sound effects. Each key plays assets/audio/<key>.(mp3|ogg) when listed in
-// assets/audio/manifest.json, otherwise a short synthesized placeholder.
+// Sound effects, music and ambience. Each sound key plays the file listed for
+// it in assets/audio/manifest.json, otherwise a short synthesized placeholder.
 // Sounds are rate-limited per key and attenuated by distance from the camera.
+// The manifest's "music" and "ambience" objects list streamed loops.
 const SYNTH = {
   bow:        { type: 'noise', dur: 0.08, f: 2400, q: 1.2, vol: 0.18 },
   rifle:      { type: 'noise', dur: 0.12, f: 1200, q: 0.7, vol: 0.28 },
@@ -26,6 +27,15 @@ const SYNTH = {
   defeat:     { type: 'chord', dur: 1.6, notes: [392, 311, 262, 196], seq: true, vol: 0.18 },
 };
 
+// New sound keys that borrow a placeholder until their own file exists.
+// Keys missing from both lists stay silent until a file is added.
+const FALLBACK = { collapse: 'explosion', infect: 'groan' };
+
+// Music and ambience (see ASSETS.md). Moods: menu, calm, tension, swarm,
+// final, victory, defeat. Ambience: one loop per map id (FA, BR, TM, AL, DS, VO).
+const MUSIC_VOL = 0.5, AMB_VOL = 0.3, FADE = 2.5;
+const ONCE = new Set(['victory', 'defeat']);
+
 export class Audio {
   constructor() {
     this.ctx = null; this.master = null; this.buffers = new Map();
@@ -33,6 +43,9 @@ export class Audio {
     this.last = new Map();       // key -> time last played (rate limit)
     this.listener = { x: 0, y: 0, scale: 40, W: 800, H: 600 };
     this.files = {};
+    this.lists = { music: {}, ambience: {} };
+    this.musicOn = true; this.moodName = null; this.ambName = null; this.musicCh = null; this.ambCh = null;
+    document.addEventListener('visibilitychange', () => { if (this.ctx) { if (document.hidden) this.ctx.suspend(); else this.ctx.resume(); } });
     try { const v = localStorage.getItem('billions-audio'); if (v) { const o = JSON.parse(v); this.enabled = o.enabled !== false; this.volume = o.volume ?? 0.7; } } catch (e) { /* ignore */ }
     const unlock = () => { this.init(); window.removeEventListener('pointerdown', unlock); window.removeEventListener('keydown', unlock); };
     window.addEventListener('pointerdown', unlock); window.addEventListener('keydown', unlock);
@@ -55,13 +68,21 @@ export class Audio {
       const res = await fetch('assets/audio/manifest.json', { cache: 'no-cache' });
       if (!res.ok) return;
       this.files = await res.json();
+      this.lists.music = this.files.music || {}; this.lists.ambience = this.files.ambience || {};
+      this.refreshMusic();
+      // A key may list several files; each play picks one at random.
       for (const key in this.files) {
-        fetch('assets/audio/' + this.files[key]).then((r) => r.arrayBuffer()).then((b) => this.ctx.decodeAudioData(b)).then((buf) => this.buffers.set(key, buf)).catch(() => {});
+        if (key === 'music' || key === 'ambience') continue;
+        for (const file of [].concat(this.files[key])) {
+          if (typeof file !== 'string') continue;
+          fetch('assets/audio/' + file).then((r) => r.arrayBuffer()).then((b) => this.ctx.decodeAudioData(b))
+            .then((buf) => { const list = this.buffers.get(key) || []; list.push(buf); this.buffers.set(key, list); }).catch(() => {});
+        }
       }
     } catch (e) { /* no audio files: synth only */ }
   }
 
-  setEnabled(on) { this.enabled = on; if (this.master) this.master.gain.value = on ? this.volume : 0; this.persist(); }
+  setEnabled(on) { this.enabled = on; if (this.master) this.master.gain.value = on ? this.volume : 0; this.persist(); this.refreshMusic(); }
   setVolume(v) { this.volume = v; if (this.master && this.enabled) this.master.gain.value = v; this.persist(); }
   persist() { try { localStorage.setItem('billions-audio', JSON.stringify({ enabled: this.enabled, volume: this.volume })); } catch (e) { /* ignore */ } }
 
@@ -79,10 +100,66 @@ export class Audio {
       vol = Math.max(0, 1 - d * 0.8) * Math.min(1, L.scale / 30);
     }
     this.last.set(key, now);
-    const buf = this.buffers.get(key);
+    let bufs = this.buffers.get(key);
+    if (!bufs && !SYNTH[key] && FALLBACK[key]) { key = FALLBACK[key]; bufs = this.buffers.get(key); }
+    const buf = bufs && bufs[(Math.random() * bufs.length) | 0];
     if (buf) { const src = this.ctx.createBufferSource(); src.buffer = buf; const g = this.ctx.createGain(); g.gain.value = vol; src.connect(g).connect(this.master); src.start(); return; }
     const s = SYNTH[key]; if (!s) return;
     this.synth(s, vol);
+  }
+
+  // Plays the first of `keys` that has a file (voice lines have no
+  // synthesized placeholder, so nothing plays until the files exist).
+  playFirst(keys, minGap = 1) {
+    for (const k of keys) if (this.buffers.has(k)) { this.play(k, null, null, minGap); return; }
+  }
+
+  // ------------------------------------------------------------- music
+  setMusic(on) { this.musicOn = on; this.refreshMusic(); }
+  mood(name) { if (this.moodName === name) return; this.moodName = name; this.refreshMusic(); }
+  setAmbience(name) { if (this.ambName === name) return; this.ambName = name; this.refreshMusic(); }
+  refreshMusic() {
+    if (!this.ctx) return;
+    const on = this.enabled && this.musicOn;
+    this.musicCh = this.cue(this.musicCh, on ? this.choose(this.lists.music[this.moodName], this.musicCh) : null, MUSIC_VOL, 'music');
+    this.ambCh = this.cue(this.ambCh, on ? this.choose(this.lists.ambience[this.ambName], this.ambCh) : null, AMB_VOL, 'amb');
+  }
+  // A mood may list several files: the current one keeps playing while it
+  // belongs to the mood, otherwise one is picked at random.
+  choose(list, cur, avoid) {
+    if (!list) return null;
+    const files = Array.isArray(list) ? list : [list];
+    if (cur && !avoid && files.includes(cur.file)) return cur.file;
+    const pool = files.length > 1 && avoid ? files.filter((f) => f !== avoid) : files;
+    return pool[(Math.random() * pool.length) | 0];
+  }
+  // Crossfades a channel to `file` (null fades it out). Returns the channel.
+  cue(ch, file, vol, kind) {
+    if (ch && ch.file === file) return ch;
+    if (ch) this.fadeOut(ch);
+    if (!file) return null;
+    const el = new window.Audio('assets/audio/' + file), gain = this.ctx.createGain();
+    el.preload = 'auto';
+    try { this.ctx.createMediaElementSource(el).connect(gain); } catch (e) { return null; }
+    gain.connect(this.master);
+    const now = this.ctx.currentTime;
+    gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(vol, now + FADE);
+    const list = kind === 'music' ? this.lists.music[this.moodName] : this.lists.ambience[this.ambName];
+    const many = Array.isArray(list) && list.length > 1, once = kind === 'music' && ONCE.has(this.moodName);
+    el.loop = !many && !once;
+    const nc = { file, el, gain };
+    // With several tracks, the next one starts when this one ends.
+    if (many) el.addEventListener('ended', () => {
+      if (kind === 'music' && this.musicCh === nc) this.musicCh = this.cue(null, this.choose(this.lists.music[this.moodName], null, file), vol, kind);
+      if (kind === 'amb' && this.ambCh === nc) this.ambCh = this.cue(null, this.choose(this.lists.ambience[this.ambName], null, file), vol, kind);
+    });
+    el.play().catch(() => {});
+    return nc;
+  }
+  fadeOut(ch) {
+    const now = this.ctx.currentTime, g = ch.gain.gain;
+    g.cancelScheduledValues(now); g.setValueAtTime(g.value, now); g.linearRampToValueAtTime(0, now + FADE);
+    setTimeout(() => { ch.el.pause(); ch.el.removeAttribute('src'); ch.el.load(); }, FADE * 1000 + 100);
   }
 
   synth(s, vol) {

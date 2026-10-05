@@ -1,6 +1,7 @@
 import { rectDist } from '../core/util.js';
 import { SpatialGrid } from '../core/spatial.js';
 import { NOISE_CHECK } from './noise.js';
+import { MOVE_SCALE } from '../data/maps.js';
 
 // Infected AI. States (z.st):
 //   0 idle   - dormant map population; roams a little around its spot
@@ -100,7 +101,7 @@ export class InfectedSystem {
       }
     }
 
-    const speed = (z.st === 0 ? ts.walk : ts.run) * z.slow * g.terrainSpeed(z.x, z.y);
+    const speed = (z.st === 0 ? ts.walk : ts.run) * MOVE_SCALE * z.slow * g.terrainSpeed(z.x, z.y);
     switch (z.st) {
       case 0: this.roam(z, speed, dt); break;
       case 1: {
