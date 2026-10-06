@@ -1,11 +1,35 @@
 {
   "music": {
     "menu": "music/menu.mp3",
-    "calm": ["music/calm_1.mp3", "music/calm_2.mp3", "music/calm_3.mp3"],
+    "calm": [
+      "music/calm_1.mp3",
+      "music/calm_2.mp3",
+      "music/calm_3.mp3"
+    ],
     "tension": "music/tension.mp3",
-    "swarm": ["music/swarm_1.mp3", "music/swarm_2.mp3"],
+    "swarm": [
+      "music/swarm_1.mp3",
+      "music/swarm_2.mp3"
+    ],
     "final": "music/final.mp3",
     "victory": "music/victory.mp3",
     "defeat": "music/defeat.mp3"
-  }
+  },
+  "bow": [
+    "sfx/bow_1.mp3",
+    "sfx/bow_2.mp3",
+    "sfx/bow_3.mp3"
+  ],
+  "rifle": [
+    "sfx/rifle_1.mp3",
+    "sfx/rifle_2.mp3",
+    "sfx/rifle_3.mp3"
+  ],
+  "mg": [
+    "sfx/mg_1.mp3",
+    "sfx/mg_2.mp3",
+    "sfx/mg_3.mp3"
+  ],
+  "sniper": "sfx/sniper.mp3",
+  "ballista": "sfx/ballista.mp3"
 }
