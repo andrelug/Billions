@@ -38,19 +38,37 @@ const ONCE = new Set(['victory', 'defeat']);
 // A mood without its own tracks borrows the closest one until they exist.
 const MOOD_FALLBACK = { final: 'swarm', swarm: 'tension', tension: 'calm' };
 
+// A tenth of a second of silence, played once inside a tap so that Safari
+// lets each music element start later without one.
+function silentWav() {
+  const n = 800, b = new Uint8Array(44 + n), v = new DataView(b.buffer);
+  const str = (o, t) => { for (let i = 0; i < t.length; i++) b[o + i] = t.charCodeAt(i); };
+  str(0, 'RIFF'); v.setUint32(4, 36 + n, true); str(8, 'WAVE'); str(12, 'fmt ');
+  v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, 8000, true);
+  v.setUint32(28, 8000, true); v.setUint16(32, 1, true); v.setUint16(34, 8, true); str(36, 'data'); v.setUint32(40, n, true);
+  b.fill(128, 44);
+  return URL.createObjectURL(new Blob([b], { type: 'audio/wav' }));
+}
+
 export class Audio {
   constructor() {
     this.ctx = null; this.master = null; this.buffers = new Map();
     this.enabled = true; this.volume = 0.7;
     this.last = new Map();       // key -> time last played (rate limit)
     this.listener = { x: 0, y: 0, scale: 40, W: 800, H: 600 };
-    this.files = {};
+    this.files = null;           // assets/audio/manifest.json once loaded
     this.lists = { music: {}, ambience: {} };
     this.musicOn = true; this.moodName = null; this.ambName = null; this.musicCh = null; this.ambCh = null;
-    document.addEventListener('visibilitychange', () => { if (this.ctx) { if (document.hidden) this.ctx.suspend(); else this.ctx.resume(); } });
+    this.pool = { music: [], amb: [] };   // two <audio> elements per channel, for crossfades
     try { const v = localStorage.getItem('billions-audio'); if (v) { const o = JSON.parse(v); this.enabled = o.enabled !== false; this.volume = o.volume ?? 0.7; } } catch (e) { /* ignore */ }
-    const unlock = () => { this.init(); window.removeEventListener('pointerdown', unlock); window.removeEventListener('keydown', unlock); };
-    window.addEventListener('pointerdown', unlock); window.addEventListener('keydown', unlock);
+    // The track list is fetched right away so the first tap can start the menu music.
+    this.loadManifest();
+    // Browsers, Safari above all, only start sound inside a tap, click or key
+    // press, and iOS ignores the start of a touch. Every such event unlocks
+    // whatever is still locked, so a refused first attempt is retried.
+    const unlock = () => this.unlock();
+    for (const ev of ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown']) window.addEventListener(ev, unlock, true);
+    document.addEventListener('visibilitychange', () => { if (this.ctx) { if (document.hidden) this.ctx.suspend(); else this.ctx.resume().catch(() => {}); } });
   }
 
   init() {
@@ -62,26 +80,57 @@ export class Audio {
     this.master.connect(this.ctx.destination);
     this.noise = this.ctx.createBuffer(1, this.ctx.sampleRate, this.ctx.sampleRate);
     const d = this.noise.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-    this.loadFiles();
+    // Music elements are made once and reused: Safari remembers per element
+    // that a tap allowed it to play.
+    for (const kind of ['music', 'amb']) for (let i = 0; i < 2; i++) {
+      const el = new window.Audio(), gain = this.ctx.createGain();
+      el.preload = 'auto'; gain.gain.value = 0;
+      try { this.ctx.createMediaElementSource(el).connect(gain); gain.connect(this.master); } catch (e) { continue; }
+      el._gain = gain; el._file = null; el._unlocked = false;
+      this.pool[kind].push(el);
+    }
+    this.decodeSounds();
+    this.refreshMusic();
   }
 
-  async loadFiles() {
+  // Called from every tap, click and key press.
+  unlock() {
+    this.init();
+    if (!this.ctx) return;
+    if (this.ctx.state !== 'running') this.ctx.resume().catch(() => {});
+    for (const el of [...this.pool.music, ...this.pool.amb]) {
+      if (el._unlocked) continue;
+      if (el._file) { el.play().then(() => { el._unlocked = true; }).catch(() => {}); continue; }
+      if (!this.silent) this.silent = silentWav();
+      el.src = this.silent;
+      el.play().then(() => { el._unlocked = true; if (!el._file) el.pause(); }).catch(() => {});
+    }
+  }
+
+  async loadManifest() {
     try {
       const res = await fetch('assets/audio/manifest.json', { cache: 'no-cache' });
       if (!res.ok) return;
       this.files = await res.json();
       this.lists.music = this.files.music || {}; this.lists.ambience = this.files.ambience || {};
+      this.decodeSounds();
       this.refreshMusic();
-      // A key may list several files; each play picks one at random.
-      for (const key in this.files) {
-        if (key === 'music' || key === 'ambience') continue;
-        for (const file of [].concat(this.files[key])) {
-          if (typeof file !== 'string') continue;
-          fetch('assets/audio/' + file).then((r) => r.arrayBuffer()).then((b) => this.ctx.decodeAudioData(b))
-            .then((buf) => { const list = this.buffers.get(key) || []; list.push(buf); this.buffers.set(key, list); }).catch(() => {});
-        }
-      }
     } catch (e) { /* no audio files: synth only */ }
+  }
+
+  // One-shot sounds are decoded once both the manifest and the audio context
+  // exist. A key may list several files; each play picks one at random.
+  decodeSounds() {
+    if (!this.ctx || !this.files || this.decoded) return;
+    this.decoded = true;
+    for (const key in this.files) {
+      if (key === 'music' || key === 'ambience') continue;
+      for (const file of [].concat(this.files[key])) {
+        if (typeof file !== 'string') continue;
+        fetch('assets/audio/' + file).then((r) => r.arrayBuffer()).then((b) => this.ctx.decodeAudioData(b))
+          .then((buf) => { const list = this.buffers.get(key) || []; list.push(buf); this.buffers.set(key, list); }).catch(() => {});
+      }
+    }
   }
 
   setEnabled(on) { this.enabled = on; if (this.master) this.master.gain.value = on ? this.volume : 0; this.persist(); this.refreshMusic(); }
@@ -121,7 +170,7 @@ export class Audio {
   mood(name) { if (this.moodName === name) return; this.moodName = name; this.refreshMusic(); }
   setAmbience(name) { if (this.ambName === name) return; this.ambName = name; this.refreshMusic(); }
   refreshMusic() {
-    if (!this.ctx) return;
+    if (!this.ctx || !this.pool.music.length) return;
     const on = this.enabled && this.musicOn;
     this.musicCh = this.cue(this.musicCh, on ? this.choose(this.moodList(), this.musicCh) : null, MUSIC_VOL, 'music');
     this.ambCh = this.cue(this.ambCh, on ? this.choose(this.lists.ambience[this.ambName], this.ambCh) : null, AMB_VOL, 'amb');
@@ -140,33 +189,35 @@ export class Audio {
     const pool = files.length > 1 && avoid ? files.filter((f) => f !== avoid) : files;
     return pool[(Math.random() * pool.length) | 0];
   }
-  // Crossfades a channel to `file` (null fades it out). Returns the channel.
+  // Crossfades a channel to `file` (null fades it out) on the element of its
+  // pair that is not playing. Returns the channel.
   cue(ch, file, vol, kind) {
     if (ch && ch.file === file) return ch;
     if (ch) this.fadeOut(ch);
     if (!file) return null;
-    const el = new window.Audio('assets/audio/' + file), gain = this.ctx.createGain();
-    el.preload = 'auto';
-    try { this.ctx.createMediaElementSource(el).connect(gain); } catch (e) { return null; }
-    gain.connect(this.master);
-    const now = this.ctx.currentTime;
-    gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(vol, now + FADE);
+    const pair = this.pool[kind], el = pair.find((e) => !ch || e !== ch.el) || pair[0];
+    if (!el) return null;
+    clearTimeout(el._stop);
+    const gain = el._gain, now = this.ctx.currentTime;
+    gain.gain.cancelScheduledValues(now); gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(vol, now + FADE);
     const list = kind === 'music' ? this.moodList() : this.lists.ambience[this.ambName];
     const many = Array.isArray(list) && list.length > 1, once = kind === 'music' && ONCE.has(this.moodName);
-    el.loop = !many && !once;
+    el._file = file; el.src = 'assets/audio/' + file; el.loop = !many && !once;
     const nc = { file, el, gain };
     // With several tracks, the next one starts when this one ends.
-    if (many) el.addEventListener('ended', () => {
+    el.onended = !many ? null : () => {
       if (kind === 'music' && this.musicCh === nc) this.musicCh = this.cue(null, this.choose(this.moodList(), null, file), vol, kind);
       if (kind === 'amb' && this.ambCh === nc) this.ambCh = this.cue(null, this.choose(this.lists.ambience[this.ambName], null, file), vol, kind);
-    });
-    el.play().catch(() => {});
+    };
+    el.play().then(() => { el._unlocked = true; }).catch(() => {});
     return nc;
   }
   fadeOut(ch) {
-    const now = this.ctx.currentTime, g = ch.gain.gain;
+    const el = ch.el, now = this.ctx.currentTime, g = ch.gain.gain;
     g.cancelScheduledValues(now); g.setValueAtTime(g.value, now); g.linearRampToValueAtTime(0, now + FADE);
-    setTimeout(() => { ch.el.pause(); ch.el.removeAttribute('src'); ch.el.load(); }, FADE * 1000 + 100);
+    el.onended = null; el._file = null;
+    clearTimeout(el._stop);
+    el._stop = setTimeout(() => { if (!el._file) el.pause(); }, FADE * 1000 + 100);
   }
 
   synth(s, vol) {
