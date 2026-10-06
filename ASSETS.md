@@ -208,7 +208,7 @@ one-shots. MP3 works everywhere; OGG does not play on old Safari.
 | `alert` | The colony is under attack |
 | `horde` | A swarm is announced or arrives |
 | `victory`, `defeat` | Wonder completed or game won / game lost |
-| `groan` | Reserved for infected ambience |
+| `groan` | Now and then, from an infected on screen |
 
 **Voice lines** play when you select or command units, as in the original game. The
 game tries `voice_<unit>_<what>` first, then `voice_<what>`, where `<what>` is
