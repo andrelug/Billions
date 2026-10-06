@@ -22,6 +22,9 @@ const TRAIN_KEYS = { q: 'ranger', w: 'soldier', r: 'sniper', u: 'pyro', i: 'tita
 
 const AUTOSAVE = 120;   // seconds of real play between autosaves
 const SWARM_MUSIC = 150;  // game seconds of swarm music after a swarm arrives, then back to calm
+// Shortest gap in seconds between two plays of a sound, so that a swarm
+// biting a wall or dying under fire does not turn into a wall of noise.
+const SOUND_GAP = { mg: 0.09, rifle: 0.09, bow: 0.09, hit: 0.1, zap: 0.15, flame: 0.25, bite: 0.15, zdie: 0.12, spit: 0.2, smash: 0.25, explosion: 0.08, collapse: 0.3, infect: 0.5, die: 0.2 };
 
 export class App {
   constructor() {
@@ -110,7 +113,7 @@ export class App {
       if (onScreen && !this.profile.settings.visibleAlerts) return;
       this.toast(`⚠ ${text}`, 'danger', where); this.sound('alert');
     });
-    g.ev.on('sound', (k, x, y) => this.audio.play(k, x, y, k === 'mg' || k === 'rifle' || k === 'bow' ? 0.09 : 0.05));
+    g.ev.on('sound', (k, x, y) => this.audio.play(k, x, y, SOUND_GAP[k] || 0.05));
     g.ev.on('end', (r) => this.ended(r));
     g.ev.on('mayor', (offer) => this.panel.mayor(offer));
     g.ev.on('completed', () => this.tray.refresh());
@@ -282,6 +285,15 @@ export class App {
       if (g.state === 'playing') {
         this.hud.update(dt);
         if (this.calmAt != null && g.time > this.calmAt) { this.calmAt = null; if (this.audio.moodName === 'swarm') this.audio.mood('calm'); }
+        if (!g.paused) {
+          // Infected on screen groan now and then, more often in a crowd.
+          this.groanT = (this.groanT ?? 3) - dt;
+          if (this.groanT <= 0) {
+            const zs = (this.renderer.dl || []).filter((e) => e.kind === 'z');
+            this.groanT = zs.length ? 2.5 + Math.random() * 5 / Math.sqrt(zs.length) : 3;
+            if (zs.length) { const z = zs[(Math.random() * zs.length) | 0]; this.audio.play('groan', z.x, z.y, 1.5); }
+          }
+        }
         this.panel.update(dt);
         this.trayT = (this.trayT || 0) - dt; if (this.trayT <= 0) { this.trayT = 0.5; this.tray.refresh(); }
         if (!g.paused) { this.saveT -= dt; if (this.saveT <= 0) { this.saveT = AUTOSAVE; this.autosave(); } }

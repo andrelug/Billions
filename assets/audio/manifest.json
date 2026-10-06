@@ -31,5 +31,68 @@
     "sfx/mg_3.mp3"
   ],
   "sniper": "sfx/sniper.mp3",
-  "ballista": "sfx/ballista.mp3"
+  "ballista": "sfx/ballista.mp3",
+  "explosion": [
+    "sfx/explosion_1.mp3",
+    "sfx/explosion_2.mp3"
+  ],
+  "hit": [
+    "sfx/hit_1.mp3",
+    "sfx/hit_2.mp3",
+    "sfx/hit_3.mp3"
+  ],
+  "zap": [
+    "sfx/zap_1.mp3",
+    "sfx/zap_2.mp3"
+  ],
+  "flame": [
+    "sfx/flame_1.mp3",
+    "sfx/flame_2.mp3"
+  ],
+  "rocket": "sfx/rocket.mp3",
+  "die": [
+    "sfx/die_1.mp3",
+    "sfx/die_2.mp3"
+  ],
+  "gate": "sfx/gate.mp3",
+  "research": "sfx/research.mp3",
+  "complete": "sfx/complete.mp3",
+  "build": [
+    "sfx/build_1.mp3",
+    "sfx/build_2.mp3"
+  ],
+  "bite": [
+    "sfx/bite_1.mp3",
+    "sfx/bite_2.mp3",
+    "sfx/bite_3.mp3"
+  ],
+  "groan": [
+    "sfx/groan_1.mp3",
+    "sfx/groan_2.mp3",
+    "sfx/groan_3.mp3"
+  ],
+  "infect": "sfx/infect.mp3",
+  "collapse": [
+    "sfx/collapse_1.mp3",
+    "sfx/collapse_2.mp3"
+  ],
+  "trained": "sfx/trained.mp3",
+  "click": "sfx/click.mp3",
+  "horde": "sfx/horde.mp3",
+  "smash": [
+    "sfx/smash_1.mp3",
+    "sfx/smash_2.mp3"
+  ],
+  "spit": "sfx/spit.mp3",
+  "zdie": [
+    "sfx/zdie_1.mp3",
+    "sfx/zdie_2.mp3",
+    "sfx/zdie_3.mp3"
+  ],
+  "voice_select": "sfx/voice_select.mp3",
+  "voice_move": "sfx/voice_move.mp3",
+  "defeat": "sfx/defeat.mp3",
+  "victory": "sfx/victory.mp3",
+  "alert": "sfx/alert.mp3",
+  "error": "sfx/error.mp3"
 }
